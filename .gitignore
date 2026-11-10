@@ -1,0 +1,18 @@
+# Python and local environments
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Build and tool outputs
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local secrets; intentional test-key fixtures are managed separately
+.env
+.env.*
+!.env.example
