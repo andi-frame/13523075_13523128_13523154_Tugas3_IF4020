@@ -1,2 +1,7 @@
+"""Release artifact signing."""
+
+
 def main() -> None:
-    print("Hello from if4020-signing!")
+    from .sign_cli import main as cli_main
+
+    cli_main()
