@@ -127,3 +127,22 @@ def test_cli_help_and_version():
         result = subprocess.run(['if4020-signing', option], capture_output=True, text=True)
         assert result.returncode == 0
         assert result.stdout.strip()
+
+
+def test_shared_rsa_fixture():
+    from pathlib import Path
+    from if4020_signing.artifact import read_artifact
+
+    root = Path(__file__).parent / 'fixtures' / 'rsa'
+    manifest, signature = parse_bundle_strict((root / 'bundle.json').read_bytes())
+    public = rsa.load_public_key((root / 'TEST_ONLY.pub.pem').read_bytes())
+    private = rsa.load_private_key((root / 'TEST_ONLY.key.pem').read_bytes())
+    store = json.loads((root / 'trust.json').read_bytes())
+    assert manifest == (root / 'manifest.json').read_bytes()
+    assert rsa.verify_bytes(public, manifest, signature)
+    assert rsa.fingerprint(public) == rsa.fingerprint(rsa.public_from_private(private))
+    assert store['keys'][0]['keyid'] == rsa.fingerprint(public)
+    assert store['keys'][0]['packages'] == ['demo']
+    info = read_artifact(root / 'demo.bin')
+    assert parse_manifest_strict(manifest)['artifact'] == {
+        'name': info.name, 'size': info.size, 'sha256': info.sha256}
