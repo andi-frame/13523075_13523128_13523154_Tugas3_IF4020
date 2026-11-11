@@ -1,0 +1,93 @@
+[
+  {
+    "operation": "keygen",
+    "artifact_bytes": 0,
+    "n": 5,
+    "median_ns": 135579091,
+    "p95_ns": 315294533
+  },
+  {
+    "operation": "artifact_sha256",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 23292.0,
+    "p95_ns": 25282
+  },
+  {
+    "operation": "crypto_sign",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 1759342.5,
+    "p95_ns": 1958985
+  },
+  {
+    "operation": "crypto_verify",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 44209.5,
+    "p95_ns": 55873
+  },
+  {
+    "operation": "sign_end_to_end",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 110203046.0,
+    "p95_ns": 116693384
+  },
+  {
+    "operation": "artifact_sha256",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 1126055.0,
+    "p95_ns": 1337954
+  },
+  {
+    "operation": "crypto_sign",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 1848600.0,
+    "p95_ns": 1955214
+  },
+  {
+    "operation": "crypto_verify",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 43930.0,
+    "p95_ns": 46305
+  },
+  {
+    "operation": "sign_end_to_end",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 111994236.5,
+    "p95_ns": 116062296
+  },
+  {
+    "operation": "artifact_sha256",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 8018470.5,
+    "p95_ns": 9368263
+  },
+  {
+    "operation": "crypto_sign",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 1715063.5,
+    "p95_ns": 1884464
+  },
+  {
+    "operation": "crypto_verify",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 48575.0,
+    "p95_ns": 65441
+  },
+  {
+    "operation": "sign_end_to_end",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 115624354.0,
+    "p95_ns": 125209719
+  }
+]
