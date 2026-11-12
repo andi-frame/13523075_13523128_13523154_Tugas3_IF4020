@@ -84,7 +84,7 @@ def run_benchmark(adapter, output: Path, *, iterations=30, warmups=5, keygens=5,
             measure("sign_end_to_end", size, lambda: sign(artifact, "benchmark", "1.0",
                     private_path, root / "bundle.json", adapter=adapter))
     with (output / "raw.csv").open("w", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=("operation", "artifact_bytes", "iteration", "elapsed_ns"))
+        writer = csv.DictWriter(stream, fieldnames=("operation", "artifact_bytes", "iteration", "elapsed_ns"), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     summary = []
