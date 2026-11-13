@@ -4,6 +4,7 @@ import argparse
 from importlib.metadata import version
 import sys
 
+from .keygen_cli import register_keygen
 from .signing import sign
 from .trust_cli import register_trust
 
@@ -33,6 +34,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="if4020-signing")
     parser.add_argument("--version", action="version", version=version("if4020-signing"))
     subparsers = parser.add_subparsers(dest="command", required=True)
+    register_keygen(subparsers)
     register_sign(subparsers)
     register_trust(subparsers)
     args = parser.parse_args()
