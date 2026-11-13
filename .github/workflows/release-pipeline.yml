@@ -1,0 +1,228 @@
+# Consumer pipeline: uses the published image (pinned by digest) as the
+# signing and verification tool. Deployment is simulated with a marker file
+# and runs only after verification succeeded for the same artifact bytes.
+#
+# C01: pull image, sign, verify and mark deployment for every profile.
+# C05: run the CLI with the runner UID/GID, without TTY and with --network none.
+# Only trusted triggers run here (no pull_request), because jobs read secrets.
+name: Release pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build artifact
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build release artifact
+        run: |
+          . ci/pipeline.env
+          mkdir -p dist
+          git archive --format=zip -o "dist/$ARTIFACT" HEAD -- README.md src
+          sha256sum "dist/$ARTIFACT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: dist/
+          if-no-files-found: error
+
+  sign:
+    name: Sign (${{ matrix.profile }})
+    needs: build
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - profile: rsa-pss-sha256
+            secret: SIGNING_KEY_RSA_PSS_SHA256
+          - profile: ecdsa-p256-sha256
+            secret: SIGNING_KEY_ECDSA_P256_SHA256
+          - profile: ed25519
+            secret: SIGNING_KEY_ED25519
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load pinned image
+        run: |
+          . ci/pipeline.env
+          if ! printf '%s' "$IMAGE" | grep -Eq '@sha256:[0-9a-f]{64}$' || printf '%s' "$IMAGE" | grep -q '@sha256:0\{64\}$'; then
+            echo "::error::ci/pipeline.env must pin a published image digest"; exit 1
+          fi
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+      - name: Pull image
+        run: docker pull "$IMAGE"
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: dist
+      - name: Sign
+        env:
+          SIGNING_KEY: ${{ secrets[matrix.secret] }}
+        run: |
+          . ci/pipeline.env
+          : "${SIGNING_KEY:?secret ${{ matrix.secret }} is not configured}"
+          SIGNING_KEY_FILE="$(mktemp "$RUNNER_TEMP/signing.XXXXXX.pem")"
+          trap 'rm -f "$SIGNING_KEY_FILE"' EXIT
+          chmod 0600 "$SIGNING_KEY_FILE"
+          printf '%s\n' "$SIGNING_KEY" > "$SIGNING_KEY_FILE"
+          mkdir -p out
+          docker run --rm --network none \
+            --user "$(id -u):$(id -g)" \
+            -v "$PWD/dist:/input:ro" \
+            -v "$PWD/out:/output" \
+            -v "$SIGNING_KEY_FILE:/run/signing.key.pem:ro" \
+            "$IMAGE" sign --file "/input/$ARTIFACT" \
+              --package "$PACKAGE" --version "$VERSION" \
+              --key /run/signing.key.pem --out /output/release.json
+          test -s out/release.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle-${{ matrix.profile }}
+          path: out/release.json
+          if-no-files-found: error
+
+  verify:
+    name: Verify (${{ matrix.profile }})
+    needs: sign
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [rsa-pss-sha256, ecdsa-p256-sha256, ed25519]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load pinned image
+        run: |
+          . ci/pipeline.env
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+      - name: Pull image
+        run: docker pull "$IMAGE"
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: bundle-${{ matrix.profile }}
+          path: release
+      - name: Verify (no private key in this job)
+        run: |
+          . ci/pipeline.env
+          mkdir -p out
+          set +e
+          docker run --rm --network none \
+            --user "$(id -u):$(id -g)" \
+            -v "$PWD/dist:/input:ro" \
+            -v "$PWD/release:/release:ro" \
+            -v "$PWD/ci/trust.json:/trust.json:ro" \
+            "$IMAGE" verify --file "/input/$ARTIFACT" \
+              --bundle /release/release.json --trust-store /trust.json \
+              --package "$PACKAGE" --version "$VERSION" --json \
+            > out/verification.json
+          code=$?
+          set -e
+          cat out/verification.json
+          echo "verify exit code: $code"
+          if [ "$code" -ne 0 ]; then
+            echo "::error::verification rejected the release (exit $code)"; exit 1
+          fi
+          jq -e '.valid == true and .status == "OK"' out/verification.json > /dev/null
+          sha256sum "dist/$ARTIFACT" | cut -d' ' -f1 > out/verified-artifact.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verification-${{ matrix.profile }}
+          path: out/
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy (${{ matrix.profile }}, simulated)
+    needs: verify
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [rsa-pss-sha256, ecdsa-p256-sha256, ed25519]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: verification-${{ matrix.profile }}
+          path: verified
+      - name: Create deployment marker for the verified bytes
+        run: |
+          . ci/pipeline.env
+          actual="$(sha256sum "dist/$ARTIFACT" | cut -d' ' -f1)"
+          if [ "$actual" != "$(cat verified/verified-artifact.sha256)" ]; then
+            echo "::error::artifact differs from the verified bytes"; exit 1
+          fi
+          mkdir -p deploy
+          {
+            echo "deployed=$ARTIFACT"
+            echo "sha256=$actual"
+            echo "profile=${{ matrix.profile }}"
+            echo "keyid=$(jq -r .keyid verified/verification.json)"
+            echo "image=$IMAGE"
+            echo "run=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > "deploy/DEPLOYED-${{ matrix.profile }}.txt"
+          cat "deploy/DEPLOYED-${{ matrix.profile }}.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deployment-marker-${{ matrix.profile }}
+          path: deploy/
+
+  runtime-contract:
+    name: C05 runner UID/GID, no TTY, no network
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load pinned image
+        run: |
+          . ci/pipeline.env
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+      - name: Pull image
+        run: docker pull "$IMAGE"
+      - name: Run CLI as runner user without TTY or network
+        run: |
+          mkdir -p out
+          uid="$(id -u)"; gid="$(id -g)"
+          run() {
+            docker run --rm --network none --user "$uid:$gid" \
+              -v "$PWD/out:/output" "$IMAGE" "$@" < /dev/null
+          }
+          {
+            echo "runner uid:gid = $uid:$gid"
+            run --version
+            run --help > /dev/null && echo "--help: ok"
+            run keygen --algorithm ed25519 --out /output/c05
+            run trust add --key /output/c05.pub.pem --package c05-demo --store /output/trust.json
+            run trust list --store /output/trust.json
+            # Missing arguments must fail fast with exit 2 instead of prompting.
+            set +e; run keygen --algorithm ed25519 > /dev/null 2>&1; code=$?; set -e
+            echo "keygen without --out: exit $code"
+            test "$code" -eq 2
+            for file in c05.key.pem c05.pub.pem trust.json; do
+              owner="$(stat -c '%u:%g' "out/$file")"
+              echo "$file owner $owner"
+              test "$owner" = "$uid:$gid"
+            done
+          } 2>&1 | tee c05-result.txt
+          rm -f out/c05.key.pem
+      - uses: actions/upload-artifact@v4
+        with:
+          name: c05-runtime-contract
+          path: c05-result.txt
