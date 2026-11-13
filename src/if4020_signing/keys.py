@@ -1,9 +1,7 @@
-"""Dispatch key operations to the algorithm adapter matching the key or profile.
+"""Route key operations to the adapter for the key type or profile.
 
-This module satisfies the same adapter contract as ``crypto.rsa`` and
-``crypto.ed25519`` (it can be passed to ``signing.sign``), but selects the
-concrete adapter from the key type. Validation of type, parameters and
-encoding is always delegated to the owning adapter.
+Implements the same adapter contract, so it can be passed to ``signing.sign``.
+Validation always happens in the owning adapter.
 """
 
 import base64
@@ -89,7 +87,7 @@ def generate_keypair(profile: str):
 
 
 def load_private_key(pem_bytes: bytes):
-    """Load a private key; the profile is derived from the key itself."""
+    """The profile is derived from the key."""
     return adapter_for_profile(detect_private_profile(pem_bytes)).load_private_key(pem_bytes)
 
 
@@ -98,7 +96,7 @@ def load_public_key(pem_bytes: bytes):
 
 
 def load_public_key_for_profile(pem_bytes: bytes, profile: str):
-    """Load a public key that must belong to ``profile`` (used by the trust store)."""
+    """Reject keys whose type does not match ``profile``."""
     adapter = adapter_for_profile(profile)
     actual = detect_public_profile(pem_bytes)
     if actual != profile:

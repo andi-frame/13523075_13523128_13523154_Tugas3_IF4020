@@ -31,10 +31,7 @@ def _temporary(directory: Path, name: str, data: bytes, mode: int) -> Path:
 
 
 def keygen(profile: str, output_prefix: str | os.PathLike, overwrite_explicit: bool = False) -> KeygenResult:
-    """Existing key files are only replaced when ``overwrite_explicit`` is true.
-
-    Unsupported profiles raise ValueError; I/O problems raise OSError.
-    """
+    """Existing files are replaced only when ``overwrite_explicit`` is true."""
     adapter = keys.adapter_for_profile(profile)
     prefix = Path(output_prefix)
     if not prefix.name or prefix.name in (".", ".."):

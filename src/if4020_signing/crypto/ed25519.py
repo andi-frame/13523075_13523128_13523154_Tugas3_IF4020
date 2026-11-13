@@ -1,9 +1,4 @@
-"""Pure Ed25519 (RFC 8032) over the original manifest bytes.
-
-No external pre-hash and no context are used, so this is not Ed25519ph/Ed25519ctx.
-Keys follow RFC 8410: PKCS8 private keys and SPKI public keys whose
-AlgorithmIdentifier is id-Ed25519 (1.3.101.112) without parameters.
-"""
+"""Pure Ed25519 (RFC 8032, no pre-hash or context) with RFC 8410 keys."""
 
 import base64
 from dataclasses import dataclass
@@ -15,7 +10,7 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 
 PROFILE = "ed25519"
 SIGNATURE_SIZE = 64
-# DER prefix of an RFC 8410 Ed25519 SPKI: SEQUENCE { SEQUENCE { OID 1.3.101.112 }, BIT STRING (32 bytes) }.
+# SPKI prefix: id-Ed25519 (1.3.101.112) without parameters, then a 32-byte key.
 _SPKI_PREFIX = bytes.fromhex("302a300506032b6570032100")
 
 
@@ -56,7 +51,7 @@ def _pem_der(pem: bytes, label: bytes) -> bytes:
 def generate_keypair(profile: str = PROFILE) -> KeyPair:
     if profile != PROFILE:
         raise KeyValidationError("Unsupported Ed25519 profile")
-    # The library draws the 32-byte seed from the operating system CSPRNG.
+    # Seed comes from the OS CSPRNG.
     private = ed25519.Ed25519PrivateKey.generate()
     return KeyPair(private, private.public_key())
 
@@ -77,7 +72,6 @@ def load_public_key(pem_bytes: bytes) -> ed25519.Ed25519PublicKey:
     except (ValueError, UnsupportedAlgorithm) as exc:
         raise KeyValidationError("Invalid SPKI public key") from exc
     key = _public(key)
-    # Canonical RFC 8410 form: parameters absent, 32-byte raw point.
     if der != export_public_spki_der(key) or not der.startswith(_SPKI_PREFIX):
         raise KeyValidationError("Expected canonical RFC 8410 Ed25519 SPKI encoding")
     return key
@@ -117,7 +111,7 @@ def fingerprint(public_key: ed25519.Ed25519PublicKey) -> str:
 
 
 def sign_bytes(private_key: ed25519.Ed25519PrivateKey, manifest_bytes: bytes) -> bytes:
-    # Pure Ed25519: the message is passed as-is; SHA-512 runs inside the algorithm.
+    # No external pre-hash; SHA-512 runs inside Ed25519.
     return _private(private_key).sign(manifest_bytes)
 
 

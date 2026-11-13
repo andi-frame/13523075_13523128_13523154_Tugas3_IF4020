@@ -1,10 +1,7 @@
-"""Trust store (``minisign-trust/v1``): strict validation, lookup and safe updates.
+"""Trust store (``minisign-trust/v1``): strict validation, lookup and atomic updates.
 
-The store is never updated from bundle contents. Every entry and key is
-validated on load, not only the entry that matches a lookup. Updates are
-written to a temporary file in the same directory and atomically replace the
-previous store only after the write completed, so a failed write leaves the
-old store intact.
+Every entry is validated on load. Updates go to a temp file in the same
+directory and replace the store only after the write completed.
 """
 
 from dataclasses import dataclass
@@ -19,7 +16,7 @@ from . import keys
 from .formats import FormatError, HEX_PATTERN, PACKAGE_PATTERN, parse_json_strict
 
 SCHEMA = "minisign-trust/v1"
-# Not mandated by the assignment; bounds memory use for hostile inputs.
+# Internal limit, not part of the spec.
 TRUST_STORE_LIMIT = 1024 * 1024
 _ENTRY_FIELDS = ("keyid", "algorithm", "public_key_pem", "packages")
 
@@ -110,12 +107,12 @@ def parse_trust_store_strict(raw_bytes: bytes) -> TrustStore:
 
 
 def load_trust_store(path: str | Path) -> TrustStore:
-    """Read and validate a store. OSError propagates as an input/I-O failure."""
+    """OSError propagates to the caller as an I/O failure."""
     return parse_trust_store_strict(Path(path).read_bytes())
 
 
 def find_authorized_key(store: TrustStore, keyid: str, profile: str, expected_package: str):
-    """Return the trusted public key or raise KeyNotTrustedError. No fallback keys are tried."""
+    """Return the trusted key or raise KeyNotTrustedError; no fallback."""
     entry = store.get(keyid)
     if entry is None:
         raise KeyNotTrustedError(f"Key {keyid} is not in the trust store")
@@ -156,7 +153,7 @@ def add_trust(store_path: str | Path, public_key_pem: bytes, package: str) -> Ad
     pem = keys.export_public_spki_pem(public_key).decode("ascii")
     path = Path(store_path)
     created = not path.exists()
-    # An existing but unreadable or invalid store is an error, never treated as empty.
+    # A broken store is an error, never treated as empty.
     store = TrustStore(()) if created else load_trust_store(path)
     entries = list(store.entries)
     existing = store.get(keyid)

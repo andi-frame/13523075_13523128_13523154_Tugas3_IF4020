@@ -1,6 +1,5 @@
 # syntax=docker/dockerfile:1
-# Release image: the CLI and all runtime dependencies, no build tools, no keys.
-#   docker run --rm <image> <subcommand> ...
+# Usage: docker run --rm <image> <subcommand> ...
 
 ARG PYTHON_IMAGE=python:3.13-slim-bookworm
 
@@ -13,7 +12,7 @@ ENV UV_COMPILE_BYTECODE=1 \
     UV_PYTHON_DOWNLOADS=never \
     UV_PROJECT_ENVIRONMENT=/opt/venv
 WORKDIR /src
-# Dependencies first (cached layer), then the project itself as a non-editable install.
+# Dependencies first for layer caching, then the project.
 COPY pyproject.toml uv.lock .python-version README.md ./
 RUN uv sync --locked --no-dev --no-install-project
 COPY src ./src
@@ -31,7 +30,7 @@ COPY --from=build /opt/venv /opt/venv
 ENV PATH=/opt/venv/bin:$PATH \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
-# Any runner UID/GID may be supplied with --user; this is only the default.
+# Non-root default; override with --user.
 USER 65532:65532
 WORKDIR /work
 ENTRYPOINT ["if4020-signing"]

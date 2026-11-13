@@ -1,4 +1,4 @@
-# Only the files needed to build the CLI enter the build context.
+# Allowlist: no tests, keys or evidence in the build context.
 *
 !pyproject.toml
 !uv.lock

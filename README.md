@@ -98,7 +98,8 @@ docker run --rm --network none --user "$(id -u):$(id -g)" \
 image pinned in `ci/pipeline.env`, signs with a per-profile secret
 (`SIGNING_KEY_RSA_PSS_SHA256`, `SIGNING_KEY_ECDSA_P256_SHA256`,
 `SIGNING_KEY_ED25519`), verifies with `ci/trust.json` and only then writes a
-deployment marker (C01), and checks UID/GID, no TTY and `--network none` (C05).
+deployment marker, and checks that the CLI runs with the runner UID/GID, no TTY
+and `--network none`.
 
 | Program version | Source tag | Image digest |
 | --- | --- | --- |

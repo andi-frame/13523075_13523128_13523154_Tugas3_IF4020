@@ -1,6 +1,5 @@
-# Builds the release image from this commit and publishes it to GHCR.
-# A tag vX.Y.Z must match the program version in pyproject.toml; the job
-# summary records the immutable digest to pin in ci/pipeline.env and README.
+# Build and push the image to GHCR. Tags vX.Y.Z must match pyproject.toml;
+# the run summary shows the digest to pin in ci/pipeline.env.
 name: Publish image
 
 on:

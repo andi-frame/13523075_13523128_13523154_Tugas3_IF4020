@@ -1,12 +1,7 @@
-# Consumer pipeline: uses the published image (pinned by digest) as the
-# signing and verification tool. Deployment is simulated with a marker file
-# and runs only after verification succeeded for the same artifact bytes.
-#
-# C01: pull image, sign, verify and mark deployment for every profile.
-# C05: run the CLI with the runner UID/GID, without TTY and with --network none.
-# Only trusted triggers run here (no pull_request), because jobs read secrets.
-# Manual for now; add `push: branches: [main]` once ci/pipeline.env pins a
-# published digest and every profile can be signed and verified.
+# Release pipeline using the image pinned in ci/pipeline.env: sign, verify,
+# and write a deployment marker only if verification passed.
+# No pull_request trigger because jobs read secrets. Add `push: branches: [main]`
+# once a digest is pinned and every profile verifies.
 name: Release pipeline
 
 on:
@@ -186,7 +181,7 @@ jobs:
           path: deploy/
 
   runtime-contract:
-    name: C05 runner UID/GID, no TTY, no network
+    name: Runner UID/GID, no TTY, no network
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -208,21 +203,21 @@ jobs:
             echo "runner uid:gid = $uid:$gid"
             run --version
             run --help > /dev/null && echo "--help: ok"
-            run keygen --algorithm ed25519 --out /output/c05
-            run trust add --key /output/c05.pub.pem --package c05-demo --store /output/trust.json
+            run keygen --algorithm ed25519 --out /output/runtime
+            run trust add --key /output/runtime.pub.pem --package runtime-demo --store /output/trust.json
             run trust list --store /output/trust.json
             # Missing arguments must fail fast with exit 2 instead of prompting.
             set +e; run keygen --algorithm ed25519 > /dev/null 2>&1; code=$?; set -e
             echo "keygen without --out: exit $code"
             test "$code" -eq 2
-            for file in c05.key.pem c05.pub.pem trust.json; do
+            for file in runtime.key.pem runtime.pub.pem trust.json; do
               owner="$(stat -c '%u:%g' "out/$file")"
               echo "$file owner $owner"
               test "$owner" = "$uid:$gid"
             done
-          } 2>&1 | tee c05-result.txt
-          rm -f out/c05.key.pem
+          } 2>&1 | tee runtime-result.txt
+          rm -f out/runtime.key.pem
       - uses: actions/upload-artifact@v4
         with:
-          name: c05-runtime-contract
-          path: c05-result.txt
+          name: runtime-contract
+          path: runtime-result.txt
