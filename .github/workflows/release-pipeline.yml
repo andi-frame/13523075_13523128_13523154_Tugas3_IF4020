@@ -5,12 +5,12 @@
 # C01: pull image, sign, verify and mark deployment for every profile.
 # C05: run the CLI with the runner UID/GID, without TTY and with --network none.
 # Only trusted triggers run here (no pull_request), because jobs read secrets.
+# Manual for now; add `push: branches: [main]` once ci/pipeline.env pins a
+# published digest and every profile can be signed and verified.
 name: Release pipeline
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: read
