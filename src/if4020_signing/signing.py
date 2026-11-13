@@ -7,7 +7,7 @@ import tempfile
 from typing import Any, Protocol
 
 from .artifact import read_artifact
-from .crypto import rsa
+from . import keys
 from .formats import build_manifest, encode_bundle, serialize_manifest
 
 
@@ -41,9 +41,9 @@ def _check_output(output: Path, inputs: tuple[Path, ...]) -> None:
 def sign(
     artifact_path: str | Path, package: str, version: str,
     private_key_path: str | Path, output_bundle_path: str | Path,
-    *, adapter: SigningAdapter = rsa,
+    *, adapter: SigningAdapter = keys,
 ) -> SignResult:
-    """Sign using RSA by default; pass a validated adapter/dispatcher for other profiles.
+    """Sign with the profile derived from the private key via the key dispatcher.
 
     OSError propagates as an input/environment failure. Key and format validation
     errors propagate as ValueError subclasses for the command to map to exit 2.
