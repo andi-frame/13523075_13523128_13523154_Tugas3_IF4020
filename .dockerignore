@@ -1,0 +1,8 @@
+# Only the files needed to build the CLI enter the build context.
+*
+!pyproject.toml
+!uv.lock
+!.python-version
+!README.md
+!src/
+src/**/__pycache__
