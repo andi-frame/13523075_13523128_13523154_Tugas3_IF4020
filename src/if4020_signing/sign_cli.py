@@ -5,6 +5,7 @@ from importlib.metadata import version
 import sys
 
 from .signing import sign
+from .trust_cli import register_trust
 
 
 def register_sign(subparsers) -> None:
@@ -31,6 +32,8 @@ def main() -> None:
     # Minimal entry point until the shared CLI registers all command handlers.
     parser = argparse.ArgumentParser(prog="if4020-signing")
     parser.add_argument("--version", action="version", version=version("if4020-signing"))
-    register_sign(parser.add_subparsers(dest="command", required=True))
+    subparsers = parser.add_subparsers(dest="command", required=True)
+    register_sign(subparsers)
+    register_trust(subparsers)
     args = parser.parse_args()
     raise SystemExit(args.handler(args))
