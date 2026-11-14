@@ -15,7 +15,7 @@ def run(*args):
     return subprocess.run([CLI, *map(str, args)], capture_output=True, text=True, stdin=subprocess.DEVNULL)
 
 
-@pytest.mark.parametrize("profile", ["ed25519", "rsa-pss-sha256"])
+@pytest.mark.parametrize("profile", keys.PROFILES)
 def test_keygen_writes_matching_pair(tmp_path, profile):
     result = keygen(profile, tmp_path / "keys" / "publisher")
     private_pem = result.private_key_path.read_bytes()

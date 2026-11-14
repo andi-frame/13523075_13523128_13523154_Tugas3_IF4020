@@ -3,15 +3,16 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec, ed448, rsa as backend_rsa
 
 from if4020_signing import keys
-from if4020_signing.crypto import ed25519, rsa
+from if4020_signing.crypto import ecdsa, ed25519, rsa
 
 
 @pytest.fixture(scope="module")
 def pairs():
-    return {"ed25519": ed25519.generate_keypair(), "rsa-pss-sha256": rsa.generate_keypair()}
+    return {"ed25519": ed25519.generate_keypair(), "rsa-pss-sha256": rsa.generate_keypair(),
+            "ecdsa-p256-sha256": ecdsa.generate_keypair()}
 
 
-@pytest.mark.parametrize("profile", ["ed25519", "rsa-pss-sha256"])
+@pytest.mark.parametrize("profile", keys.PROFILES)
 def test_dispatch_roundtrip(pairs, profile):
     pair = pairs[profile]
     adapter = keys.adapter_for_profile(profile)
@@ -30,7 +31,7 @@ def test_dispatch_roundtrip(pairs, profile):
     assert not keys.verify_bytes(public, b"other", signature)
 
 
-@pytest.mark.parametrize("profile", ["ed25519", "rsa-pss-sha256"])
+@pytest.mark.parametrize("profile", keys.PROFILES)
 def test_generate_keypair(profile):
     pair = keys.generate_keypair(profile)
     assert keys.profile_of(pair.private_key) == profile
@@ -69,3 +70,16 @@ def test_ecdsa_keys_route_to_ecdsa_profile():
     pem = key.private_bytes(serialization.Encoding.PEM, serialization.PrivateFormat.PKCS8,
                             serialization.NoEncryption())
     assert keys.detect_private_profile(pem) == "ecdsa-p256-sha256"
+    assert keys.profile_of(keys.load_private_key(pem)) == "ecdsa-p256-sha256"
+
+
+def test_ecdsa_curve_still_enforced():
+    key = ec.generate_private_key(ec.SECP384R1())
+    pem = key.private_bytes(serialization.Encoding.PEM, serialization.PrivateFormat.PKCS8,
+                            serialization.NoEncryption())
+    with pytest.raises(ValueError):
+        keys.load_private_key(pem)
+    public = key.public_key().public_bytes(serialization.Encoding.PEM,
+                                           serialization.PublicFormat.SubjectPublicKeyInfo)
+    with pytest.raises(ValueError):
+        keys.load_public_key_for_profile(public, "ecdsa-p256-sha256")
