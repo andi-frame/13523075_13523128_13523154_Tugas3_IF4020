@@ -1,7 +1,7 @@
-"""Release artifact signing."""
+"""Release artifact signing and verification."""
 
 
 def main() -> None:
-    from .sign_cli import main as cli_main
+    from .cli import main as cli_main
 
-    cli_main()
+    raise SystemExit(cli_main())

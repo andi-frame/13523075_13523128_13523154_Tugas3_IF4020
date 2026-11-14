@@ -1,5 +1,7 @@
 # Release pipeline using the image pinned in ci/pipeline.env: sign, verify,
-# and write a deployment marker only if verification passed.
+# and write a deployment marker only if verification passed (C01). The
+# rejection jobs (C02-C04) prove that a failed verification blocks deployment,
+# and runtime-contract covers C05.
 # No pull_request trigger because jobs read secrets. Add `push: branches: [main]`
 # once a digest is pinned and every profile verifies.
 name: Release pipeline
@@ -179,6 +181,142 @@ jobs:
         with:
           name: deployment-marker-${{ matrix.profile }}
           path: deploy/
+
+  rejection:
+    # C02-C04: verify must reject the release and the protected deployment step
+    # must not run. The job passes only after both facts are checked.
+    name: ${{ matrix.id }} ${{ matrix.case }} (${{ matrix.profile }})
+    needs: sign
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: C02
+            case: artifact-byte-changed
+            profile: ecdsa-p256-sha256
+            trust: ci/trust.json
+            expected_exit: 1
+            expected_status: ARTIFACT_MISMATCH
+          - id: C03
+            case: empty-trust-store
+            profile: ecdsa-p256-sha256
+            trust: ci/scenarios/trust-empty.json
+            expected_exit: 1
+            expected_status: KEY_NOT_TRUSTED
+          - id: C03
+            case: key-not-allowed-for-package
+            profile: ecdsa-p256-sha256
+            trust: ci/scenarios/trust-other-package.json
+            expected_exit: 1
+            expected_status: KEY_NOT_TRUSTED
+          - id: C04
+            case: artifact-missing
+            profile: ecdsa-p256-sha256
+            trust: ci/trust.json
+            expected_exit: 2
+            expected_status: INPUT_ERROR
+    env:
+      SCENARIO: ${{ matrix.id }}-${{ matrix.case }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load pinned image
+        run: |
+          . ci/pipeline.env
+          if ! printf '%s' "$IMAGE" | grep -Eq '@sha256:[0-9a-f]{64}$' || printf '%s' "$IMAGE" | grep -q '@sha256:0\{64\}$'; then
+            echo "::error::ci/pipeline.env must pin a published image digest"; exit 1
+          fi
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+      - name: Pull image
+        run: docker pull "$IMAGE"
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: bundle-${{ matrix.profile }}
+          path: release
+      - name: Prepare scenario input
+        run: |
+          . ci/pipeline.env
+          file="dist/$ARTIFACT"
+          echo "before: $(stat -c '%n %s bytes' "$file") sha256=$(sha256sum "$file" | cut -d' ' -f1)"
+          case "${{ matrix.id }}" in
+            C02)
+              # Flip one byte in the middle; size and name stay the same.
+              python3 - "$file" <<'EOF'
+          import sys
+          path = sys.argv[1]
+          with open(path, "r+b") as stream:
+              data = bytearray(stream.read())
+              offset = len(data) // 2
+              data[offset] ^= 0x01
+              stream.seek(0)
+              stream.write(data)
+          print(f"flipped byte at offset {offset}")
+          EOF
+              echo "after:  $(stat -c '%n %s bytes' "$file") sha256=$(sha256sum "$file" | cut -d' ' -f1)"
+              ;;
+            C04)
+              rm -f "$file"
+              test ! -e "$file" && echo "after:  $file does not exist"
+              ;;
+          esac
+      - name: Verify (exit code captured, not ignored)
+        id: verify
+        run: |
+          . ci/pipeline.env
+          rm -rf out deploy
+          mkdir -p out
+          set +e
+          docker run --rm --network none \
+            --user "$(id -u):$(id -g)" \
+            -v "$PWD/dist:/input:ro" \
+            -v "$PWD/release:/release:ro" \
+            -v "$PWD/${{ matrix.trust }}:/trust.json:ro" \
+            "$IMAGE" verify --file "/input/$ARTIFACT" \
+              --bundle /release/release.json --trust-store /trust.json \
+              --package "$PACKAGE" --version "$VERSION" --json \
+            > out/verification.json 2> out/verification.stderr
+          code=$?
+          set -e
+          echo "$code" > out/exit-code
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          cat out/verification.json
+          cat out/verification.stderr >&2
+          echo "verify exit code: $code"
+      - name: Deploy (protected, runs only if verification passed)
+        if: steps.verify.outputs.code == '0'
+        run: |
+          mkdir -p deploy
+          echo "deployed by $SCENARIO" > deploy/DEPLOYED.txt
+      - name: Check that the release was rejected and not deployed
+        run: |
+          code="$(cat out/exit-code)"
+          status="$(jq -r .status out/verification.json)"
+          valid="$(jq -r .valid out/verification.json)"
+          {
+            echo "scenario=$SCENARIO"
+            echo "profile=${{ matrix.profile }}"
+            echo "trust_store=${{ matrix.trust }}"
+            echo "image=$IMAGE"
+            echo "expected=${{ matrix.expected_status }} exit ${{ matrix.expected_exit }}"
+            echo "actual=$status exit $code valid=$valid"
+            if [ -e deploy/DEPLOYED.txt ]; then echo "deployment_marker=present"; else echo "deployment_marker=absent"; fi
+            echo "run=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } | tee out/scenario-result.txt
+          test "$code" = "${{ matrix.expected_exit }}"
+          test "$status" = "${{ matrix.expected_status }}"
+          test "$valid" = false
+          test ! -e deploy/DEPLOYED.txt
+          echo "$SCENARIO: rejected as expected, deployment did not run" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scenario-${{ matrix.id }}-${{ matrix.case }}
+          path: out/
+          if-no-files-found: error
 
   runtime-contract:
     name: Runner UID/GID, no TTY, no network

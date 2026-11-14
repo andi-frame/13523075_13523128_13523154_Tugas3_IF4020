@@ -40,6 +40,8 @@ def test_strict_json_rejects_invalid(raw):
 @pytest.mark.parametrize("field,value", [
     ("package", "Demo"), ("package", "a" * 65), ("version", "v/1"),
     ("keyid", "A" * 64), ("keyid", None), ("algorithm", 1), ("algorithm", "é"),
+    ("algorithm", 'ed"25519'), ("algorithm", "ed\\25519"), ("algorithm", "ed\x0025519"),
+    ("algorithm", None),
     ("schema", None), ("extra", 1),
 ])
 def test_invalid_manifest_fields(manifest, field, value):

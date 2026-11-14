@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+# Signed fixtures and recorded evidence must keep their exact bytes on every
+# platform; line-ending conversion would change their SHA-256 values.
+tests/fixtures/** -text
+evidence/** -text

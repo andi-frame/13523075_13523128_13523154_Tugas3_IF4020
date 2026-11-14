@@ -1,0 +1,2364 @@
+{
+  "generated_at": "2026-11-14T06:13:33+00:00",
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "if4020-signing": "0.1.0",
+    "cryptography": "50.0.2",
+    "openssl_cli": "OpenSSL 3.0.22 25 Aug 2026 (Library: OpenSSL 3.0.22 25 Aug 2026)"
+  },
+  "cases": [
+    {
+      "id": "U01",
+      "variant": "text",
+      "profile": "rsa-pss-sha256",
+      "title": "Sign and verify a text artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-text-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "binary",
+      "profile": "rsa-pss-sha256",
+      "title": "Sign and verify a binary artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-binary-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "empty",
+      "profile": "rsa-pss-sha256",
+      "title": "Sign and verify an empty artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-empty-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U02",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "One artifact byte changed, same size and name",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U02-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "One byte flipped; size and name unchanged.",
+      "passed": true
+    },
+    {
+      "id": "U03",
+      "variant": "append",
+      "profile": "rsa-pss-sha256",
+      "title": "One byte appended to the artifact",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U03-append-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact size 1031 does not match manifest size 1030",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U03",
+      "variant": "truncate",
+      "profile": "rsa-pss-sha256",
+      "title": "Last artifact byte removed",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U03-truncate-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact size 1029 does not match manifest size 1030",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U04",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Manifest version changed, old signature kept",
+      "expected_status": "INVALID_SIGNATURE",
+      "expected_exit": 1,
+      "directory": "U04-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "INVALID_SIGNATURE",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "INVALID_SIGNATURE",
+        "message": "Signature is not valid for rsa-pss-sha256 key f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.1"
+      },
+      "note": "Canonical manifest with version 1.0.1, signature of the 1.0.0 manifest.",
+      "passed": true
+    },
+    {
+      "id": "U05",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "One signature bit flipped, valid Base64 and length",
+      "expected_status": "INVALID_SIGNATURE",
+      "expected_exit": 1,
+      "directory": "U05-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "INVALID_SIGNATURE",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "INVALID_SIGNATURE",
+        "message": "Signature is not valid for rsa-pss-sha256 key f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Lowest bit of the last signature byte flipped; length stays 384 bytes.",
+      "passed": true
+    },
+    {
+      "id": "U06",
+      "variant": "empty-store",
+      "profile": "rsa-pss-sha256",
+      "title": "Empty trust store",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U06-empty-store-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7 is not in the trust store",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U06",
+      "variant": "removed-key",
+      "profile": "rsa-pss-sha256",
+      "title": "Publisher key removed with trust remove",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U06-removed-key-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing trust remove --keyid f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7 --store trust.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7 is not in the trust store",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U07",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Key trusted only for another package",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U07-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing trust add --key ../keys/rsa.pub.pem --package other-app --store trust.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7 is not allowed to sign package contoh-app",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U08",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Valid bundle, different expected version",
+      "expected_status": "METADATA_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U08-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "METADATA_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "METADATA_MISMATCH",
+        "message": "Manifest version '1.0.0' does not match expected '1.0.1'",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U09",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Artifact renamed, content unchanged",
+      "expected_status": "METADATA_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U09-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "METADATA_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "METADATA_MISMATCH",
+        "message": "Manifest artifact name 'contoh-app.zip' does not match expected 'contoh-app-renamed.zip'",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "duplicate-bundle-field",
+      "profile": "rsa-pss-sha256",
+      "title": "Duplicate field in the bundle",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-duplicate-bundle-field-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid JSON: Duplicate JSON field: schema",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "duplicate-manifest-field",
+      "profile": "rsa-pss-sha256",
+      "title": "Duplicate field in the manifest",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-duplicate-manifest-field-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid JSON: Duplicate JSON field: package",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "wrong-type",
+      "profile": "rsa-pss-sha256",
+      "title": "Wrong data type in the manifest",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-wrong-type-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid artifact.size",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "artifact.size stored as a JSON string, e.g. \"1030\".",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "invalid-base64",
+      "profile": "rsa-pss-sha256",
+      "title": "Invalid Base64 in the bundle",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-invalid-base64-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid Base64",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "First signature_b64 character replaced by '-', which is outside the RFC 4648 alphabet.",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "oversized-manifest",
+      "profile": "rsa-pss-sha256",
+      "title": "Manifest larger than 16 KiB",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-oversized-manifest-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Manifest exceeds 16 KiB",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "Manifest padded to 16385 bytes (limit 16384).",
+      "passed": true
+    },
+    {
+      "id": "U11",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Unsupported algorithm string in the manifest",
+      "expected_status": "UNSUPPORTED_ALGORITHM",
+      "expected_exit": 1,
+      "directory": "U11-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "UNSUPPORTED_ALGORITHM",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "UNSUPPORTED_ALGORITHM",
+        "message": "Unsupported algorithm profile: 'rsa-pss-sha512'",
+        "algorithm": "rsa-pss-sha512",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U12",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Signed by another key of the same profile",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U12-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing keygen --algorithm rsa-pss-sha256 --out TEST_ONLY_other",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 808db30dec56094cf3486d326806fc6ba9fe080ba1718a18078735f767cba69f is not in the trust store",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "808db30dec56094cf3486d326806fc6ba9fe080ba1718a18078735f767cba69f",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Bundle keyid is the fingerprint of TEST_ONLY_other.pub.pem, which is not in trust.json.",
+      "passed": true
+    },
+    {
+      "id": "U13",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Bundle whitespace and field order changed",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U13-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Field order reversed, tab indentation and surrounding whitespace; Base64 strings unchanged.",
+      "passed": true
+    },
+    {
+      "id": "U14",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Same manifest signed twice",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U14-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out first.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out second.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Manifests identical: True; signatures identical: False. RSA-PSS draws a fresh 32-byte random salt for every signature. Both verifications: OK, OK.",
+      "passed": true
+    },
+    {
+      "id": "INT",
+      "variant": "openssl-verifies",
+      "profile": "rsa-pss-sha256",
+      "title": "OpenSSL CLI verifies a bundle signed by this program",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "INT-openssl-verifies-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "openssl dgst -sha256 -verify ../keys/rsa.pub.pem -signature signature.bin -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -sigopt rsa_mgf1_md:sha256 manifest.bin",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": null,
+      "note": "Verified OK",
+      "passed": true
+    },
+    {
+      "id": "INT",
+      "variant": "openssl-signs",
+      "profile": "rsa-pss-sha256",
+      "title": "This program verifies a manifest signed by the OpenSSL CLI",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "INT-openssl-signs-rsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out reference.json",
+          "exit_code": 0
+        },
+        {
+          "command": "openssl dgst -sha256 -sign ../keys/rsa.key.pem -sigopt rsa_padding_mode:pss -sigopt rsa_pss_saltlen:32 -sigopt rsa_mgf1_md:sha256 -out openssl.sig manifest.bin",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Signature produced by OpenSSL (384 bytes after conversion).",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "text",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Sign and verify a text artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-text-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "binary",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Sign and verify a binary artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-binary-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "empty",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Sign and verify an empty artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-empty-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U02",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "One artifact byte changed, same size and name",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U02-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "One byte flipped; size and name unchanged.",
+      "passed": true
+    },
+    {
+      "id": "U03",
+      "variant": "append",
+      "profile": "ecdsa-p256-sha256",
+      "title": "One byte appended to the artifact",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U03-append-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact size 1031 does not match manifest size 1030",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U03",
+      "variant": "truncate",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Last artifact byte removed",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U03-truncate-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact size 1029 does not match manifest size 1030",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U04",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Manifest version changed, old signature kept",
+      "expected_status": "INVALID_SIGNATURE",
+      "expected_exit": 1,
+      "directory": "U04-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "INVALID_SIGNATURE",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "INVALID_SIGNATURE",
+        "message": "Signature is not valid for ecdsa-p256-sha256 key 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.1"
+      },
+      "note": "Canonical manifest with version 1.0.1, signature of the 1.0.0 manifest.",
+      "passed": true
+    },
+    {
+      "id": "U05",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "One signature bit flipped, valid Base64 and length",
+      "expected_status": "INVALID_SIGNATURE",
+      "expected_exit": 1,
+      "directory": "U05-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "INVALID_SIGNATURE",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "INVALID_SIGNATURE",
+        "message": "Signature is not valid for ecdsa-p256-sha256 key 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Lowest bit of the last signature byte flipped; length stays 64 bytes.",
+      "passed": true
+    },
+    {
+      "id": "U06",
+      "variant": "empty-store",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Empty trust store",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U06-empty-store-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668 is not in the trust store",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U06",
+      "variant": "removed-key",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Publisher key removed with trust remove",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U06-removed-key-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing trust remove --keyid 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668 --store trust.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668 is not in the trust store",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U07",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Key trusted only for another package",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U07-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing trust add --key ../keys/ecdsa.pub.pem --package other-app --store trust.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668 is not allowed to sign package contoh-app",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U08",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Valid bundle, different expected version",
+      "expected_status": "METADATA_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U08-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "METADATA_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "METADATA_MISMATCH",
+        "message": "Manifest version '1.0.0' does not match expected '1.0.1'",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U09",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Artifact renamed, content unchanged",
+      "expected_status": "METADATA_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U09-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "METADATA_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "METADATA_MISMATCH",
+        "message": "Manifest artifact name 'contoh-app.zip' does not match expected 'contoh-app-renamed.zip'",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "duplicate-bundle-field",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Duplicate field in the bundle",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-duplicate-bundle-field-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid JSON: Duplicate JSON field: schema",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "duplicate-manifest-field",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Duplicate field in the manifest",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-duplicate-manifest-field-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid JSON: Duplicate JSON field: package",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "wrong-type",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Wrong data type in the manifest",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-wrong-type-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid artifact.size",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "artifact.size stored as a JSON string, e.g. \"1030\".",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "invalid-base64",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Invalid Base64 in the bundle",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-invalid-base64-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid Base64",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "First signature_b64 character replaced by '-', which is outside the RFC 4648 alphabet.",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "oversized-manifest",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Manifest larger than 16 KiB",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-oversized-manifest-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Manifest exceeds 16 KiB",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "Manifest padded to 16385 bytes (limit 16384).",
+      "passed": true
+    },
+    {
+      "id": "U11",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Unsupported algorithm string in the manifest",
+      "expected_status": "UNSUPPORTED_ALGORITHM",
+      "expected_exit": 1,
+      "directory": "U11-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "UNSUPPORTED_ALGORITHM",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "UNSUPPORTED_ALGORITHM",
+        "message": "Unsupported algorithm profile: 'rsa-pss-sha512'",
+        "algorithm": "rsa-pss-sha512",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U12",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Signed by another key of the same profile",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U12-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing keygen --algorithm ecdsa-p256-sha256 --out TEST_ONLY_other",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key b4daa65461f89c6745964009a8b8c8f62707cf2d1f8148a61d929b8c6ebcde8d is not in the trust store",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "b4daa65461f89c6745964009a8b8c8f62707cf2d1f8148a61d929b8c6ebcde8d",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Bundle keyid is the fingerprint of TEST_ONLY_other.pub.pem, which is not in trust.json.",
+      "passed": true
+    },
+    {
+      "id": "U13",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Bundle whitespace and field order changed",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U13-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Field order reversed, tab indentation and surrounding whitespace; Base64 strings unchanged.",
+      "passed": true
+    },
+    {
+      "id": "U14",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Same manifest signed twice",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U14-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out first.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out second.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Manifests identical: True; signatures identical: True. RFC 6979 derives the nonce from the private key and the message digest. Both verifications: OK, OK.",
+      "passed": true
+    },
+    {
+      "id": "INT",
+      "variant": "openssl-verifies",
+      "profile": "ecdsa-p256-sha256",
+      "title": "OpenSSL CLI verifies a bundle signed by this program",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "INT-openssl-verifies-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "openssl dgst -sha256 -verify ../keys/ecdsa.pub.pem -signature signature.der manifest.bin",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": null,
+      "note": "Verified OK",
+      "passed": true
+    },
+    {
+      "id": "INT",
+      "variant": "openssl-signs",
+      "profile": "ecdsa-p256-sha256",
+      "title": "This program verifies a manifest signed by the OpenSSL CLI",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "INT-openssl-signs-ecdsa",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out reference.json",
+          "exit_code": 0
+        },
+        {
+          "command": "openssl dgst -sha256 -sign ../keys/ecdsa.key.pem -out openssl.sig.der manifest.bin",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Signature produced by OpenSSL (64 bytes after conversion).",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "text",
+      "profile": "ed25519",
+      "title": "Sign and verify a text artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-text-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "binary",
+      "profile": "ed25519",
+      "title": "Sign and verify a binary artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-binary-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U01",
+      "variant": "empty",
+      "profile": "ed25519",
+      "title": "Sign and verify an empty artifact",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U01-empty-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U02",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "One artifact byte changed, same size and name",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U02-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "One byte flipped; size and name unchanged.",
+      "passed": true
+    },
+    {
+      "id": "U03",
+      "variant": "append",
+      "profile": "ed25519",
+      "title": "One byte appended to the artifact",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U03-append-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact size 1031 does not match manifest size 1030",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U03",
+      "variant": "truncate",
+      "profile": "ed25519",
+      "title": "Last artifact byte removed",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U03-truncate-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "message": "Artifact size 1029 does not match manifest size 1030",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U04",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Manifest version changed, old signature kept",
+      "expected_status": "INVALID_SIGNATURE",
+      "expected_exit": 1,
+      "directory": "U04-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "INVALID_SIGNATURE",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "INVALID_SIGNATURE",
+        "message": "Signature is not valid for ed25519 key 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.1"
+      },
+      "note": "Canonical manifest with version 1.0.1, signature of the 1.0.0 manifest.",
+      "passed": true
+    },
+    {
+      "id": "U05",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "One signature bit flipped, valid Base64 and length",
+      "expected_status": "INVALID_SIGNATURE",
+      "expected_exit": 1,
+      "directory": "U05-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "INVALID_SIGNATURE",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "INVALID_SIGNATURE",
+        "message": "Signature is not valid for ed25519 key 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Lowest bit of the last signature byte flipped; length stays 64 bytes.",
+      "passed": true
+    },
+    {
+      "id": "U06",
+      "variant": "empty-store",
+      "profile": "ed25519",
+      "title": "Empty trust store",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U06-empty-store-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1 is not in the trust store",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U06",
+      "variant": "removed-key",
+      "profile": "ed25519",
+      "title": "Publisher key removed with trust remove",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U06-removed-key-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing trust remove --keyid 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1 --store trust.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1 is not in the trust store",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U07",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Key trusted only for another package",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U07-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing trust add --key ../keys/ed25519.pub.pem --package other-app --store trust.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1 is not allowed to sign package contoh-app",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U08",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Valid bundle, different expected version",
+      "expected_status": "METADATA_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U08-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "METADATA_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "METADATA_MISMATCH",
+        "message": "Manifest version '1.0.0' does not match expected '1.0.1'",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U09",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Artifact renamed, content unchanged",
+      "expected_status": "METADATA_MISMATCH",
+      "expected_exit": 1,
+      "directory": "U09-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "METADATA_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "METADATA_MISMATCH",
+        "message": "Manifest artifact name 'contoh-app.zip' does not match expected 'contoh-app-renamed.zip'",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "duplicate-bundle-field",
+      "profile": "ed25519",
+      "title": "Duplicate field in the bundle",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-duplicate-bundle-field-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid JSON: Duplicate JSON field: schema",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "duplicate-manifest-field",
+      "profile": "ed25519",
+      "title": "Duplicate field in the manifest",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-duplicate-manifest-field-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid JSON: Duplicate JSON field: package",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "wrong-type",
+      "profile": "ed25519",
+      "title": "Wrong data type in the manifest",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-wrong-type-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid artifact.size",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "artifact.size stored as a JSON string, e.g. \"1030\".",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "invalid-base64",
+      "profile": "ed25519",
+      "title": "Invalid Base64 in the bundle",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-invalid-base64-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Invalid Base64",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "First signature_b64 character replaced by '-', which is outside the RFC 4648 alphabet.",
+      "passed": true
+    },
+    {
+      "id": "U10",
+      "variant": "oversized-manifest",
+      "profile": "ed25519",
+      "title": "Manifest larger than 16 KiB",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "U10-oversized-manifest-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "message": "Manifest exceeds 16 KiB",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      },
+      "note": "Manifest padded to 16385 bytes (limit 16384).",
+      "passed": true
+    },
+    {
+      "id": "U11",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Unsupported algorithm string in the manifest",
+      "expected_status": "UNSUPPORTED_ALGORITHM",
+      "expected_exit": 1,
+      "directory": "U11-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "UNSUPPORTED_ALGORITHM",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "UNSUPPORTED_ALGORITHM",
+        "message": "Unsupported algorithm profile: 'rsa-pss-sha512'",
+        "algorithm": "rsa-pss-sha512",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "",
+      "passed": true
+    },
+    {
+      "id": "U12",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Signed by another key of the same profile",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "U12-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing keygen --algorithm ed25519 --out TEST_ONLY_other",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "message": "Key 510942b2207e9c5c443ac1656fce78fd08fe1cf947a6d7f3ac3fadd14ee6d58d is not in the trust store",
+        "algorithm": "ed25519",
+        "keyid": "510942b2207e9c5c443ac1656fce78fd08fe1cf947a6d7f3ac3fadd14ee6d58d",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Bundle keyid is the fingerprint of TEST_ONLY_other.pub.pem, which is not in trust.json.",
+      "passed": true
+    },
+    {
+      "id": "U13",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Bundle whitespace and field order changed",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U13-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Field order reversed, tab indentation and surrounding whitespace; Base64 strings unchanged.",
+      "passed": true
+    },
+    {
+      "id": "U14",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Same manifest signed twice",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "U14-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out first.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out second.json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Manifests identical: True; signatures identical: True. Ed25519 derives the nonce from the private key and the message (RFC 8032). Both verifications: OK, OK.",
+      "passed": true
+    },
+    {
+      "id": "INT",
+      "variant": "openssl-verifies",
+      "profile": "ed25519",
+      "title": "OpenSSL CLI verifies a bundle signed by this program",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "INT-openssl-verifies-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "openssl pkeyutl -verify -pubin -inkey ../keys/ed25519.pub.pem -rawin -in manifest.bin -sigfile signature.bin",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": null,
+      "note": "Signature Verified Successfully",
+      "passed": true
+    },
+    {
+      "id": "INT",
+      "variant": "openssl-signs",
+      "profile": "ed25519",
+      "title": "This program verifies a manifest signed by the OpenSSL CLI",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "INT-openssl-signs-ed25519",
+      "steps": [
+        {
+          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out reference.json",
+          "exit_code": 0
+        },
+        {
+          "command": "openssl pkeyutl -sign -inkey ../keys/ed25519.key.pem -rawin -in manifest.bin -out openssl.sig",
+          "exit_code": 0
+        },
+        {
+          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "contoh-app",
+        "version": "1.0.0"
+      },
+      "note": "Signature produced by OpenSSL (64 bytes after conversion).",
+      "passed": true
+    }
+  ]
+}

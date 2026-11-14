@@ -1,0 +1,1 @@
+{"valid": false, "status": "KEY_NOT_TRUSTED", "message": "Key 808db30dec56094cf3486d326806fc6ba9fe080ba1718a18078735f767cba69f is not in the trust store", "algorithm": "rsa-pss-sha256", "keyid": "808db30dec56094cf3486d326806fc6ba9fe080ba1718a18078735f767cba69f", "package": "contoh-app", "version": "1.0.0"}

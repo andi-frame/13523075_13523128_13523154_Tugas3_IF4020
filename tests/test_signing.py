@@ -81,7 +81,10 @@ def test_prevent_overwriting_inputs(inputs, target):
     elif target == "hardlink":
         output.hardlink_to(key)
     else:
-        output.symlink_to(artifact)
+        try:
+            output.symlink_to(artifact)
+        except OSError:
+            pytest.skip("Creating symlinks requires extra privileges on this platform")
     with pytest.raises(ValueError):
         sign(artifact, "demo", "1.0", key, output)
     assert artifact.read_bytes() == before_artifact

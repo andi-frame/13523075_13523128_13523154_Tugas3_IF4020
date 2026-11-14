@@ -1,4 +1,5 @@
 import hashlib
+import os
 import stat
 import subprocess
 
@@ -14,7 +15,7 @@ def run(*args):
     return subprocess.run([CLI, *map(str, args)], capture_output=True, text=True, stdin=subprocess.DEVNULL)
 
 
-@pytest.mark.parametrize("profile", ["ed25519", "rsa-pss-sha256"])
+@pytest.mark.parametrize("profile", keys.PROFILES)
 def test_keygen_writes_matching_pair(tmp_path, profile):
     result = keygen(profile, tmp_path / "keys" / "publisher")
     private_pem = result.private_key_path.read_bytes()
@@ -28,7 +29,8 @@ def test_keygen_writes_matching_pair(tmp_path, profile):
     assert keys.profile_of(private) == profile
     assert result.keyid == keys.fingerprint(public) == keys.fingerprint(keys.public_from_private(private))
     assert result.keyid == hashlib.sha256(keys.export_public_spki_der(public)).hexdigest()
-    assert stat.S_IMODE(result.private_key_path.stat().st_mode) == 0o600
+    if os.name == "posix":  # Windows has no POSIX permission bits
+        assert stat.S_IMODE(result.private_key_path.stat().st_mode) == 0o600
     assert sorted(p.name for p in result.private_key_path.parent.iterdir()) == \
         ["publisher.key.pem", "publisher.pub.pem"]
 
