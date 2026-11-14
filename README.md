@@ -1,106 +1,262 @@
 # if4020-signing
 
-A Python CLI for signing software release manifests. Currently supports the
-RSA-PSS and Ed25519 profiles, `keygen`, `sign` and trust store management.
-ECDSA and verification are pending integration. The program name is provisional.
+A command-line tool for signing software release artifacts and verifying them
+before publication or deployment. It follows the blob-signing flow of Sigstore
+Cosign, but with a local trust store instead of certificates or a transparency
+log:
 
-## Requirements
+1. `sign` reads an artifact, records its name, size and SHA-256 in a release
+   manifest, signs the exact manifest bytes and stores manifest and signature
+   in a JSON bundle.
+2. `verify` accepts the artifact only if the bundle is well formed, the signing
+   key is trusted for the expected package, the signature is valid, and the
+   metadata and artifact bytes match.
 
-Python 3.13.x and [uv](https://docs.astral.sh/uv/). Dependencies are locked in
-`uv.lock`: cryptography 50.0.2, cffi 2.1.1, pycparser 3.12; tests use pytest 9.2.0.
-OpenSSL CLI is needed for interoperability tests; those tests skip if unavailable.
+Three signature profiles are supported: `rsa-pss-sha256`, `ecdsa-p256-sha256`
+and `ed25519`. The tool is distributed as a container image for CI/CD runners
+and also runs directly with Python.
+
+## Tech stack and dependencies
+
+| Component | Version | Purpose |
+| --- | --- | --- |
+| Python | 3.13.x | Runtime (`requires-python = ">=3.13,<3.14"`) |
+| [uv](https://docs.astral.sh/uv/) | 0.13.4 (image build) | Project and dependency management, `uv.lock` |
+| [cryptography](https://cryptography.io/) | 50.0.2 | RSA-PSS, ECDSA, Ed25519, key serialization |
+| cffi, pycparser | 2.1.1, 3.12 | Transitive dependencies of cryptography |
+| [pytest](https://docs.pytest.org/) | 9.2.0 | Tests only (dev group) |
+| OpenSSL CLI | any 3.x | Tests only: independent interoperability checks; skipped if absent |
+| `python:3.13-slim-bookworm` | Docker base image | Container runtime |
+
+JSON, Base64, SHA-256 and the CLI use the Python standard library (`json`,
+`base64`, `hashlib`, `argparse`). Manifest construction, strict parsing, trust
+store management and the signing and verification flow are implemented in this
+repository; no external signing application is invoked.
+
+## Container image
+
+The image runs the CLI as its entrypoint (`docker run --rm <image> <subcommand> ...`)
+on `linux/amd64`. All dependencies are inside the image, so every command works
+with `--network none`. It runs as an unprivileged user by default and accepts the
+runner's UID/GID through `--user`. It is published to
+`ghcr.io/dadecky/if4020-signing` by `.github/workflows/publish-image.yml` when a
+`vX.Y.Z` tag that matches the program version is pushed.
+
+| Program version | Source tag | Image digest |
+| --- | --- | --- |
+| _pending first release_ | | |
+
+Always pin the image by digest, not by tag:
+
+```sh
+IMAGE=ghcr.io/dadecky/if4020-signing@sha256:<digest>
+docker pull "$IMAGE"
+docker run --rm --network none "$IMAGE" --version
+```
+
+### Use on a CI/CD runner
+
+Inputs are bind-mounted read-only, outputs go to a mounted directory, and the
+private key is a temporary file from a CI secret, mounted read-only:
+
+```sh
+set -eu
+: "${IMAGE:?}" "${SIGNING_KEY_FILE:?}"
+trap 'rm -f "$SIGNING_KEY_FILE"' 0
+mkdir -p out
+docker pull "$IMAGE"
+
+docker run --rm --network none --user "$(id -u):$(id -g)" \
+  -v "$PWD/dist:/input:ro" -v "$PWD/out:/output" \
+  -v "$SIGNING_KEY_FILE:/run/signing.key.pem:ro" \
+  "$IMAGE" sign --file /input/contoh-app.zip --package contoh-app \
+  --version 1.0.0 --key /run/signing.key.pem --out /output/release.json
+
+docker run --rm --network none --user "$(id -u):$(id -g)" \
+  -v "$PWD/dist:/input:ro" -v "$PWD/out:/output:ro" \
+  -v "$PWD/ci/trust.json:/trust.json:ro" \
+  "$IMAGE" verify --file /input/contoh-app.zip --bundle /output/release.json \
+  --trust-store /trust.json --package contoh-app --version 1.0.0 --json \
+  > out/verification.json
+```
+
+With `set -e`, a rejected release (exit 1) or an input error (exit 2) stops the
+script before any deployment step. Never append `|| true` or use
+`continue-on-error` on the verify step of a release path.
+
+`.github/workflows/release-pipeline.yml` is the consumer pipeline. It pulls the
+image pinned in `ci/pipeline.env` and runs these jobs:
+
+| Scenario | Job | What it shows |
+| --- | --- | --- |
+| C01 | `sign` → `verify` → `deploy` (all three profiles) | A valid release is signed, verified and only then gets a deployment marker |
+| C02 | `rejection` / `artifact-byte-changed` | One artifact byte changed after signing: `ARTIFACT_MISMATCH`, exit 1, no marker |
+| C03 | `rejection` / `empty-trust-store`, `key-not-allowed-for-package` | `KEY_NOT_TRUSTED`, exit 1, no marker |
+| C04 | `rejection` / `artifact-missing` | Artifact path does not exist: `INPUT_ERROR`, exit 2, no marker |
+| C05 | `runtime-contract` | Runner UID/GID, no TTY, `--network none`, missing option fails with exit 2 |
+
+The signing keys come from the secrets `SIGNING_KEY_RSA_PSS_SHA256`,
+`SIGNING_KEY_ECDSA_P256_SHA256` and `SIGNING_KEY_ED25519` and exist only for this
+demo. The verify jobs never receive a private key. Trust stores are prepared in
+`ci/` ahead of time and are never generated by the pipeline; see `ci/README.md`.
+
+## Commands
+
+| Command | Options | Output |
+| --- | --- | --- |
+| `keygen` | `--algorithm <profile> --out <prefix> [--force]` | `<prefix>.key.pem`, `<prefix>.pub.pem`, keyid on stdout |
+| `sign` | `--file <path> --package <name> --version <version> --key <private.pem> --out <bundle.json>` | Bundle; the profile is taken from the private key |
+| `verify` | `--file <path> --bundle <bundle.json> --trust-store <trust.json> --package <name> --version <version> [--json]` | Verification result |
+| `trust add` | `--key <public.pem> --package <name> --store <trust.json>` | Keyid, profile and allowed packages; creates the store if missing |
+| `trust list` | `--store <trust.json>` | One line per key: keyid, profile, packages |
+| `trust remove` | `--keyid <keyid> --store <trust.json>` | Removed entry; exit 2 if the keyid is not in the store |
+
+`--help` and `--version` are available globally and `--help` on every command.
+No command prompts for input or needs a TTY. Missing options, unknown options
+and abbreviated options (for example `--pack`) fail immediately with exit 2.
+Existing key files are replaced only with `keygen --force`.
+
+```sh
+if4020-signing keygen --algorithm ecdsa-p256-sha256 --out keys/publisher
+if4020-signing trust add --key keys/publisher.pub.pem --package contoh-app --store trust.json
+if4020-signing trust list --store trust.json
+if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 \
+  --key keys/publisher.key.pem --out release.json
+if4020-signing verify --file contoh-app.zip --bundle release.json \
+  --trust-store trust.json --package contoh-app --version 1.0.0 --json
+if4020-signing trust remove --keyid <keyid> --store trust.json
+```
+
+### Verification result
+
+Checks run in this order and stop at the first failure. No other key, profile
+or trust store is tried, and the trust store is never updated from a bundle.
+
+| Order | Status | Exit | Failure condition |
+| ---: | --- | ---: | --- |
+| 1 | `INPUT_ERROR` | 2 | Invalid options or expected values; an input file cannot be read |
+| 2 | `FORMAT_ERROR` | 1 | Bundle, manifest or trust store violates its format, size limit, canonical serialization or Base64 rules; a trust store key does not match its profile or keyid |
+| 3 | `UNSUPPORTED_ALGORITHM` | 1 | Manifest `algorithm` is not one of the three profiles |
+| 4 | `KEY_NOT_TRUSTED` | 1 | Keyid not in the store, trusted under another profile, or not allowed for the expected package |
+| 5 | `INVALID_SIGNATURE` | 1 | Signature invalid over the stored manifest bytes, including wrong length or out-of-range ECDSA values |
+| 6 | `METADATA_MISMATCH` | 1 | Package, version or artifact basename differ from the expected values |
+| 7 | `ARTIFACT_MISMATCH` | 1 | Artifact size or SHA-256 differ from the manifest |
+| 8 | `OK` | 0 | All checks passed |
+
+With `--json`, stdout holds exactly one JSON object followed by a newline;
+diagnostics go to stderr. This also applies to usage errors such as a missing
+option, which are reported as `INPUT_ERROR`.
+
+```json
+{"valid": true, "status": "OK", "message": "Signature and artifact are valid.", "algorithm": "ecdsa-p256-sha256", "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668", "package": "demo", "version": "1.0"}
+```
+
+`algorithm`, `keyid`, `package` and `version` are `null` until the manifest has
+been parsed. When `valid` is false they only explain the result and must not be
+trusted. Without `--json`, an accepted release is reported on stdout and a
+rejection on stderr. All other commands exit 0 on success and 2 on failure.
+
+## File formats
+
+**Manifest** (`minisign-manifest/v1`) is the signed message. It is canonical
+UTF-8 JSON without BOM, whitespace, escapes or a trailing newline, at most
+16 KiB, with fields in the order `schema, package, version, algorithm, keyid,
+artifact` and `artifact` as `name, size, sha256`:
+
+```json
+{"schema":"minisign-manifest/v1","package":"demo","version":"1.0","algorithm":"ecdsa-p256-sha256","keyid":"2339bbb4…","artifact":{"name":"demo.bin","size":26,"sha256":"ee5fe9c6…"}}
+```
+
+Patterns: package `[a-z0-9][a-z0-9._-]{0,63}`, version
+`[A-Za-z0-9][A-Za-z0-9._+-]{0,63}`, artifact name
+`[A-Za-z0-9][A-Za-z0-9._-]{0,127}`, size an integer from 0 to 2^53 − 1 (booleans
+are rejected), keyid and sha256 64 lowercase hex characters. The verifier parses
+the manifest strictly, re-serializes it and requires a byte-for-byte match, then
+checks the signature over the original bytes.
+
+**Bundle** (`minisign-bundle/v1`) holds exactly `schema`, `manifest_b64` and
+`signature_b64`, at most 64 KiB, UTF-8 without BOM. Field order and whitespace
+are free. Both values use canonical RFC 4648 Base64 with padding and no
+whitespace, checked by decoding and re-encoding.
+
+**Trust store** (`minisign-trust/v1`) holds exactly `schema` and `keys`. Each
+entry has exactly `keyid`, `algorithm`, `public_key_pem` and `packages`. Every
+entry is validated on load: the key matches the profile and its parameters, the
+keyid matches the key, packages are non-empty, unique and contain no wildcards,
+and keyids are unique. Invalid stores are never overwritten. Updates are written
+to a temporary file in the same directory and then atomically replaced.
+
+**Keys** are unencrypted PKCS#8 PEM (`PRIVATE KEY`) and SubjectPublicKeyInfo PEM
+(`PUBLIC KEY`). The keyid is `hex_lower(SHA256(DER_SPKI))` of the re-exported
+public key, so PEM line wrapping and line endings do not change it.
+
+Strict JSON parsing rejects duplicate field names while parsing (via
+`object_pairs_hook`), as well as `NaN`/`Infinity`, invalid UTF-8 and trailing data.
+
+## Profiles and library API
+
+All profiles use the [PyCA cryptography](https://cryptography.io/) hazmat API.
+Signatures are computed over the manifest bytes `M` from the bundle. For RSA and
+ECDSA the library hashes `M` with SHA-256 exactly once; no digest is passed in
+(no double hashing).
+
+| Profile | Key | Sign / verify call | Signature |
+| --- | --- | --- | --- |
+| `rsa-pss-sha256` | [`rsa.generate_private_key(public_exponent=65537, key_size=3072)`](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/); SPKI `rsaEncryption`, exactly 3072 bits, e = 65537 | `sign(M, PSS(mgf=MGF1(SHA256()), salt_length=32), SHA256())` | 384 bytes; random salt |
+| `ecdsa-p256-sha256` | [`ec.generate_private_key(SECP256R1())`](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ec/); named-curve OID, uncompressed SEC1 point | `sign(M, ECDSA(SHA256(), deterministic_signing=True))`, verify with `ECDSA(SHA256())` | 64 bytes `r ‖ s`, 32-byte big-endian each; RFC 6979 nonce |
+| `ed25519` | [`Ed25519PrivateKey.generate()`](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/); RFC 8410 without AlgorithmIdentifier parameters | `sign(M)` / `verify(signature, M)`, pure Ed25519, no pre-hash or context | 64 bytes; deterministic |
+
+Key loading and export use the
+[serialization API](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization/).
+Public keys must be in canonical DER: a key that differs from its own re-export
+(for example a compressed EC point, explicit curve parameters or an RSA-PSS
+restricted OID) is rejected.
+
+ECDSA details: the library returns DER, which `crypto/ecdsa.py` converts to
+`r ‖ s` with `decode_dss_signature`; verification converts back with
+`encode_dss_signature`. A signature that is not 64 bytes, or has `r` or `s`
+outside `[1, n − 1]`, is invalid. Low-S normalization is neither applied nor
+required. Nonces follow RFC 6979, so signing does not depend on a runtime random
+number generator, and the implementation matches the RFC 6979 P-256 test vectors.
+Key generation and the RSA-PSS salt use the operating system CSPRNG via OpenSSL.
 
 ## Local usage
 
 ```sh
 uv sync --locked
 uv run if4020-signing --help
-uv run if4020-signing --version
-uv run if4020-signing sign --file tests/fixtures/rsa/demo.bin \
-  --package demo --version 1.0 --key tests/fixtures/rsa/TEST_ONLY.key.pem \
-  --out /tmp/demo.bundle.json
-
-uv run if4020-signing keygen --algorithm ed25519 --out keys/publisher
-uv run if4020-signing trust add --key keys/publisher.pub.pem \
-  --package contoh-app --store trust.json
-uv run if4020-signing trust list --store trust.json
-uv run if4020-signing trust remove --keyid <keyid> --store trust.json
+uv run if4020-signing verify --file tests/fixtures/ecdsa/demo.bin \
+  --bundle tests/fixtures/ecdsa/bundle.json --trust-store tests/fixtures/ecdsa/trust.json \
+  --package demo --version 1.0 --json
 ```
 
-`keygen --algorithm <profile> --out <prefix>` writes `<prefix>.key.pem` (PKCS8,
-mode 0600) and `<prefix>.pub.pem` (SPKI) and prints the keyid. Existing key files
-are only replaced with `--force`. `sign` derives the profile from the private key.
+`python -m if4020_signing` is equivalent to the `if4020-signing` script. The
+program is developed and tested on Linux and also runs on Windows; key file
+permissions (mode 0600) only apply on POSIX systems.
 
-Keys in `tests/fixtures/rsa/` are public test fixtures. Never use them for real
-releases. `keygen`, `sign` and `trust` return exit 0 on success or 2 for invalid
-input or I/O errors, including `trust remove` with an unknown keyid.
-
-## Formats and cryptography
-
-- Manifest: `minisign-manifest/v1`, canonical UTF-8 JSON, at most 16 KiB;
-  field order `schema, package, version, algorithm, keyid, artifact` and
-  artifact field order `name, size, sha256`. No BOM or external whitespace.
-- Bundle: `minisign-bundle/v1`, at most 64 KiB; fields
-  `schema, manifest_b64, signature_b64`, using canonical RFC 4648 Base64.
-  Duplicate, missing, extra, or incorrectly typed fields are rejected.
-- RSA profile: `rsa-pss-sha256`, 3072-bit keys, exponent 65537, 384-byte signatures.
-  [PyCA RSA API](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/):
-  `generate_private_key(public_exponent=65537, key_size=3072)`;
-  `sign/verify(message, PSS(MGF1(SHA256()), salt_length=32), SHA256())`.
-  The original manifest is hashed exactly once; PSS uses a random salt.
-- Ed25519 profile: `ed25519`, Pure Ed25519 (RFC 8032) without pre-hash or context,
-  64-byte deterministic signatures.
-  [PyCA Ed25519 API](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/):
-  `Ed25519PrivateKey.generate()`; `sign(message)` / `verify(signature, message)`
-  on the original manifest bytes. Keys follow RFC 8410 (no AlgorithmIdentifier
-  parameters); public keys must be the canonical 44-byte SPKI encoding.
-- Trust store: `minisign-trust/v1` with exactly `schema` and `keys`; each entry has
-  exactly `keyid, algorithm, public_key_pem, packages`. Every entry is validated
-  on load (profile matches key type/parameters, keyid matches the key, packages
-  non-empty, unique, no wildcards, unique keyids); invalid stores are never
-  overwritten. Updates are written to a temp file and atomically replaced.
-- Keys: unencrypted PKCS8 private PEM and rsaEncryption SPKI public PEM with
-  canonical DER encoding. Fingerprint: lowercase `SHA256(DER_SPKI)`.
-  See the [serialization API](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization/).
-
-Artifacts are read as raw bytes for SHA-256 and size. Bundle writes are atomic;
-output paths that would overwrite the artifact or private key are rejected.
-
-## Tests and benchmarks
+## Tests and evidence
 
 ```sh
-uv run pytest -q
-uv run python benchmarks/run.py --out evidence/benchmarks/rsa-new-run
+uv run pytest -q                                            # unit, CLI and scenario tests
+uv run python tests/scenarios.py --out <new-directory>      # U01-U14 and interoperability evidence
+uv run python benchmarks/run.py --out <new-directory>       # performance measurements
 ```
 
-Benchmark output includes raw CSV, environment metadata, key/signature/bundle
-sizes, median and nearest-rank P95. Defaults: 1 KiB/1 MiB/10 MiB artifacts,
-5 keygens, 5 warmups and 30 samples per condition. Use a new output directory.
-Initial RSA results: `evidence/benchmarks/rsa-initial/`.
-Application verification and CI tests are pending integration.
+- `tests/` covers each adapter (including RFC 8032 and RFC 6979 known-answer
+  tests and OpenSSL interoperability in both directions), strict formats, trust
+  store updates, key generation, signing, the verifier's check order and the
+  CLI contract.
+- `tests/scenarios.py` runs U01–U14 for all three profiles through the CLI, plus
+  interoperability with the OpenSSL CLI (OpenSSL verifies our bundles and we
+  verify signatures produced by OpenSSL). `evidence/scenarios/` holds the last
+  run: inputs, outputs, commands, expected and actual results for each case.
+- `benchmarks/run.py` measures key generation, artifact hashing, crypto sign and
+  verify on the manifest, and end-to-end `sign`/`verify` for 1 KiB, 1 MiB and
+  10 MiB artifacts (5 warm-up runs, 30 samples, monotonic `perf_counter_ns`,
+  nearest-rank P95 at `ceil(0.95 n)`). `evidence/benchmarks/all-profiles/` has
+  raw CSV, environment metadata and `summary.md` for all three profiles on one
+  machine. End-to-end RSA signing is dominated by the validation that OpenSSL
+  runs when loading a 3072-bit private key, not by the signature itself.
 
-## Container and CI/CD
-
-The `Dockerfile` builds a `linux/amd64` image whose entrypoint is the CLI; the
-build context contains only the project sources and lock file (no tests or keys).
-`.github/workflows/publish-image.yml` publishes it to
-`ghcr.io/dadecky/if4020-signing` on a `vX.Y.Z` tag matching the program version
-and records the digest in the run summary.
-
-```sh
-docker pull ghcr.io/dadecky/if4020-signing@sha256:<digest>
-docker run --rm --network none --user "$(id -u):$(id -g)" \
-  -v "$PWD/out:/output" ghcr.io/dadecky/if4020-signing@sha256:<digest> \
-  keygen --algorithm ed25519 --out /output/publisher
-```
-
-`.github/workflows/release-pipeline.yml` is the consumer pipeline: it pulls the
-image pinned in `ci/pipeline.env`, signs with a per-profile secret
-(`SIGNING_KEY_RSA_PSS_SHA256`, `SIGNING_KEY_ECDSA_P256_SHA256`,
-`SIGNING_KEY_ED25519`), verifies with `ci/trust.json` and only then writes a
-deployment marker, and checks that the CLI runs with the runner UID/GID, no TTY
-and `--network none`.
-
-| Program version | Source tag | Image digest |
-| --- | --- | --- |
-| _pending first release_ | | |
+Key pairs in `tests/fixtures/` and `evidence/` are named `TEST_ONLY` and exist
+only for tests. Never use them for real releases.
