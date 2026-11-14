@@ -1,0 +1,114 @@
+[
+  {
+    "operation": "keygen",
+    "artifact_bytes": 0,
+    "n": 5,
+    "median_ns": 68427,
+    "p95_ns": 305145
+  },
+  {
+    "operation": "artifact_sha256",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 17453.0,
+    "p95_ns": 91656
+  },
+  {
+    "operation": "crypto_sign",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 33049.5,
+    "p95_ns": 41359
+  },
+  {
+    "operation": "crypto_verify",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 97065.0,
+    "p95_ns": 194065
+  },
+  {
+    "operation": "sign_end_to_end",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 1768534.5,
+    "p95_ns": 3318898
+  },
+  {
+    "operation": "verify_end_to_end",
+    "artifact_bytes": 1024,
+    "n": 30,
+    "median_ns": 274902.5,
+    "p95_ns": 332617
+  },
+  {
+    "operation": "artifact_sha256",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 806085.0,
+    "p95_ns": 1015841
+  },
+  {
+    "operation": "crypto_sign",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 32178.5,
+    "p95_ns": 42964
+  },
+  {
+    "operation": "crypto_verify",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 81078.0,
+    "p95_ns": 95711
+  },
+  {
+    "operation": "sign_end_to_end",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 2877373.5,
+    "p95_ns": 3903890
+  },
+  {
+    "operation": "verify_end_to_end",
+    "artifact_bytes": 1048576,
+    "n": 30,
+    "median_ns": 1636823.0,
+    "p95_ns": 3207153
+  },
+  {
+    "operation": "artifact_sha256",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 9453588.5,
+    "p95_ns": 11304620
+  },
+  {
+    "operation": "crypto_sign",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 32023.5,
+    "p95_ns": 56170
+  },
+  {
+    "operation": "crypto_verify",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 80202.5,
+    "p95_ns": 96757
+  },
+  {
+    "operation": "sign_end_to_end",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 11944625.0,
+    "p95_ns": 14111484
+  },
+  {
+    "operation": "verify_end_to_end",
+    "artifact_bytes": 10485760,
+    "n": 30,
+    "median_ns": 9979238.0,
+    "p95_ns": 11862025
+  }
+]
