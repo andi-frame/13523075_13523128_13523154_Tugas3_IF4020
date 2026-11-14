@@ -58,8 +58,11 @@ def validate_manifest(manifest: dict) -> None:
         raise FormatError("Unknown manifest schema")
     _string(manifest["package"], PACKAGE_PATTERN, "package")
     _string(manifest["version"], VERSION_PATTERN, "version")
-    # Unknown ASCII profiles reach the verifier's UNSUPPORTED_ALGORITHM stage.
-    _string(manifest["algorithm"], r"[\x00-\x7f]*", "algorithm")
+    # Unknown profiles reach the verifier's UNSUPPORTED_ALGORITHM stage. Only
+    # printable ASCII that needs no JSON escape is a well-formed value.
+    _string(manifest["algorithm"], r'[\x20-\x7e]*', "algorithm")
+    if '"' in manifest["algorithm"] or "\\" in manifest["algorithm"]:
+        raise FormatError("Invalid algorithm")
     _string(manifest["keyid"], HEX_PATTERN, "keyid")
     artifact = manifest["artifact"]
     _fields(artifact, ("name", "size", "sha256"))
