@@ -1,0 +1,1 @@
+{"valid": false, "status": "ARTIFACT_MISMATCH", "message": "Artifact SHA-256 does not match the manifest", "algorithm": "ecdsa-p256-sha256", "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668", "package": "contoh-app", "version": "1.0.0"}

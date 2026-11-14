@@ -1,0 +1,1 @@
+{"valid": false, "status": "ARTIFACT_MISMATCH", "message": "Artifact size 1029 does not match manifest size 1030", "algorithm": "ed25519", "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1", "package": "contoh-app", "version": "1.0.0"}

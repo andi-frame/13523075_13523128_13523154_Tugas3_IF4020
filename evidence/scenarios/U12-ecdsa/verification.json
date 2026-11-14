@@ -1,0 +1,1 @@
+{"valid": false, "status": "KEY_NOT_TRUSTED", "message": "Key b4daa65461f89c6745964009a8b8c8f62707cf2d1f8148a61d929b8c6ebcde8d is not in the trust store", "algorithm": "ecdsa-p256-sha256", "keyid": "b4daa65461f89c6745964009a8b8c8f62707cf2d1f8148a61d929b8c6ebcde8d", "package": "contoh-app", "version": "1.0.0"}
