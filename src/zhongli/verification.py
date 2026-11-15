@@ -31,6 +31,8 @@ from .trust import TRUST_STORE_LIMIT, KeyNotTrustedError, find_authorized_key, p
 
 
 class Status(enum.StrEnum):
+    """Verification status; `exit_code` is 0 for OK, 2 for INPUT_ERROR and 1 otherwise."""
+
     OK = "OK"
     INPUT_ERROR = "INPUT_ERROR"
     FORMAT_ERROR = "FORMAT_ERROR"
@@ -72,6 +74,7 @@ class VerificationResult:
         return self.status.exit_code
 
     def to_json(self) -> dict[str, Any]:
+        """The object printed by ``verify --json``, with fields in the order of the specification."""
         return {
             "valid": self.valid, "status": str(self.status), "message": self.message,
             "algorithm": self.algorithm, "keyid": self.keyid,
@@ -96,10 +99,47 @@ def verify(
     artifact_path: str | os.PathLike, bundle_path: str | os.PathLike,
     trust_store_path: str | os.PathLike, expected_package: str, expected_version: str,
 ) -> VerificationResult:
-    metadata: dict[str, str] = {}
+    """Verify ``artifact_path`` against ``bundle_path`` using ``trust_store_path``.
 
-    def result(status: Status, message: str) -> VerificationResult:
-        return VerificationResult(status, message, **metadata)
+    Args:
+        artifact_path: The release artifact. Its basename must equal
+            ``artifact.name`` in the signed manifest.
+        bundle_path: A ``minisign-bundle/v1`` JSON file produced by ``sign``.
+        trust_store_path: A ``minisign-trust/v1`` JSON file. It is read only.
+        expected_package: The package the caller expects, for example ``"contoh-app"``.
+        expected_version: The version the caller expects, for example ``"1.0.0"``.
+
+    Returns:
+        A `VerificationResult`. It never raises for invalid or unreadable
+        inputs; those become ``INPUT_ERROR`` or ``FORMAT_ERROR``.
+
+    Example:
+        >>> result = verify("dist/contoh-app.zip", "release.json", "trust.json",
+        ...                 "contoh-app", "1.0.0")
+        >>> result.status, result.exit_code
+        (<Status.OK: 'OK'>, 0)
+    """
+    return verify_with_manifest(artifact_path, bundle_path, trust_store_path,
+                                expected_package, expected_version)[0]
+
+
+def verify_with_manifest(
+    artifact_path: str | os.PathLike, bundle_path: str | os.PathLike,
+    trust_store_path: str | os.PathLike, expected_package: str, expected_version: str,
+) -> tuple[VerificationResult, dict | None]:
+    """Like `verify`, but also return the manifest that was verified.
+
+    The manifest is returned only when the status is OK. It is then
+    authentic: its signature was checked over the exact bytes it was parsed
+    from, and the artifact matched it. Callers that bind further data to the
+    release (the signed SBOM) use these values instead of reading the bundle
+    a second time.
+    """
+    metadata: dict[str, str] = {}
+    verified: dict | None = None
+
+    def result(status: Status, message: str) -> tuple[VerificationResult, dict | None]:
+        return VerificationResult(status, message, **metadata), verified if status is Status.OK else None
 
     for name, value, pattern in (("package", expected_package, PACKAGE_PATTERN),
                                  ("version", expected_version, VERSION_PATTERN)):
@@ -152,6 +192,7 @@ def verify(
                               f"Artifact size {size} does not match manifest size {manifest['artifact']['size']}")
             if sha256 != manifest["artifact"]["sha256"]:
                 return result(Status.ARTIFACT_MISMATCH, "Artifact SHA-256 does not match the manifest")
+            verified = manifest
     except OSError as exc:
         return result(Status.INPUT_ERROR, _describe(exc))
 
