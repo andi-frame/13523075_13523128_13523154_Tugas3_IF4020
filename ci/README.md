@@ -15,7 +15,7 @@
 | --- | --- | --- |
 | `keys/ci-ed25519.pub.pem` | `ed25519` | `351bda0b8320fc4deaa5479349546f550c917c1b2f2e100d6287d4bd1c2faa7c` |
 | `keys/ci-rsa-pss-sha256.pub.pem` | `rsa-pss-sha256` | `a8f599b03f91e26d62cfdc8ae1aa9014c634df9f3e418c475fb7fac5725b9d07` |
-| `keys/ci-ecdsa-p256-sha256.pub.pem` | `ecdsa-p256-sha256` | `6aa00f55fff2e931faa11e25df670d9482bf6f2ba0ec6a6e3a7b82913de20d56` |
+| `keys/ci-ecdsa-p256-sha256.pub.pem` | `ecdsa-p256-sha256` | `1fa39d9f57e354ea96a76e60e3a9020e5abde053ae6325fc88c137e8d9277c4f` |
 
 To rotate a key: `keygen` locally, `trust add --key keys/<new>.pub.pem
 --package contoh-app --store ci/trust.json` (and `--package other-app --store

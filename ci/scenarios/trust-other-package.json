@@ -18,9 +18,9 @@
       ]
     },
     {
-      "keyid": "6aa00f55fff2e931faa11e25df670d9482bf6f2ba0ec6a6e3a7b82913de20d56",
+      "keyid": "1fa39d9f57e354ea96a76e60e3a9020e5abde053ae6325fc88c137e8d9277c4f",
       "algorithm": "ecdsa-p256-sha256",
-      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEI1jsiZPB55tTsOX/6kcF5NJBOxDT\nS2Uvg9X3I2a9Tch+unff5bvG1JXjk+7cOmTy7YrTXRrJ2YohqRpdK5xXLQ==\n-----END PUBLIC KEY-----\n",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEDr1+1hj/Ox1x1DtfeYIWUWmEIvwd\nVEwyOsw+XTgVxfArvKKxvEvVqNsNtYlvEu8YYBZf7aVDPH7C6UGtbqL0mw==\n-----END PUBLIC KEY-----\n",
       "packages": [
         "other-app"
       ]
