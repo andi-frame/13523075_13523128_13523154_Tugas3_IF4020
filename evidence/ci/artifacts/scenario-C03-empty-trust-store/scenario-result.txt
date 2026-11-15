@@ -1,0 +1,8 @@
+scenario=C03-empty-trust-store
+profile=ecdsa-p256-sha256
+trust_store=ci/scenarios/trust-empty.json
+image=docker.io/andiframe/zhongli@sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3
+expected=KEY_NOT_TRUSTED exit 1
+actual=KEY_NOT_TRUSTED exit 1 valid=false
+deployment_marker=absent
+run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/43719510564

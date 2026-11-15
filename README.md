@@ -103,6 +103,10 @@ image pinned in `ci/pipeline.env` and runs these jobs:
 | C04 | `rejection` / `artifact-missing` | Artifact path does not exist: `INPUT_ERROR`, exit 2, no marker |
 | C05 | `runtime-contract` | Runner UID/GID, no TTY, `--network none`, missing option fails with exit 2 |
 
+All jobs run on GitHub-hosted `ubuntu-24.04` runners (Linux amd64, a new virtual
+machine per job). [`evidence/ci/`](evidence/ci/) holds a copy of the last run: run
+links, job logs, verification JSON, deployment markers and per-scenario results.
+
 The signing keys come from the secrets `SIGNING_KEY_RSA_PSS_SHA256`,
 `SIGNING_KEY_ECDSA_P256_SHA256` and `SIGNING_KEY_ED25519` and exist only for this
 demo. The verify jobs never receive a private key. Trust stores are prepared in

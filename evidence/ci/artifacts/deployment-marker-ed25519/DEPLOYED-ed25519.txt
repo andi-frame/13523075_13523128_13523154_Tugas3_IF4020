@@ -1,0 +1,6 @@
+deployed=contoh-app.zip
+sha256=c37d723b4a22a82899ec18245ae7e486b1cc0a1be921d905a18d1891ce6f2997
+profile=ed25519
+keyid=351bda0b8320fc4deaa5479349546f550c917c1b2f2e100d6287d4bd1c2faa7c
+image=docker.io/andiframe/zhongli@sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3
+run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/43719510564
