@@ -2,8 +2,8 @@
 # and write a deployment marker only if verification passed (C01). The
 # rejection jobs (C02-C04) prove that a failed verification blocks deployment,
 # and runtime-contract covers C05.
-# No pull_request trigger because jobs read secrets. Add `push: branches: [main]`
-# once a digest is pinned and every profile verifies.
+# Started by hand only: the sign jobs read secrets, so there is no pull_request
+# trigger, and each run pulls the image from Docker Hub.
 name: Release pipeline
 
 on:
