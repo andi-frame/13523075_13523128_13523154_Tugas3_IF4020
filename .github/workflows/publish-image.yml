@@ -1,5 +1,8 @@
-# Build and push the image to GHCR. Tags vX.Y.Z must match pyproject.toml;
+# Build the image and push it to the public Docker Hub repository
+# docker.io/<DOCKERHUB_USERNAME>/zhongli. Tags vX.Y.Z must match pyproject.toml;
 # the run summary shows the digest to pin in ci/pipeline.env.
+# Needs the repository variable DOCKERHUB_USERNAME and the secret DOCKERHUB_TOKEN
+# (a Docker Hub access token with read and write access).
 name: Publish image
 
 on:
@@ -9,7 +12,6 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
   publish:
@@ -19,8 +21,11 @@ jobs:
 
       - name: Resolve image name and version
         id: meta
+        env:
+          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
         run: |
-          image="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/zhongli"
+          : "${DOCKERHUB_USERNAME:?repository variable DOCKERHUB_USERNAME is not set}"
+          image="docker.io/${DOCKERHUB_USERNAME}/zhongli"
           version="$(sed -n 's/^version = "\(.*\)"$/\1/p' pyproject.toml | head -n1)"
           if [ "$GITHUB_REF_TYPE" = tag ]; then
             if [ "$GITHUB_REF_NAME" != "v$version" ]; then
@@ -41,9 +46,9 @@ jobs:
 
       - uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push (linux/amd64)
         id: build
@@ -58,10 +63,12 @@ jobs:
             VERSION=${{ steps.meta.outputs.version }}
             REVISION=${{ github.sha }}
 
-      - name: Smoke test the pushed image by digest
+      - name: Smoke test the pushed image by digest, without credentials
         env:
           REF: ${{ steps.meta.outputs.image }}@${{ steps.build.outputs.digest }}
         run: |
+          docker logout docker.io
+          docker image rm -f "$REF" 2>/dev/null || true
           docker pull "$REF"
           docker run --rm --network none --user "$(id -u):$(id -g)" "$REF" --version
           docker run --rm --network none --user "$(id -u):$(id -g)" "$REF" --help > /dev/null
