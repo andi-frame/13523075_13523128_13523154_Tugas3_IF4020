@@ -1,0 +1,1542 @@
+{
+  "generated_at": "2026-11-15T13:14:39+00:00",
+  "environment": {
+    "python": "3.13.18",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "zhongli": "0.1.0",
+    "cryptography": "50.0.2",
+    "openssl_cli": "OpenSSL 3.0.22 25 Aug 2026 (Library: OpenSSL 3.0.22 25 Aug 2026)"
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Release and SBOM signed by the trusted key",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "S01-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "stage": null,
+        "message": "Release, SBOM and their binding are valid.",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 1028,
+          "artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 1028,
+          "sbom_artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": true
+        }
+      },
+      "note": "",
+      "passed": true,
+      "expected_stage": null,
+      "actual_stage": null
+    },
+    {
+      "id": "S02",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "SBOM content changed after signing",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S02-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "stage": "sbom",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "ARTIFACT_MISMATCH",
+          "message": "Artifact SHA-256 does not match the manifest",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "Version of the first component changed in sbom.json after sbom sign.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S03",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "One release artifact byte changed",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S03-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "stage": "artifact",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "artifact": {
+          "valid": false,
+          "status": "ARTIFACT_MISMATCH",
+          "message": "Artifact SHA-256 does not match the manifest",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "One artifact byte flipped after signing; size and name unchanged.",
+      "passed": true,
+      "expected_stage": "artifact",
+      "actual_stage": "artifact"
+    },
+    {
+      "id": "S04",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Artifact replaced and re-signed, old SBOM kept",
+      "expected_status": "SBOM_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S04-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "SBOM_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "SBOM_MISMATCH",
+        "stage": "binding",
+        "message": "SBOM artifact SHA-256 '55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc' does not match the verified release '8c41d56cbdf49980459cc22610780f4df6f26f5f18ca7f88b956b4697644cab6'",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 168,
+          "artifact_sha256": "8c41d56cbdf49980459cc22610780f4df6f26f5f18ca7f88b956b4697644cab6",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 1028,
+          "sbom_artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": false
+        }
+      },
+      "note": "Artifact replaced and release.json re-signed with the trusted key; sbom.json and sbom.bundle.json still describe the original artifact.",
+      "passed": true,
+      "expected_stage": "binding",
+      "actual_stage": "binding"
+    },
+    {
+      "id": "S05",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Valid SBOM of another artifact",
+      "expected_status": "SBOM_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S05-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file other/contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "SBOM_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "SBOM_MISMATCH",
+        "stage": "binding",
+        "message": "SBOM artifact SHA-256 '4a37f91fd441588acd0556d8fa2d4b02416f086b51e71a6208a3fcaa9f47f003' does not match the verified release '55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc'",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 1028,
+          "artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 37,
+          "sbom_artifact_sha256": "4a37f91fd441588acd0556d8fa2d4b02416f086b51e71a6208a3fcaa9f47f003",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": false
+        }
+      },
+      "note": "sbom.json was created and signed for another artifact with the same name and version.",
+      "passed": true,
+      "expected_stage": "binding",
+      "actual_stage": "binding"
+    },
+    {
+      "id": "S06",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "SBOM signed by an untrusted key",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "S06-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli keygen --algorithm rsa-pss-sha256 --out TEST_ONLY_other",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "stage": "sbom",
+        "message": "Key 06c792d6461dcc3be758f82488f6223c24d283c7eae50e8455862c3b816c49d8 is not in the trust store",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "KEY_NOT_TRUSTED",
+          "message": "Key 06c792d6461dcc3be758f82488f6223c24d283c7eae50e8455862c3b816c49d8 is not in the trust store",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "06c792d6461dcc3be758f82488f6223c24d283c7eae50e8455862c3b816c49d8",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "sbom.bundle.json signed with a key that is not in trust.json.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S07",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "Signed file is not a CycloneDX SBOM",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "S07-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sign --file sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "stage": "sbom",
+        "message": "SBOM bomFormat must be \"CycloneDX\"",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "A JSON file that is not a CycloneDX SBOM, signed with plain sign by the trusted key.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S08",
+      "variant": "",
+      "profile": "rsa-pss-sha256",
+      "title": "SBOM file missing",
+      "expected_status": "INPUT_ERROR",
+      "expected_exit": 2,
+      "directory": "S08-rsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 2
+        }
+      ],
+      "actual_status": "INPUT_ERROR",
+      "actual_exit": 2,
+      "output": {
+        "valid": false,
+        "status": "INPUT_ERROR",
+        "stage": "sbom",
+        "message": "Cannot read sbom.json: No such file or directory",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "rsa-pss-sha256",
+          "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "INPUT_ERROR",
+          "message": "Cannot read sbom.json: No such file or directory",
+          "algorithm": null,
+          "keyid": null,
+          "package": null,
+          "version": null
+        },
+        "binding": null
+      },
+      "note": "",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S01",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Release and SBOM signed by the trusted key",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "S01-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "stage": null,
+        "message": "Release, SBOM and their binding are valid.",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 1028,
+          "artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 1028,
+          "sbom_artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": true
+        }
+      },
+      "note": "",
+      "passed": true,
+      "expected_stage": null,
+      "actual_stage": null
+    },
+    {
+      "id": "S02",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "SBOM content changed after signing",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S02-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "stage": "sbom",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "ARTIFACT_MISMATCH",
+          "message": "Artifact SHA-256 does not match the manifest",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "Version of the first component changed in sbom.json after sbom sign.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S03",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "One release artifact byte changed",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S03-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "stage": "artifact",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "artifact": {
+          "valid": false,
+          "status": "ARTIFACT_MISMATCH",
+          "message": "Artifact SHA-256 does not match the manifest",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "One artifact byte flipped after signing; size and name unchanged.",
+      "passed": true,
+      "expected_stage": "artifact",
+      "actual_stage": "artifact"
+    },
+    {
+      "id": "S04",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Artifact replaced and re-signed, old SBOM kept",
+      "expected_status": "SBOM_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S04-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "SBOM_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "SBOM_MISMATCH",
+        "stage": "binding",
+        "message": "SBOM artifact SHA-256 '55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc' does not match the verified release '8c41d56cbdf49980459cc22610780f4df6f26f5f18ca7f88b956b4697644cab6'",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 168,
+          "artifact_sha256": "8c41d56cbdf49980459cc22610780f4df6f26f5f18ca7f88b956b4697644cab6",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 1028,
+          "sbom_artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": false
+        }
+      },
+      "note": "Artifact replaced and release.json re-signed with the trusted key; sbom.json and sbom.bundle.json still describe the original artifact.",
+      "passed": true,
+      "expected_stage": "binding",
+      "actual_stage": "binding"
+    },
+    {
+      "id": "S05",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Valid SBOM of another artifact",
+      "expected_status": "SBOM_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S05-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file other/contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "SBOM_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "SBOM_MISMATCH",
+        "stage": "binding",
+        "message": "SBOM artifact SHA-256 '4a37f91fd441588acd0556d8fa2d4b02416f086b51e71a6208a3fcaa9f47f003' does not match the verified release '55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc'",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 1028,
+          "artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 37,
+          "sbom_artifact_sha256": "4a37f91fd441588acd0556d8fa2d4b02416f086b51e71a6208a3fcaa9f47f003",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": false
+        }
+      },
+      "note": "sbom.json was created and signed for another artifact with the same name and version.",
+      "passed": true,
+      "expected_stage": "binding",
+      "actual_stage": "binding"
+    },
+    {
+      "id": "S06",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "SBOM signed by an untrusted key",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "S06-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli keygen --algorithm ecdsa-p256-sha256 --out TEST_ONLY_other",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "stage": "sbom",
+        "message": "Key ff81078828e668b3c7911eddca972d569b1caff893e54a4f87e12d950b74b671 is not in the trust store",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "KEY_NOT_TRUSTED",
+          "message": "Key ff81078828e668b3c7911eddca972d569b1caff893e54a4f87e12d950b74b671 is not in the trust store",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "ff81078828e668b3c7911eddca972d569b1caff893e54a4f87e12d950b74b671",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "sbom.bundle.json signed with a key that is not in trust.json.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S07",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "Signed file is not a CycloneDX SBOM",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "S07-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sign --file sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "stage": "sbom",
+        "message": "SBOM bomFormat must be \"CycloneDX\"",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "A JSON file that is not a CycloneDX SBOM, signed with plain sign by the trusted key.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S08",
+      "variant": "",
+      "profile": "ecdsa-p256-sha256",
+      "title": "SBOM file missing",
+      "expected_status": "INPUT_ERROR",
+      "expected_exit": 2,
+      "directory": "S08-ecdsa",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 2
+        }
+      ],
+      "actual_status": "INPUT_ERROR",
+      "actual_exit": 2,
+      "output": {
+        "valid": false,
+        "status": "INPUT_ERROR",
+        "stage": "sbom",
+        "message": "Cannot read sbom.json: No such file or directory",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ecdsa-p256-sha256",
+          "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "INPUT_ERROR",
+          "message": "Cannot read sbom.json: No such file or directory",
+          "algorithm": null,
+          "keyid": null,
+          "package": null,
+          "version": null
+        },
+        "binding": null
+      },
+      "note": "",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S01",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Release and SBOM signed by the trusted key",
+      "expected_status": "OK",
+      "expected_exit": 0,
+      "directory": "S01-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 0
+        }
+      ],
+      "actual_status": "OK",
+      "actual_exit": 0,
+      "output": {
+        "valid": true,
+        "status": "OK",
+        "stage": null,
+        "message": "Release, SBOM and their binding are valid.",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 1028,
+          "artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 1028,
+          "sbom_artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": true
+        }
+      },
+      "note": "",
+      "passed": true,
+      "expected_stage": null,
+      "actual_stage": null
+    },
+    {
+      "id": "S02",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "SBOM content changed after signing",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S02-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "stage": "sbom",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "ARTIFACT_MISMATCH",
+          "message": "Artifact SHA-256 does not match the manifest",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "Version of the first component changed in sbom.json after sbom sign.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S03",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "One release artifact byte changed",
+      "expected_status": "ARTIFACT_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S03-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "ARTIFACT_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "ARTIFACT_MISMATCH",
+        "stage": "artifact",
+        "message": "Artifact SHA-256 does not match the manifest",
+        "artifact": {
+          "valid": false,
+          "status": "ARTIFACT_MISMATCH",
+          "message": "Artifact SHA-256 does not match the manifest",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "One artifact byte flipped after signing; size and name unchanged.",
+      "passed": true,
+      "expected_stage": "artifact",
+      "actual_stage": "artifact"
+    },
+    {
+      "id": "S04",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Artifact replaced and re-signed, old SBOM kept",
+      "expected_status": "SBOM_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S04-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "SBOM_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "SBOM_MISMATCH",
+        "stage": "binding",
+        "message": "SBOM artifact SHA-256 '55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc' does not match the verified release '8c41d56cbdf49980459cc22610780f4df6f26f5f18ca7f88b956b4697644cab6'",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 168,
+          "artifact_sha256": "8c41d56cbdf49980459cc22610780f4df6f26f5f18ca7f88b956b4697644cab6",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 1028,
+          "sbom_artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": false
+        }
+      },
+      "note": "Artifact replaced and release.json re-signed with the trusted key; sbom.json and sbom.bundle.json still describe the original artifact.",
+      "passed": true,
+      "expected_stage": "binding",
+      "actual_stage": "binding"
+    },
+    {
+      "id": "S05",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Valid SBOM of another artifact",
+      "expected_status": "SBOM_MISMATCH",
+      "expected_exit": 1,
+      "directory": "S05-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file other/contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "SBOM_MISMATCH",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "SBOM_MISMATCH",
+        "stage": "binding",
+        "message": "SBOM artifact SHA-256 '4a37f91fd441588acd0556d8fa2d4b02416f086b51e71a6208a3fcaa9f47f003' does not match the verified release '55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc'",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": {
+          "artifact_name": "contoh-app.zip",
+          "artifact_size": 1028,
+          "artifact_sha256": "55cf14b0da2830b4a0c792188f89ecb6d7331b8260a9af1b6fc5a65abf78adcc",
+          "sbom_artifact_name": "contoh-app.zip",
+          "sbom_artifact_size": 37,
+          "sbom_artifact_sha256": "4a37f91fd441588acd0556d8fa2d4b02416f086b51e71a6208a3fcaa9f47f003",
+          "sbom_package": "contoh-app",
+          "sbom_version": "1.0.0",
+          "match": false
+        }
+      },
+      "note": "sbom.json was created and signed for another artifact with the same name and version.",
+      "passed": true,
+      "expected_stage": "binding",
+      "actual_stage": "binding"
+    },
+    {
+      "id": "S06",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "SBOM signed by an untrusted key",
+      "expected_status": "KEY_NOT_TRUSTED",
+      "expected_exit": 1,
+      "directory": "S06-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli keygen --algorithm ed25519 --out TEST_ONLY_other",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "KEY_NOT_TRUSTED",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "KEY_NOT_TRUSTED",
+        "stage": "sbom",
+        "message": "Key e7ba8657dff89527967a2e76d81aaed3ab323ca196d3bdae8332700b1c3725b3 is not in the trust store",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "KEY_NOT_TRUSTED",
+          "message": "Key e7ba8657dff89527967a2e76d81aaed3ab323ca196d3bdae8332700b1c3725b3 is not in the trust store",
+          "algorithm": "ed25519",
+          "keyid": "e7ba8657dff89527967a2e76d81aaed3ab323ca196d3bdae8332700b1c3725b3",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "sbom.bundle.json signed with a key that is not in trust.json.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S07",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "Signed file is not a CycloneDX SBOM",
+      "expected_status": "FORMAT_ERROR",
+      "expected_exit": 1,
+      "directory": "S07-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sign --file sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 1
+        }
+      ],
+      "actual_status": "FORMAT_ERROR",
+      "actual_exit": 1,
+      "output": {
+        "valid": false,
+        "status": "FORMAT_ERROR",
+        "stage": "sbom",
+        "message": "SBOM bomFormat must be \"CycloneDX\"",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "binding": null
+      },
+      "note": "A JSON file that is not a CycloneDX SBOM, signed with plain sign by the trusted key.",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    },
+    {
+      "id": "S08",
+      "variant": "",
+      "profile": "ed25519",
+      "title": "SBOM file missing",
+      "expected_status": "INPUT_ERROR",
+      "expected_exit": 2,
+      "directory": "S08-ed25519",
+      "steps": [
+        {
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 --out sbom.json --lock ../uv.lock",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out sbom.bundle.json",
+          "exit_code": 0
+        },
+        {
+          "command": "zhongli sbom verify --file contoh-app.zip --bundle release.json --sbom sbom.json --sbom-bundle sbom.bundle.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "exit_code": 2
+        }
+      ],
+      "actual_status": "INPUT_ERROR",
+      "actual_exit": 2,
+      "output": {
+        "valid": false,
+        "status": "INPUT_ERROR",
+        "stage": "sbom",
+        "message": "Cannot read sbom.json: No such file or directory",
+        "artifact": {
+          "valid": true,
+          "status": "OK",
+          "message": "Signature and artifact are valid.",
+          "algorithm": "ed25519",
+          "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+          "package": "contoh-app",
+          "version": "1.0.0"
+        },
+        "sbom": {
+          "valid": false,
+          "status": "INPUT_ERROR",
+          "message": "Cannot read sbom.json: No such file or directory",
+          "algorithm": null,
+          "keyid": null,
+          "package": null,
+          "version": null
+        },
+        "binding": null
+      },
+      "note": "",
+      "passed": true,
+      "expected_stage": "sbom",
+      "actual_stage": "sbom"
+    }
+  ]
+}
