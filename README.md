@@ -43,12 +43,17 @@ The image runs the CLI as its entrypoint (`docker run --rm <image> <subcommand> 
 on `linux/amd64`. All dependencies are inside the image, so every command works
 with `--network none`. It runs as an unprivileged user by default and accepts the
 runner's UID/GID through `--user`. It is published to
-`ghcr.io/andi-frame/zhongli` by `.github/workflows/publish-image.yml` when a
-`vX.Y.Z` tag that matches the program version is pushed.
+`ghcr.io/andi-frame/zhongli` by `.github/workflows/publish-image.yml`: as tag
+`X.Y.Z` when a `vX.Y.Z` tag that matches the program version is pushed, or as
+`dev-<commit>` when the workflow is started by hand.
 
-| Program version | Source tag | Image digest |
-| --- | --- | --- |
-| _pending first release_ | | |
+| Program version | Source | Image tag | Image digest |
+| --- | --- | --- | --- |
+| 0.1.0 | `main` @ `f3db5fdc1eeb` | `dev-f3db5fdc1eeb` | `sha256:fb2e9bbce37f622ee89e852fe00d90eb320169c22472e4d9379aad2db2fddb64` |
+
+The image is at
+[ghcr.io/andi-frame/zhongli](https://github.com/users/andi-frame/packages/container/package/zhongli).
+`ci/pipeline.env` pins the digest above.
 
 Always pin the image by digest, not by tag:
 
