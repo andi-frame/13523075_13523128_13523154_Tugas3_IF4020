@@ -10,6 +10,8 @@ from . import keys
 
 @dataclass(frozen=True)
 class KeygenResult:
+    """Profile, keyid and paths of a generated key pair."""
+
     algorithm: str
     keyid: str
     private_key_path: Path
@@ -31,7 +33,25 @@ def _temporary(directory: Path, name: str, data: bytes, mode: int) -> Path:
 
 
 def keygen(profile: str, output_prefix: str | os.PathLike, overwrite_explicit: bool = False) -> KeygenResult:
-    """Existing files are replaced only when ``overwrite_explicit`` is true."""
+    """Generate a key pair and write ``<prefix>.key.pem`` (mode 0600) and ``<prefix>.pub.pem``.
+
+    Both files are written to temporary files first and replace their targets
+    only after both writes succeeded.
+
+    Args:
+        profile: One of `zhongli.keys.PROFILES`.
+        output_prefix: Path prefix, for example ``keys/publisher``.
+        overwrite_explicit: Replace existing files (``keygen --force``).
+
+    Raises:
+        FileExistsError: a target exists and ``overwrite_explicit`` is false.
+        ValueError: unsupported profile or invalid prefix.
+
+    Example:
+        >>> result = keygen("ed25519", "keys/publisher")
+        >>> result.algorithm, result.private_key_path.name, len(result.keyid)
+        ('ed25519', 'publisher.key.pem', 64)
+    """
     adapter = keys.adapter_for_profile(profile)
     prefix = Path(output_prefix)
     if not prefix.name or prefix.name in (".", ".."):

@@ -13,6 +13,8 @@ CHUNK_SIZE = 1024 * 1024
 
 @dataclass(frozen=True)
 class ArtifactInfo:
+    """Basename, size in bytes and lowercase hex SHA-256 of an artifact."""
+
     name: str
     size: int
     sha256: str
@@ -31,6 +33,12 @@ def digest_stream(stream: BinaryIO) -> tuple[int, str]:
 
 
 def read_artifact(path: str | Path) -> ArtifactInfo:
+    """Return basename, size and SHA-256 of the file at ``path``, read in 1 MiB chunks.
+
+    Raises:
+        FormatError: the basename does not match the artifact name pattern.
+        OSError: the file cannot be read.
+    """
     path = Path(path)
     if re.fullmatch(NAME_PATTERN, path.name) is None:
         raise FormatError("Invalid artifact basename")

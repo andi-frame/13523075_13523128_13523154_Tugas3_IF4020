@@ -23,6 +23,8 @@ class SigningAdapter(Protocol):
 
 @dataclass(frozen=True)
 class SignResult:
+    """What `sign` produced: profile, keyid, the signed manifest bytes, the raw signature and the bundle path."""
+
     algorithm: str
     keyid: str
     manifest_bytes: bytes
@@ -43,10 +45,31 @@ def sign(
     private_key_path: str | Path, output_bundle_path: str | Path,
     *, adapter: SigningAdapter = keys,
 ) -> SignResult:
-    """Sign with the profile derived from the private key via the key dispatcher.
+    """Hash the artifact, build its manifest, sign the manifest bytes and write the bundle.
 
-    OSError propagates as an input/environment failure. Key and format validation
-    errors propagate as ValueError subclasses for the command to map to exit 2.
+    The profile comes from the private key, so there is no algorithm option.
+    The bundle is written to a temporary file and replaces ``output_bundle_path``
+    only after signing succeeded.
+
+    Args:
+        artifact_path: The release artifact; its basename becomes ``artifact.name``.
+        package: Package name, pattern ``[a-z0-9][a-z0-9._-]{0,63}``.
+        version: Release version, pattern ``[A-Za-z0-9][A-Za-z0-9._+-]{0,63}``.
+        private_key_path: Unencrypted PKCS#8 PEM private key.
+        output_bundle_path: Bundle JSON to write; must differ from the inputs.
+        adapter: Key adapter; defaults to the dispatcher `zhongli.keys`.
+
+    Returns:
+        A `SignResult` with profile, keyid, manifest and signature bytes.
+
+    Raises:
+        OSError: an input cannot be read or the bundle cannot be written.
+        ValueError: invalid key, metadata or output path (exit code 2 in the CLI).
+
+    Example:
+        >>> result = sign("dist/contoh-app.zip", "contoh-app", "1.0.0", "publisher.key.pem", "release.json")
+        >>> result.algorithm, len(result.signature_bytes)
+        ('ecdsa-p256-sha256', 64)
     """
     artifact_path, private_key_path, output = map(Path, (
         artifact_path, private_key_path, output_bundle_path

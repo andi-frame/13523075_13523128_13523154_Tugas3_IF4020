@@ -90,6 +90,16 @@ def _validate_entry(raw: Any, index: int) -> TrustEntry:
 
 
 def parse_trust_store_strict(raw_bytes: bytes) -> TrustStore:
+    """Parse and validate a ``minisign-trust/v1`` document.
+
+    Every entry is checked: exactly the fields ``keyid``, ``algorithm``,
+    ``public_key_pem`` and ``packages``; the key loads under its profile with
+    the profile's parameters; the keyid equals the key's fingerprint; packages
+    are a non-empty list of unique names without wildcards; keyids are unique.
+
+    Raises:
+        FormatError: any check fails, the file exceeds 1 MiB or starts with a BOM.
+    """
     if len(raw_bytes) > TRUST_STORE_LIMIT:
         raise FormatError("Trust store exceeds 1 MiB")
     if raw_bytes.startswith(b"\xef\xbb\xbf"):
@@ -107,12 +117,19 @@ def parse_trust_store_strict(raw_bytes: bytes) -> TrustStore:
 
 
 def load_trust_store(path: str | Path) -> TrustStore:
-    """OSError propagates to the caller as an I/O failure."""
+    """Read and validate a trust store file. OSError propagates as an I/O failure."""
     return parse_trust_store_strict(Path(path).read_bytes())
 
 
 def find_authorized_key(store: TrustStore, keyid: str, profile: str, expected_package: str):
-    """Return the trusted key or raise KeyNotTrustedError; no fallback."""
+    """Return the public key for ``keyid`` if it may sign ``expected_package`` under ``profile``.
+
+    There is no fallback to other keys or profiles.
+
+    Raises:
+        KeyNotTrustedError: the keyid is absent, is trusted under another
+            profile, or is not allowed for the package.
+    """
     entry = store.get(keyid)
     if entry is None:
         raise KeyNotTrustedError(f"Key {keyid} is not in the trust store")
@@ -124,6 +141,7 @@ def find_authorized_key(store: TrustStore, keyid: str, profile: str, expected_pa
 
 
 def serialize_trust_store(store: TrustStore) -> bytes:
+    """Encode a trust store as ASCII JSON with two-space indentation."""
     data = {"schema": SCHEMA, "keys": [entry.to_json() for entry in store.entries]}
     return (json.dumps(data, indent=2, ensure_ascii=True) + "\n").encode("ascii")
 
@@ -145,6 +163,26 @@ def _write_atomic(path: Path, data: bytes) -> None:
 
 
 def add_trust(store_path: str | Path, public_key_pem: bytes, package: str) -> AddResult:
+    """Allow the key in ``public_key_pem`` to sign ``package``.
+
+    Creates the store if it does not exist. If the key is already trusted, the
+    package is added to its list; if it is already allowed, nothing changes.
+    An existing but invalid store is never overwritten.
+
+    Args:
+        store_path: Trust store JSON file.
+        public_key_pem: SPKI PEM bytes of the publisher's public key.
+        package: Package name the key may sign; no wildcards.
+
+    Raises:
+        ValueError: invalid package name, invalid key, or invalid existing store.
+        OSError: the store cannot be read or written.
+
+    Example:
+        >>> result = add_trust("trust.json", open("publisher.pub.pem", "rb").read(), "contoh-app")
+        >>> result.changed, result.entry.algorithm
+        (True, 'ecdsa-p256-sha256')
+    """
     if type(package) is not str or re.fullmatch(PACKAGE_PATTERN, package) is None:
         raise ValueError(f"Invalid package name: {package!r}")
     public_key = keys.load_public_key(public_key_pem)
@@ -171,10 +209,17 @@ def add_trust(store_path: str | Path, public_key_pem: bytes, package: str) -> Ad
 
 
 def list_trust(store_path: str | Path) -> tuple[TrustEntry, ...]:
+    """Return the validated entries of a trust store, in file order."""
     return load_trust_store(store_path).entries
 
 
 def remove_trust(store_path: str | Path, keyid: str) -> TrustEntry:
+    """Remove the entry for ``keyid`` and return it.
+
+    Raises:
+        TrustKeyNotFoundError: ``keyid`` is not in the store.
+        FormatError: the store is invalid; it is left unchanged.
+    """
     path = Path(store_path)
     store = load_trust_store(path)
     entry = store.get(keyid)

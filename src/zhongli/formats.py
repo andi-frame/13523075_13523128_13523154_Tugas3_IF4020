@@ -33,6 +33,11 @@ def _invalid_constant(value: str) -> None:
 
 
 def parse_json_strict(raw_bytes: bytes) -> Any:
+    """Decode UTF-8 JSON, rejecting duplicate field names, ``NaN``/``Infinity`` and trailing data.
+
+    Raises:
+        FormatError: the bytes are not strict JSON.
+    """
     try:
         return json.loads(
             raw_bytes.decode("utf-8"), object_pairs_hook=_unique_object,
@@ -53,6 +58,11 @@ def _string(value: Any, pattern: str, field: str) -> None:
 
 
 def validate_manifest(manifest: dict) -> None:
+    """Check fields, types and patterns of a ``minisign-manifest/v1`` object.
+
+    Raises:
+        FormatError: a field is missing, extra, of the wrong type or out of range.
+    """
     _fields(manifest, ("schema", "package", "version", "algorithm", "keyid", "artifact"))
     if manifest["schema"] != "minisign-manifest/v1":
         raise FormatError("Unknown manifest schema")
@@ -73,6 +83,21 @@ def validate_manifest(manifest: dict) -> None:
 
 
 def serialize_manifest(manifest: dict) -> bytes:
+    """Return the canonical manifest bytes, which are the bytes that get signed.
+
+    UTF-8 without BOM, no whitespace, no escapes for non-ASCII, no trailing
+    newline, fields in the order ``schema, package, version, algorithm, keyid,
+    artifact`` and ``artifact`` as ``name, size, sha256``.
+
+    Example:
+        >>> serialize_manifest({"schema": "minisign-manifest/v1", "package": "demo", "version": "1.0",
+        ...     "algorithm": "ed25519", "keyid": "ab" * 32,
+        ...     "artifact": {"name": "demo.bin", "size": 3, "sha256": "cd" * 32}})[:44]
+        b'{"schema":"minisign-manifest/v1","package":'
+
+    Raises:
+        FormatError: the manifest is invalid or larger than 16 KiB.
+    """
     validate_manifest(manifest)
     ordered = {key: manifest[key] for key in (
         "schema", "package", "version", "algorithm", "keyid", "artifact"
@@ -85,6 +110,7 @@ def serialize_manifest(manifest: dict) -> bytes:
 
 
 def build_manifest(package: str, version: str, profile: str, keyid: str, artifact_info) -> dict:
+    """Build and validate a manifest from release metadata and an `zhongli.artifact.ArtifactInfo`."""
     manifest = {
         "schema": "minisign-manifest/v1", "package": package, "version": version,
         "algorithm": profile, "keyid": keyid,
@@ -96,6 +122,14 @@ def build_manifest(package: str, version: str, profile: str, keyid: str, artifac
 
 
 def parse_manifest_strict(manifest_bytes: bytes) -> dict:
+    """Parse manifest bytes and require that they are already canonical.
+
+    The parsed manifest is re-serialized with `serialize_manifest`; any byte
+    difference (whitespace, field order, escapes) is rejected.
+
+    Raises:
+        FormatError: invalid JSON, invalid manifest, or non-canonical bytes.
+    """
     if len(manifest_bytes) > MANIFEST_LIMIT:
         raise FormatError("Manifest exceeds 16 KiB")
     manifest = parse_json_strict(manifest_bytes)
@@ -117,6 +151,11 @@ def _decode_base64(value: Any) -> bytes:
 
 
 def encode_bundle(manifest_bytes: bytes, signature_bytes: bytes) -> bytes:
+    """Encode a ``minisign-bundle/v1`` JSON object with canonical Base64 values.
+
+    Raises:
+        FormatError: the manifest is not canonical or the bundle exceeds 64 KiB.
+    """
     parse_manifest_strict(manifest_bytes)
     raw = json.dumps({
         "schema": "minisign-bundle/v1",
@@ -129,6 +168,16 @@ def encode_bundle(manifest_bytes: bytes, signature_bytes: bytes) -> bytes:
 
 
 def parse_bundle_strict(bundle_bytes: bytes) -> tuple[bytes, bytes]:
+    """Parse a bundle and return ``(manifest_bytes, signature_bytes)``.
+
+    Field order and whitespace of the bundle are free. Both Base64 values must
+    be canonical (padding, no whitespace) and the decoded manifest must be
+    canonical. The signature length is not checked here; a wrong length is an
+    invalid signature, not a format error.
+
+    Raises:
+        FormatError: the bundle or the manifest inside it is invalid.
+    """
     if len(bundle_bytes) > BUNDLE_LIMIT:
         raise FormatError("Bundle exceeds 64 KiB")
     bundle = parse_json_strict(bundle_bytes)
