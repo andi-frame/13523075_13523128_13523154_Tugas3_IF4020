@@ -11,6 +11,7 @@ dist/
 .ruff_cache/
 .coverage
 htmlcov/
+site/
 
 # Local secrets; intentional test-key fixtures are managed separately
 .env
