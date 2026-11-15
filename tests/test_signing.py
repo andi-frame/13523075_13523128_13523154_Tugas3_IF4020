@@ -3,9 +3,9 @@ import subprocess
 
 import pytest
 
-from if4020_signing.crypto import rsa
-from if4020_signing.formats import parse_bundle_strict, parse_manifest_strict
-from if4020_signing.signing import sign
+from zhongli.crypto import rsa
+from zhongli.formats import parse_bundle_strict, parse_manifest_strict
+from zhongli.signing import sign
 
 
 @pytest.fixture(scope="module")
@@ -37,7 +37,7 @@ def test_sign_real_artifacts_u01(inputs, pair, content):
 
 @pytest.mark.parametrize("change", [lambda b: bytes([b[0] ^ 1]) + b[1:], lambda b: b + b'!', lambda b: b[:-1]])
 def test_artifact_changes_u02_u03(inputs, pair, change):
-    from if4020_signing.artifact import read_artifact
+    from zhongli.artifact import read_artifact
 
     artifact, key, output = inputs
     sign(artifact, "demo", "1.0", key, output)
@@ -50,7 +50,7 @@ def test_artifact_changes_u02_u03(inputs, pair, change):
 
 
 def test_metadata_change_invalidates_signature_u04(inputs, pair):
-    from if4020_signing.formats import serialize_manifest
+    from zhongli.formats import serialize_manifest
 
     artifact, key, output = inputs
     sign(artifact, "demo", "1.0", key, output)
@@ -101,7 +101,7 @@ def test_failures_preserve_existing_bundle(inputs, monkeypatch):
     def fail_replace(*args):
         raise OSError("simulated replace failure")
 
-    monkeypatch.setattr("if4020_signing.signing.os.replace", fail_replace)
+    monkeypatch.setattr("zhongli.signing.os.replace", fail_replace)
     with pytest.raises(OSError):
         sign(artifact, "demo", "1.0", key, output)
     assert output.read_bytes() == b'previous bundle'
@@ -110,7 +110,7 @@ def test_failures_preserve_existing_bundle(inputs, monkeypatch):
 
 def test_cli_sign_success_and_failures(inputs, pair):
     artifact, key, output = inputs
-    command = ['if4020-signing', 'sign', '--file', str(artifact), '--key', str(key),
+    command = ['zhongli', 'sign', '--file', str(artifact), '--key', str(key),
                '--out', str(output), '--package', 'demo', '--version', '1.0']
     result = subprocess.run(command, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
@@ -121,20 +121,20 @@ def test_cli_sign_success_and_failures(inputs, pair):
     assert result.returncode == 2
     assert result.stdout == ''
     assert 'INPUT_ERROR' in result.stderr
-    result = subprocess.run(['if4020-signing', 'sign'], capture_output=True, text=True)
+    result = subprocess.run(['zhongli', 'sign'], capture_output=True, text=True)
     assert result.returncode == 2
 
 
 def test_cli_help_and_version():
     for option in ('--help', '--version'):
-        result = subprocess.run(['if4020-signing', option], capture_output=True, text=True)
+        result = subprocess.run(['zhongli', option], capture_output=True, text=True)
         assert result.returncode == 0
         assert result.stdout.strip()
 
 
 def test_shared_rsa_fixture():
     from pathlib import Path
-    from if4020_signing.artifact import read_artifact
+    from zhongli.artifact import read_artifact
 
     root = Path(__file__).parent / 'fixtures' / 'rsa'
     manifest, signature = parse_bundle_strict((root / 'bundle.json').read_bytes())

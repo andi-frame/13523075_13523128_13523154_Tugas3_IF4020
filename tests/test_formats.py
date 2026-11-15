@@ -4,8 +4,8 @@ import json
 
 import pytest
 
-from if4020_signing.artifact import ArtifactInfo, read_artifact
-from if4020_signing.formats import (
+from zhongli.artifact import ArtifactInfo, read_artifact
+from zhongli.formats import (
     BUNDLE_LIMIT, MANIFEST_LIMIT, FormatError, build_manifest, encode_bundle,
     parse_bundle_strict, parse_json_strict, parse_manifest_strict, serialize_manifest,
 )

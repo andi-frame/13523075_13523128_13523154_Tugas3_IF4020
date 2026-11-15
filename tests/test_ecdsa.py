@@ -8,7 +8,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec, ed25519 as backend_ed25519, rsa as backend_rsa
 from cryptography.hazmat.primitives.asymmetric.utils import Prehashed, decode_dss_signature
 
-from if4020_signing.crypto import ecdsa
+from zhongli.crypto import ecdsa
 
 N = ecdsa.CURVE_ORDER
 

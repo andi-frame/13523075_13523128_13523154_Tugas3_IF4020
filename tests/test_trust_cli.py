@@ -3,9 +3,9 @@ import subprocess
 
 import pytest
 
-from if4020_signing.crypto import ed25519
+from zhongli.crypto import ed25519
 
-CLI = "if4020-signing"
+CLI = "zhongli"
 
 
 def run(*args):

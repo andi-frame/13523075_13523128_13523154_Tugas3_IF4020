@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from if4020_signing import trust
-from if4020_signing.crypto import ed25519, rsa
-from if4020_signing.formats import FormatError
+from zhongli import trust
+from zhongli.crypto import ed25519, rsa
+from zhongli.formats import FormatError
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

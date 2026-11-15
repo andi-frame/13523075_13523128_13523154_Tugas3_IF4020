@@ -15,7 +15,7 @@ from .trust_cli import register_trust
 from .verification import Status, VerificationResult
 from .verify_cli import emit, register_verify
 
-PROG = "if4020-signing"
+PROG = "zhongli"
 USAGE_EXIT = 2
 
 

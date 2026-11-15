@@ -6,7 +6,7 @@ import pytest
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa as backend_rsa
 
-from if4020_signing.crypto import rsa
+from zhongli.crypto import rsa
 
 
 @pytest.fixture(scope="module")

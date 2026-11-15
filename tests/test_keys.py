@@ -2,8 +2,8 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec, ed448, rsa as backend_rsa
 
-from if4020_signing import keys
-from if4020_signing.crypto import ecdsa, ed25519, rsa
+from zhongli import keys
+from zhongli.crypto import ecdsa, ed25519, rsa
 
 
 @pytest.fixture(scope="module")

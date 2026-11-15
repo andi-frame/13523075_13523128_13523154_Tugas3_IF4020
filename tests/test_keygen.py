@@ -5,10 +5,10 @@ import subprocess
 
 import pytest
 
-from if4020_signing import keys
-from if4020_signing.keygen import keygen
+from zhongli import keys
+from zhongli.keygen import keygen
 
-CLI = "if4020-signing"
+CLI = "zhongli"
 
 
 def run(*args):

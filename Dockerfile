@@ -21,7 +21,7 @@ RUN uv sync --locked --no-dev --no-editable
 FROM ${PYTHON_IMAGE}
 ARG VERSION=dev
 ARG REVISION=unknown
-LABEL org.opencontainers.image.title="if4020-signing" \
+LABEL org.opencontainers.image.title="zhongli" \
       org.opencontainers.image.description="Release artifact signing and verification CLI (RSA-PSS, ECDSA P-256, Ed25519)" \
       org.opencontainers.image.source="https://github.com/DaDecky/13523075_13523128_13523154_Tugas3_IF4020" \
       org.opencontainers.image.version="${VERSION}" \
@@ -33,5 +33,5 @@ ENV PATH=/opt/venv/bin:$PATH \
 # Non-root default; override with --user.
 USER 65532:65532
 WORKDIR /work
-ENTRYPOINT ["if4020-signing"]
+ENTRYPOINT ["zhongli"]
 CMD ["--help"]

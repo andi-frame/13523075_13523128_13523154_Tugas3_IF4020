@@ -7,7 +7,7 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed448, ed25519 as backend_ed25519, rsa as backend_rsa
 
-from if4020_signing.crypto import ed25519
+from zhongli.crypto import ed25519
 
 # RFC 8032 section 7.1, TEST 1 (empty message).
 RFC_SECRET = bytes.fromhex("9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60")

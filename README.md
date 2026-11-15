@@ -1,4 +1,4 @@
-# if4020-signing
+# zhongli
 
 A command-line tool for signing software release artifacts and verifying them
 before publication or deployment. It follows the blob-signing flow of Sigstore
@@ -15,6 +15,9 @@ log:
 Three signature profiles are supported: `rsa-pss-sha256`, `ecdsa-p256-sha256`
 and `ed25519`. The tool is distributed as a container image for CI/CD runners
 and also runs directly with Python.
+
+The name comes from Zhongli, the god of contracts in Genshin Impact: a release
+manifest is a contract, and `verify` refuses any release that breaks it.
 
 ## Tech stack and dependencies
 
@@ -39,7 +42,7 @@ The image runs the CLI as its entrypoint (`docker run --rm <image> <subcommand> 
 on `linux/amd64`. All dependencies are inside the image, so every command works
 with `--network none`. It runs as an unprivileged user by default and accepts the
 runner's UID/GID through `--user`. It is published to
-`ghcr.io/dadecky/if4020-signing` by `.github/workflows/publish-image.yml` when a
+`ghcr.io/dadecky/zhongli` by `.github/workflows/publish-image.yml` when a
 `vX.Y.Z` tag that matches the program version is pushed.
 
 | Program version | Source tag | Image digest |
@@ -49,7 +52,7 @@ runner's UID/GID through `--user`. It is published to
 Always pin the image by digest, not by tag:
 
 ```sh
-IMAGE=ghcr.io/dadecky/if4020-signing@sha256:<digest>
+IMAGE=ghcr.io/dadecky/zhongli@sha256:<digest>
 docker pull "$IMAGE"
 docker run --rm --network none "$IMAGE" --version
 ```
@@ -117,14 +120,14 @@ and abbreviated options (for example `--pack`) fail immediately with exit 2.
 Existing key files are replaced only with `keygen --force`.
 
 ```sh
-if4020-signing keygen --algorithm ecdsa-p256-sha256 --out keys/publisher
-if4020-signing trust add --key keys/publisher.pub.pem --package contoh-app --store trust.json
-if4020-signing trust list --store trust.json
-if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 \
+zhongli keygen --algorithm ecdsa-p256-sha256 --out keys/publisher
+zhongli trust add --key keys/publisher.pub.pem --package contoh-app --store trust.json
+zhongli trust list --store trust.json
+zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 \
   --key keys/publisher.key.pem --out release.json
-if4020-signing verify --file contoh-app.zip --bundle release.json \
+zhongli verify --file contoh-app.zip --bundle release.json \
   --trust-store trust.json --package contoh-app --version 1.0.0 --json
-if4020-signing trust remove --keyid <keyid> --store trust.json
+zhongli trust remove --keyid <keyid> --store trust.json
 ```
 
 ### Verification result
@@ -224,13 +227,13 @@ Key generation and the RSA-PSS salt use the operating system CSPRNG via OpenSSL.
 
 ```sh
 uv sync --locked
-uv run if4020-signing --help
-uv run if4020-signing verify --file tests/fixtures/ecdsa/demo.bin \
+uv run zhongli --help
+uv run zhongli verify --file tests/fixtures/ecdsa/demo.bin \
   --bundle tests/fixtures/ecdsa/bundle.json --trust-store tests/fixtures/ecdsa/trust.json \
   --package demo --version 1.0 --json
 ```
 
-`python -m if4020_signing` is equivalent to the `if4020-signing` script. The
+`python -m zhongli` is equivalent to the `zhongli` script. The
 program is developed and tested on Linux and also runs on Windows; key file
 permissions (mode 0600) only apply on POSIX systems.
 

@@ -20,7 +20,7 @@ jobs:
       - name: Resolve image name and version
         id: meta
         run: |
-          image="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/if4020-signing"
+          image="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/zhongli"
           version="$(sed -n 's/^version = "\(.*\)"$/\1/p' pyproject.toml | head -n1)"
           if [ "$GITHUB_REF_TYPE" = tag ]; then
             if [ "$GITHUB_REF_NAME" != "v$version" ]; then

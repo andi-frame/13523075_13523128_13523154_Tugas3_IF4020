@@ -20,12 +20,12 @@ import ssl
 
 from cryptography.hazmat.backends.openssl import backend as openssl_backend
 
-from if4020_signing import keys
-from if4020_signing.artifact import read_artifact
-from if4020_signing.formats import build_manifest, encode_bundle, serialize_manifest
-from if4020_signing.signing import sign
-from if4020_signing.trust import add_trust
-from if4020_signing.verification import Status, verify
+from zhongli import keys
+from zhongli.artifact import read_artifact
+from zhongli.formats import build_manifest, encode_bundle, serialize_manifest
+from zhongli.signing import sign
+from zhongli.trust import add_trust
+from zhongli.verification import Status, verify
 
 
 def summarize(samples):

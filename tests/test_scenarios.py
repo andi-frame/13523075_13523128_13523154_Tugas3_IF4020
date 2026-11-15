@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from if4020_signing.verification import Status, verify
+from zhongli.verification import Status, verify
 from scenarios import SCENARIOS, run_scenarios, write_report
 
 FIXTURES = Path(__file__).parent / "fixtures"

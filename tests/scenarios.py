@@ -107,7 +107,7 @@ class Context:
         return proc
 
     def cli(self, *args: str) -> subprocess.CompletedProcess:
-        return self._run(["if4020-signing", *args], [sys.executable, "-m", "if4020_signing", *args])
+        return self._run(["zhongli", *args], [sys.executable, "-m", "zhongli", *args])
 
     def openssl(self, *args: str) -> subprocess.CompletedProcess:
         return self._run(["openssl", *args], ["openssl", *args])
@@ -363,7 +363,7 @@ def _prepare_keys(out: Path) -> None:
     for profile, short in PROFILES.items():
         for suffix in ("key.pem", "pub.pem"):
             shutil.copyfile(FIXTURES / short / f"TEST_ONLY.{suffix}", keys / f"{short}.{suffix}")
-        proc = subprocess.run([sys.executable, "-m", "if4020_signing", "trust", "add", "--key", f"{short}.pub.pem",
+        proc = subprocess.run([sys.executable, "-m", "zhongli", "trust", "add", "--key", f"{short}.pub.pem",
                                "--package", PACKAGE, "--store", f"{short}.trust.json"],
                               cwd=keys, capture_output=True, stdin=subprocess.DEVNULL)
         if proc.returncode != 0:
@@ -403,7 +403,7 @@ def _environment() -> dict:
     openssl_version = subprocess.run([openssl, "version"], capture_output=True, text=True).stdout.strip() \
         if openssl else None
     return {"python": platform.python_version(), "platform": platform.platform(),
-            "if4020-signing": package_version("if4020-signing"),
+            "zhongli": package_version("zhongli"),
             "cryptography": package_version("cryptography"), "openssl_cli": openssl_version}
 
 
@@ -424,7 +424,7 @@ def write_report(out: Path, cases: list[Case]) -> None:
         "```",
         "",
         f"Generated {generated} on {environment['platform']}, Python {environment['python']}, "
-        f"if4020-signing {environment['if4020-signing']}, cryptography {environment['cryptography']}, "
+        f"zhongli {environment['zhongli']}, cryptography {environment['cryptography']}, "
         f"OpenSSL CLI: {environment['openssl_cli'] or 'not available'}.",
         "",
         "Each case directory holds its inputs (artifact, bundle, trust store) and the verifier output "

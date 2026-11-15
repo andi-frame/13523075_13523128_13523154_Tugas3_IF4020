@@ -1,8 +1,8 @@
 import pytest
 
-from if4020_signing.crypto import ed25519
-from if4020_signing.formats import parse_bundle_strict, parse_manifest_strict
-from if4020_signing.signing import sign
+from zhongli.crypto import ed25519
+from zhongli.formats import parse_bundle_strict, parse_manifest_strict
+from zhongli.signing import sign
 
 
 @pytest.fixture(scope="module")

@@ -16,9 +16,9 @@ from cryptography.hazmat.primitives.asymmetric import ec, ed25519 as backend_ed2
 
 PROFILES = ("rsa-pss-sha256", "ecdsa-p256-sha256", "ed25519")
 _MODULES = {
-    "rsa-pss-sha256": "if4020_signing.crypto.rsa",
-    "ecdsa-p256-sha256": "if4020_signing.crypto.ecdsa",
-    "ed25519": "if4020_signing.crypto.ed25519",
+    "rsa-pss-sha256": "zhongli.crypto.rsa",
+    "ecdsa-p256-sha256": "zhongli.crypto.ecdsa",
+    "ed25519": "zhongli.crypto.ed25519",
 }
 
 

@@ -7,13 +7,13 @@ import subprocess
 
 import pytest
 
-from if4020_signing import keys
-from if4020_signing.formats import BUNDLE_LIMIT, parse_bundle_strict, parse_manifest_strict, serialize_manifest
-from if4020_signing.signing import sign
-from if4020_signing.trust import add_trust
-from if4020_signing.verification import Status, verify
+from zhongli import keys
+from zhongli.formats import BUNDLE_LIMIT, parse_bundle_strict, parse_manifest_strict, serialize_manifest
+from zhongli.signing import sign
+from zhongli.trust import add_trust
+from zhongli.verification import Status, verify
 
-CLI = "if4020-signing"
+CLI = "zhongli"
 PROFILES = keys.PROFILES
 RESULT_FIELDS = ["valid", "status", "message", "algorithm", "keyid", "package", "version"]
 
@@ -351,6 +351,6 @@ def test_cli_help_and_version():
 
 def test_python_module_entry_point():
     import sys
-    result = subprocess.run([sys.executable, "-m", "if4020_signing", "--version"],
+    result = subprocess.run([sys.executable, "-m", "zhongli", "--version"],
                             capture_output=True, text=True)
-    assert result.returncode == 0 and result.stdout.startswith("if4020-signing ")
+    assert result.returncode == 0 and result.stdout.startswith("zhongli ")
