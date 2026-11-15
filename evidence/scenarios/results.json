@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-14T06:13:33+00:00",
+  "generated_at": "2026-11-14T15:44:50+00:00",
   "environment": {
     "python": "3.13.18",
-    "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
-    "if4020-signing": "0.1.0",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "zhongli": "0.1.0",
     "cryptography": "50.0.2",
     "openssl_cli": "OpenSSL 3.0.22 25 Aug 2026 (Library: OpenSSL 3.0.22 25 Aug 2026)"
   },
@@ -18,11 +18,11 @@
       "directory": "U01-text-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -50,11 +50,11 @@
       "directory": "U01-binary-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -82,11 +82,11 @@
       "directory": "U01-empty-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -114,11 +114,11 @@
       "directory": "U02-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -146,11 +146,11 @@
       "directory": "U03-append-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -178,11 +178,11 @@
       "directory": "U03-truncate-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -210,11 +210,11 @@
       "directory": "U04-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
           "exit_code": 1
         }
       ],
@@ -242,11 +242,11 @@
       "directory": "U05-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -274,11 +274,11 @@
       "directory": "U06-empty-store-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -306,15 +306,15 @@
       "directory": "U06-removed-key-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing trust remove --keyid f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7 --store trust.json",
+          "command": "zhongli trust remove --keyid f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7 --store trust.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -342,15 +342,15 @@
       "directory": "U07-rsa",
       "steps": [
         {
-          "command": "if4020-signing trust add --key ../keys/rsa.pub.pem --package other-app --store trust.json",
+          "command": "zhongli trust add --key ../keys/rsa.pub.pem --package other-app --store trust.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -378,11 +378,11 @@
       "directory": "U08-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
           "exit_code": 1
         }
       ],
@@ -410,11 +410,11 @@
       "directory": "U09-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -442,11 +442,11 @@
       "directory": "U10-duplicate-bundle-field-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -474,11 +474,11 @@
       "directory": "U10-duplicate-manifest-field-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -506,11 +506,11 @@
       "directory": "U10-wrong-type-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -538,11 +538,11 @@
       "directory": "U10-invalid-base64-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -570,11 +570,11 @@
       "directory": "U10-oversized-manifest-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -602,11 +602,11 @@
       "directory": "U11-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -634,15 +634,15 @@
       "directory": "U12-rsa",
       "steps": [
         {
-          "command": "if4020-signing keygen --algorithm rsa-pss-sha256 --out TEST_ONLY_other",
+          "command": "zhongli keygen --algorithm rsa-pss-sha256 --out TEST_ONLY_other",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -651,9 +651,9 @@
       "output": {
         "valid": false,
         "status": "KEY_NOT_TRUSTED",
-        "message": "Key 808db30dec56094cf3486d326806fc6ba9fe080ba1718a18078735f767cba69f is not in the trust store",
+        "message": "Key 4bfea6e94fbbbe5f670c44593a901ad77f704e9a71053a98e86754bb1060d19d is not in the trust store",
         "algorithm": "rsa-pss-sha256",
-        "keyid": "808db30dec56094cf3486d326806fc6ba9fe080ba1718a18078735f767cba69f",
+        "keyid": "4bfea6e94fbbbe5f670c44593a901ad77f704e9a71053a98e86754bb1060d19d",
         "package": "contoh-app",
         "version": "1.0.0"
       },
@@ -670,11 +670,11 @@
       "directory": "U13-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -702,19 +702,19 @@
       "directory": "U14-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out first.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out first.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out second.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out second.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -742,7 +742,7 @@
       "directory": "INT-openssl-verifies-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
@@ -766,7 +766,7 @@
       "directory": "INT-openssl-signs-rsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out reference.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/rsa.key.pem --out reference.json",
           "exit_code": 0
         },
         {
@@ -774,7 +774,7 @@
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -802,11 +802,11 @@
       "directory": "U01-text-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -834,11 +834,11 @@
       "directory": "U01-binary-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -866,11 +866,11 @@
       "directory": "U01-empty-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -898,11 +898,11 @@
       "directory": "U02-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -930,11 +930,11 @@
       "directory": "U03-append-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -962,11 +962,11 @@
       "directory": "U03-truncate-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -994,11 +994,11 @@
       "directory": "U04-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
           "exit_code": 1
         }
       ],
@@ -1026,11 +1026,11 @@
       "directory": "U05-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1058,11 +1058,11 @@
       "directory": "U06-empty-store-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1090,15 +1090,15 @@
       "directory": "U06-removed-key-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing trust remove --keyid 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668 --store trust.json",
+          "command": "zhongli trust remove --keyid 2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668 --store trust.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1126,15 +1126,15 @@
       "directory": "U07-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing trust add --key ../keys/ecdsa.pub.pem --package other-app --store trust.json",
+          "command": "zhongli trust add --key ../keys/ecdsa.pub.pem --package other-app --store trust.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1162,11 +1162,11 @@
       "directory": "U08-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
           "exit_code": 1
         }
       ],
@@ -1194,11 +1194,11 @@
       "directory": "U09-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1226,11 +1226,11 @@
       "directory": "U10-duplicate-bundle-field-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1258,11 +1258,11 @@
       "directory": "U10-duplicate-manifest-field-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1290,11 +1290,11 @@
       "directory": "U10-wrong-type-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1322,11 +1322,11 @@
       "directory": "U10-invalid-base64-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1354,11 +1354,11 @@
       "directory": "U10-oversized-manifest-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1386,11 +1386,11 @@
       "directory": "U11-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1418,15 +1418,15 @@
       "directory": "U12-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing keygen --algorithm ecdsa-p256-sha256 --out TEST_ONLY_other",
+          "command": "zhongli keygen --algorithm ecdsa-p256-sha256 --out TEST_ONLY_other",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1435,9 +1435,9 @@
       "output": {
         "valid": false,
         "status": "KEY_NOT_TRUSTED",
-        "message": "Key b4daa65461f89c6745964009a8b8c8f62707cf2d1f8148a61d929b8c6ebcde8d is not in the trust store",
+        "message": "Key 8be54a1333ed377dc2d7c30cbc6549f037dce111a5c718b8c933e7129785c07a is not in the trust store",
         "algorithm": "ecdsa-p256-sha256",
-        "keyid": "b4daa65461f89c6745964009a8b8c8f62707cf2d1f8148a61d929b8c6ebcde8d",
+        "keyid": "8be54a1333ed377dc2d7c30cbc6549f037dce111a5c718b8c933e7129785c07a",
         "package": "contoh-app",
         "version": "1.0.0"
       },
@@ -1454,11 +1454,11 @@
       "directory": "U13-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -1486,19 +1486,19 @@
       "directory": "U14-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out first.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out first.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out second.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out second.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -1526,7 +1526,7 @@
       "directory": "INT-openssl-verifies-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out release.json",
           "exit_code": 0
         },
         {
@@ -1550,7 +1550,7 @@
       "directory": "INT-openssl-signs-ecdsa",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out reference.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ecdsa.key.pem --out reference.json",
           "exit_code": 0
         },
         {
@@ -1558,7 +1558,7 @@
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -1586,11 +1586,11 @@
       "directory": "U01-text-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -1618,11 +1618,11 @@
       "directory": "U01-binary-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -1650,11 +1650,11 @@
       "directory": "U01-empty-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -1682,11 +1682,11 @@
       "directory": "U02-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1714,11 +1714,11 @@
       "directory": "U03-append-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1746,11 +1746,11 @@
       "directory": "U03-truncate-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1778,11 +1778,11 @@
       "directory": "U04-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
           "exit_code": 1
         }
       ],
@@ -1810,11 +1810,11 @@
       "directory": "U05-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1842,11 +1842,11 @@
       "directory": "U06-empty-store-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1874,15 +1874,15 @@
       "directory": "U06-removed-key-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing trust remove --keyid 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1 --store trust.json",
+          "command": "zhongli trust remove --keyid 640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1 --store trust.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1910,15 +1910,15 @@
       "directory": "U07-ed25519",
       "steps": [
         {
-          "command": "if4020-signing trust add --key ../keys/ed25519.pub.pem --package other-app --store trust.json",
+          "command": "zhongli trust add --key ../keys/ed25519.pub.pem --package other-app --store trust.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -1946,11 +1946,11 @@
       "directory": "U08-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.1 --json",
           "exit_code": 1
         }
       ],
@@ -1978,11 +1978,11 @@
       "directory": "U09-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app-renamed.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2010,11 +2010,11 @@
       "directory": "U10-duplicate-bundle-field-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2042,11 +2042,11 @@
       "directory": "U10-duplicate-manifest-field-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2074,11 +2074,11 @@
       "directory": "U10-wrong-type-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2106,11 +2106,11 @@
       "directory": "U10-invalid-base64-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2138,11 +2138,11 @@
       "directory": "U10-oversized-manifest-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2170,11 +2170,11 @@
       "directory": "U11-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2202,15 +2202,15 @@
       "directory": "U12-ed25519",
       "steps": [
         {
-          "command": "if4020-signing keygen --algorithm ed25519 --out TEST_ONLY_other",
+          "command": "zhongli keygen --algorithm ed25519 --out TEST_ONLY_other",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key TEST_ONLY_other.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 1
         }
       ],
@@ -2219,9 +2219,9 @@
       "output": {
         "valid": false,
         "status": "KEY_NOT_TRUSTED",
-        "message": "Key 510942b2207e9c5c443ac1656fce78fd08fe1cf947a6d7f3ac3fadd14ee6d58d is not in the trust store",
+        "message": "Key becff9324097e736c00bd1878ad366ff056f39c3e563ef3735787e141d6b1a2a is not in the trust store",
         "algorithm": "ed25519",
-        "keyid": "510942b2207e9c5c443ac1656fce78fd08fe1cf947a6d7f3ac3fadd14ee6d58d",
+        "keyid": "becff9324097e736c00bd1878ad366ff056f39c3e563ef3735787e141d6b1a2a",
         "package": "contoh-app",
         "version": "1.0.0"
       },
@@ -2238,11 +2238,11 @@
       "directory": "U13-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -2270,19 +2270,19 @@
       "directory": "U14-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out first.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out first.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out second.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out second.json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle first.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle second.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
@@ -2310,7 +2310,7 @@
       "directory": "INT-openssl-verifies-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out release.json",
           "exit_code": 0
         },
         {
@@ -2334,7 +2334,7 @@
       "directory": "INT-openssl-signs-ed25519",
       "steps": [
         {
-          "command": "if4020-signing sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out reference.json",
+          "command": "zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 --key ../keys/ed25519.key.pem --out reference.json",
           "exit_code": 0
         },
         {
@@ -2342,7 +2342,7 @@
           "exit_code": 0
         },
         {
-          "command": "if4020-signing verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
+          "command": "zhongli verify --file contoh-app.zip --bundle release.json --trust-store trust.json --package contoh-app --version 1.0.0 --json",
           "exit_code": 0
         }
       ],
