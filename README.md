@@ -19,6 +19,13 @@ and also runs directly with Python.
 The name comes from Zhongli, the god of contracts in Genshin Impact: a release
 manifest is a contract, and `verify` refuses any release that breaks it.
 
+| | |
+| --- | --- |
+| Report | [`docs/13523075_13523128_13523154_Tugas3_IF4020.pdf`](docs/13523075_13523128_13523154_Tugas3_IF4020.pdf) |
+| Image | [`andiframe/zhongli`](https://hub.docker.com/r/andiframe/zhongli) on Docker Hub, see [Container image](#container-image) |
+| API documentation | <https://andi-frame.github.io/13523075_13523128_13523154_Tugas3_IF4020/> |
+| CI evidence | [`evidence/ci/`](evidence/ci/) |
+
 ## Tech stack and dependencies
 
 | Component | Version | Purpose |
