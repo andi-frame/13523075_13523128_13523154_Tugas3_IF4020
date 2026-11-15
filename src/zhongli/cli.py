@@ -10,6 +10,8 @@ from importlib.metadata import version
 import sys
 
 from .keygen_cli import register_keygen
+from .sbom import SbomVerificationResult
+from .sbom_cli import emit_sbom, register_sbom
 from .sign_cli import register_sign
 from .trust_cli import register_trust
 from .verification import Status, VerificationResult
@@ -49,6 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
     register_sign(subparsers)
     register_verify(subparsers)
     register_trust(subparsers)
+    register_sbom(subparsers)
     return parser
 
 
@@ -56,6 +59,10 @@ def _usage_failure(error: UsageError, argv: list[str]) -> int:
     error.parser.print_usage(sys.stderr)
     if error.parser.prog == f"{PROG} verify" and "--json" in argv:
         return emit(VerificationResult(Status.INPUT_ERROR, f"Usage error: {error}"), as_json=True)
+    if error.parser.prog == f"{PROG} sbom verify" and "--json" in argv:
+        unchecked = VerificationResult(Status.INPUT_ERROR, "Not checked because of a usage error")
+        return emit_sbom(SbomVerificationResult(Status.INPUT_ERROR, None, f"Usage error: {error}",
+                                                unchecked, unchecked), as_json=True)
     print(f"{error.parser.prog}: error: {error}", file=sys.stderr)
     return USAGE_EXIT
 
