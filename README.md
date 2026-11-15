@@ -28,6 +28,7 @@ manifest is a contract, and `verify` refuses any release that breaks it.
 | [cryptography](https://cryptography.io/) | 50.0.2 | RSA-PSS, ECDSA, Ed25519, key serialization |
 | cffi, pycparser | 2.1.1, 3.12 | Transitive dependencies of cryptography |
 | [pytest](https://docs.pytest.org/) | 9.2.0 | Tests only (dev group) |
+| [pdoc](https://pdoc.dev/) | 16.0.0 | API documentation only (docs group) |
 | OpenSSL CLI | any 3.x | Tests only: independent interoperability checks; skipped if absent |
 | `python:3.13-slim-bookworm` | Docker base image | Container runtime |
 
@@ -113,6 +114,9 @@ demo. The verify jobs never receive a private key. Trust stores are prepared in
 | `trust add` | `--key <public.pem> --package <name> --store <trust.json>` | Keyid, profile and allowed packages; creates the store if missing |
 | `trust list` | `--store <trust.json>` | One line per key: keyid, profile, packages |
 | `trust remove` | `--keyid <keyid> --store <trust.json>` | Removed entry; exit 2 if the keyid is not in the store |
+| `sbom create` | `--file <path> --package <name> --version <version> [--lock uv.lock] --out <sbom.json>` | CycloneDX SBOM of the artifact; see [Signed SBOM](#signed-sbom) |
+| `sbom sign` | `--sbom <sbom.json> --package <name> --version <version> --key <private.pem> --out <sbom.bundle.json>` | SBOM bundle (same bundle format) |
+| `sbom verify` | `--file <path> --bundle <bundle.json> --sbom <sbom.json> --sbom-bundle <sbom.bundle.json> --trust-store <trust.json> --package <name> --version <version> [--json]` | Result for both bundles and their binding |
 
 `--help` and `--version` are available globally and `--help` on every command.
 No command prompts for input or needs a TTY. Missing options, unknown options
@@ -196,6 +200,74 @@ public key, so PEM line wrapping and line endings do not change it.
 Strict JSON parsing rejects duplicate field names while parsing (via
 `object_pairs_hook`), as well as `NaN`/`Infinity`, invalid UTF-8 and trailing data.
 
+## Signed SBOM
+
+An SBOM (Software Bill of Materials) lists what a release is made of. Here it
+is a [CycloneDX 1.6](https://cyclonedx.org/docs/1.6/json/) JSON file that names
+the release artifact by its SHA-256. It is signed as a separate artifact with
+the normal signing flow, so it gets an ordinary `minisign-bundle/v1` bundle
+whose key is checked against the same trust store.
+
+```sh
+zhongli sign --file contoh-app.zip --package contoh-app --version 1.0.0 \
+  --key keys/publisher.key.pem --out release.json
+zhongli sbom create --file contoh-app.zip --package contoh-app --version 1.0.0 \
+  --lock uv.lock --out sbom.json
+zhongli sbom sign --sbom sbom.json --package contoh-app --version 1.0.0 \
+  --key keys/publisher.key.pem --out sbom.bundle.json
+zhongli sbom verify --file contoh-app.zip --bundle release.json \
+  --sbom sbom.json --sbom-bundle sbom.bundle.json \
+  --trust-store trust.json --package contoh-app --version 1.0.0 --json
+```
+
+**SBOM content.** `sbom create` hashes the artifact and writes the fields
+below. Other CycloneDX fields are allowed when verifying; these are required.
+The output is deterministic: no timestamp, and the serial number is a UUIDv5
+of package, version and artifact SHA-256.
+
+| Field | Type | Value |
+| --- | --- | --- |
+| `bomFormat`, `specVersion` | string | `"CycloneDX"`, `"1.6"` |
+| `version` | integer | `1` (any positive integer is accepted) |
+| `metadata.component.name`, `.version` | string | Package and version; must equal `--package` and `--version` |
+| `metadata.component.hashes` | array | Exactly one `{"alg": "SHA-256", "content": "<64 lowercase hex>"}`: the artifact SHA-256 |
+| `metadata.component.properties` | array | Exactly one `zhongli:artifact:name` (artifact basename) and one `zhongli:artifact:size` (decimal byte count) |
+| `components` | array | Runtime dependencies from `--lock` (name, version, `pkg:pypi` purl); empty without `--lock` |
+
+`sbom sign` refuses an SBOM that is invalid or names another package or
+version. **`sbom verify`** runs `verify` on the release bundle and on the
+SBOM bundle, parses the SBOM from the exact bytes whose signature was checked,
+and compares its SHA-256, size and file name with the verified release
+manifest. The result is the first failure in this order:
+
+| Stage | Status | Exit | Example |
+| --- | --- | ---: | --- |
+| any | `INPUT_ERROR` | 2 | Artifact, bundle or SBOM file missing |
+| `artifact` | any `verify` status | 1 | Artifact byte changed: `ARTIFACT_MISMATCH` |
+| `sbom` | any `verify` status | 1 | SBOM edited after signing: `ARTIFACT_MISMATCH`; SBOM signed by an untrusted key: `KEY_NOT_TRUSTED` |
+| `sbom` | `FORMAT_ERROR` | 1 | The signed file is not a CycloneDX SBOM in this form |
+| `binding` | `SBOM_MISMATCH` | 1 | Artifact replaced and re-signed with a trusted key while the old SBOM was kept, or a valid SBOM of another artifact |
+| – | `OK` | 0 | Both bundles valid and the SBOM names the verified artifact |
+
+With `--json`, stdout is one object: `valid`, `status`, `stage`, `message`,
+`artifact` and `sbom` (each a `verify --json` object), and `binding` (the
+compared values and `match`, or `null` if a bundle failed). The `verify`
+command and its statuses are unchanged.
+
+## API documentation
+
+The Python API is documented at
+**<https://andi-frame.github.io/13523075_13523128_13523154_Tugas3_IF4020/>**:
+one page per module with parameters, return values and their types, raised
+exceptions and examples. The pages are generated from the docstrings and type
+hints in `src/zhongli` with [pdoc](https://pdoc.dev/) and deployed to GitHub
+Pages by `.github/workflows/api-docs.yml` on every change to `src/`. To build
+them locally:
+
+```sh
+uv run --group docs pdoc --docformat google --output-directory site zhongli
+```
+
 ## Profiles and library API
 
 All profiles use the [PyCA cryptography](https://cryptography.io/) hazmat API.
@@ -242,6 +314,7 @@ permissions (mode 0600) only apply on POSIX systems.
 ```sh
 uv run pytest -q                                            # unit, CLI and scenario tests
 uv run python tests/scenarios.py --out <new-directory>      # U01-U14 and interoperability evidence
+uv run python tests/sbom_scenarios.py --out <new-directory> # signed SBOM scenarios S01-S08
 uv run python benchmarks/run.py --out <new-directory>       # performance measurements
 ```
 
@@ -253,6 +326,11 @@ uv run python benchmarks/run.py --out <new-directory>       # performance measur
   interoperability with the OpenSSL CLI (OpenSSL verifies our bundles and we
   verify signatures produced by OpenSSL). `evidence/scenarios/` holds the last
   run: inputs, outputs, commands, expected and actual results for each case.
+- `tests/sbom_scenarios.py` runs the signed SBOM cases for all three profiles:
+  valid release, SBOM content changed, artifact byte changed, artifact replaced
+  and re-signed with the old SBOM kept, SBOM of another artifact, SBOM signed by
+  an untrusted key, a signed file that is not an SBOM, and a missing SBOM.
+  `evidence/sbom/` holds the last run.
 - `benchmarks/run.py` measures key generation, artifact hashing, crypto sign and
   verify on the manifest, and end-to-end `sign`/`verify` for 1 KiB, 1 MiB and
   10 MiB artifacts (5 warm-up runs, 30 samples, monotonic `perf_counter_ns`,
