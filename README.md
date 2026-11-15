@@ -39,10 +39,10 @@ repository; no external signing application is invoked.
 ## Container image
 
 The image runs the CLI as its entrypoint (`docker run --rm <image> <subcommand> ...`)
-on `linux/amd64` and `linux/arm64`. All dependencies are inside the image, so every command works
+on `linux/amd64`. All dependencies are inside the image, so every command works
 with `--network none`. It runs as an unprivileged user by default and accepts the
 runner's UID/GID through `--user`. It is published to
-`ghcr.io/dadecky/zhongli` by `.github/workflows/publish-image.yml` when a
+`ghcr.io/andi-frame/zhongli` by `.github/workflows/publish-image.yml` when a
 `vX.Y.Z` tag that matches the program version is pushed.
 
 | Program version | Source tag | Image digest |
@@ -52,7 +52,7 @@ runner's UID/GID through `--user`. It is published to
 Always pin the image by digest, not by tag:
 
 ```sh
-IMAGE=ghcr.io/dadecky/zhongli@sha256:<digest>
+IMAGE=ghcr.io/andi-frame/zhongli@sha256:<digest>
 docker pull "$IMAGE"
 docker run --rm --network none "$IMAGE" --version
 ```
