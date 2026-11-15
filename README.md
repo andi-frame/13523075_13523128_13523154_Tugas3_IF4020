@@ -39,7 +39,7 @@ repository; no external signing application is invoked.
 ## Container image
 
 The image runs the CLI as its entrypoint (`docker run --rm <image> <subcommand> ...`)
-on `linux/amd64`. All dependencies are inside the image, so every command works
+on `linux/amd64` and `linux/arm64`. All dependencies are inside the image, so every command works
 with `--network none`. It runs as an unprivileged user by default and accepts the
 runner's UID/GID through `--user`. It is published to
 `ghcr.io/dadecky/zhongli` by `.github/workflows/publish-image.yml` when a

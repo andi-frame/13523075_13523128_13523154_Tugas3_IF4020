@@ -19,7 +19,7 @@ concurrency:
 jobs:
   build:
     name: Build artifact
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, arm64]
     steps:
       - uses: actions/checkout@v4
       - name: Build release artifact
@@ -37,7 +37,7 @@ jobs:
   sign:
     name: Sign (${{ matrix.profile }})
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, arm64]
     strategy:
       fail-fast: false
       matrix:
@@ -92,7 +92,7 @@ jobs:
   verify:
     name: Verify (${{ matrix.profile }})
     needs: sign
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, arm64]
     strategy:
       fail-fast: false
       matrix:
@@ -145,7 +145,7 @@ jobs:
   deploy:
     name: Deploy (${{ matrix.profile }}, simulated)
     needs: verify
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, arm64]
     strategy:
       fail-fast: false
       matrix:
@@ -187,7 +187,7 @@ jobs:
     # must not run. The job passes only after both facts are checked.
     name: ${{ matrix.id }} ${{ matrix.case }} (${{ matrix.profile }})
     needs: sign
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, arm64]
     strategy:
       fail-fast: false
       matrix:
@@ -320,7 +320,7 @@ jobs:
 
   runtime-contract:
     name: Runner UID/GID, no TTY, no network
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, arm64]
     steps:
       - uses: actions/checkout@v4
       - name: Load pinned image
