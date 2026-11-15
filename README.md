@@ -42,23 +42,22 @@ repository; no external signing application is invoked.
 The image runs the CLI as its entrypoint (`docker run --rm <image> <subcommand> ...`)
 on `linux/amd64`. All dependencies are inside the image, so every command works
 with `--network none`. It runs as an unprivileged user by default and accepts the
-runner's UID/GID through `--user`. It is published to
-`ghcr.io/andi-frame/zhongli` by `.github/workflows/publish-image.yml`: as tag
-`X.Y.Z` when a `vX.Y.Z` tag that matches the program version is pushed, or as
-`dev-<commit>` when the workflow is started by hand.
+runner's UID/GID through `--user`. It is published to the public Docker Hub
+repository [`andiframe/zhongli`](https://hub.docker.com/r/andiframe/zhongli) by
+`.github/workflows/publish-image.yml`: as tag `X.Y.Z` when a `vX.Y.Z` tag that
+matches the program version is pushed, or as `dev-<commit>` when the workflow is
+started by hand. No credentials are needed to pull it.
 
 | Program version | Source | Image tag | Image digest |
 | --- | --- | --- | --- |
-| 0.1.0 | `main` @ `f3db5fdc1eeb` | `dev-f3db5fdc1eeb` | `sha256:fb2e9bbce37f622ee89e852fe00d90eb320169c22472e4d9379aad2db2fddb64` |
+| 0.1.0 | `main` @ `3a6a7384df2c` | `dev-3a6a7384df2c` | `sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3` |
 
-The image is at
-[ghcr.io/andi-frame/zhongli](https://github.com/users/andi-frame/packages/container/package/zhongli).
 `ci/pipeline.env` pins the digest above.
 
 Always pin the image by digest, not by tag:
 
 ```sh
-IMAGE=ghcr.io/andi-frame/zhongli@sha256:<digest>
+IMAGE=docker.io/andiframe/zhongli@sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3
 docker pull "$IMAGE"
 docker run --rm --network none "$IMAGE" --version
 ```
