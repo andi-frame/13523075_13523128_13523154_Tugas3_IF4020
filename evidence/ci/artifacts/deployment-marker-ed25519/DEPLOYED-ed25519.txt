@@ -1,6 +1,6 @@
 deployed=contoh-app.zip
-sha256=df12ad48e1c50100e8d29e1129e4132a7aae7b9c37e2e5a8de0848404df73c85
+sha256=c33ba55d9ff17d614d360389d3707cd9f7b1a950bbeb74787fc039f5d37b6f22
 profile=ed25519
 keyid=351bda0b8320fc4deaa5479349546f550c917c1b2f2e100d6287d4bd1c2faa7c
-image=docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209
+image=docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731

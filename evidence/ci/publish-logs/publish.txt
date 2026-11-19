@@ -1,1124 +1,1127 @@
-2026-11-19T08:38:39.3127655Z Current runner version: '2.338.2'
-2026-11-19T08:38:39.3147195Z ##[group]Runner Image Provisioner
-2026-11-19T08:38:39.3147953Z Hosted Compute Agent
-2026-11-19T08:38:39.3148310Z Version: 20261103.629
-2026-11-19T08:38:39.3148754Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
-2026-11-19T08:38:39.3149188Z Build Date: 2026-11-03T17:26:59Z
-2026-11-19T08:38:39.3149614Z Worker ID: {2dad1460-e38e-47d9-8f64-74178987eade}
-2026-11-19T08:38:39.3150075Z Region: centralus
-2026-11-19T08:38:39.3150411Z Cloud: Azure
-2026-11-19T08:38:39.3150769Z ##[endgroup]
-2026-11-19T08:38:39.3151595Z ##[group]Operating System
-2026-11-19T08:38:39.3151985Z Ubuntu
-2026-11-19T08:38:39.3152344Z 24.04.5
-2026-11-19T08:38:39.3152654Z LTS
-2026-11-19T08:38:39.3152996Z ##[endgroup]
-2026-11-19T08:38:39.3153323Z ##[group]Runner Image
-2026-11-19T08:38:39.3153745Z Image: ubuntu-24.04
-2026-11-19T08:38:39.3154133Z Version: 20261111.370.1
-2026-11-19T08:38:39.3155210Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md
-2026-11-19T08:38:39.3156073Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370
-2026-11-19T08:38:39.3156646Z ##[endgroup]
-2026-11-19T08:38:39.3157347Z ##[group]GITHUB_TOKEN Permissions
-2026-11-19T08:38:39.3159155Z Contents: read
-2026-11-19T08:38:39.3159520Z Metadata: read
-2026-11-19T08:38:39.3159872Z ##[endgroup]
-2026-11-19T08:38:39.3161351Z Secret source: Actions
-2026-11-19T08:38:39.3161873Z Cache mode: write
-2026-11-19T08:38:39.3162373Z Prepare workflow directory
-2026-11-19T08:38:39.3405748Z Prepare all required actions
-2026-11-19T08:38:39.3436421Z Getting action download info
-2026-11-19T08:38:39.6322262Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
-2026-11-19T08:38:39.7450370Z Download action repository 'docker/setup-buildx-action@v3' (SHA:8d2750c68a42422c14e847fe6c8ac0403b4cbd6f)
-2026-11-19T08:38:40.2592146Z Download action repository 'docker/login-action@v3' (SHA:c94ce9fb468520275223c153574b00df6fe4bcc9)
-2026-11-19T08:38:40.7334609Z Download action repository 'docker/build-push-action@v6' (SHA:10e90e3645eae34f1e60eeb005ba3a3d33f178e8)
-2026-11-19T08:38:41.3557225Z Complete job name: publish
-2026-11-19T08:38:41.4195720Z ##[group]Run actions/checkout@v4
-2026-11-19T08:38:41.4196556Z with:
-2026-11-19T08:38:41.4197250Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:38:41.4202712Z   token: ***
-2026-11-19T08:38:41.4203291Z   ssh-strict: true
-2026-11-19T08:38:41.4203914Z   ssh-user: git
-2026-11-19T08:38:41.4204507Z   persist-credentials: true
-2026-11-19T08:38:41.4205216Z   clean: true
-2026-11-19T08:38:41.4205823Z   sparse-checkout-cone-mode: true
-2026-11-19T08:38:41.4206502Z   fetch-depth: 1
-2026-11-19T08:38:41.4207123Z   fetch-tags: false
-2026-11-19T08:38:41.4207872Z   show-progress: true
-2026-11-19T08:38:41.4208498Z   lfs: false
-2026-11-19T08:38:41.4209133Z   submodules: false
-2026-11-19T08:38:41.4209736Z   set-safe-directory: true
-2026-11-19T08:38:41.4210428Z   allow-unsafe-pr-checkout: false
-2026-11-19T08:38:41.4211265Z ##[endgroup]
-2026-11-19T08:38:41.6115533Z Syncing repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:38:41.6119027Z ##[group]Getting Git version info
-2026-11-19T08:38:41.6121008Z Working directory is '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
-2026-11-19T08:38:41.6123655Z [command]/usr/bin/git version
-2026-11-19T08:38:41.6250450Z git version 2.56.1
-2026-11-19T08:38:41.6306379Z ##[endgroup]
-2026-11-19T08:38:41.6331762Z Temporarily overriding HOME='/home/runner/work/_temp/ec66cbbe-f4cc-44b7-bc24-4b53f90d90e5' before making global git config changes
-2026-11-19T08:38:41.6334564Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-19T08:38:41.6338225Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:38:41.6361109Z Deleting the contents of '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
-2026-11-19T08:38:41.6374673Z ##[group]Initializing the repository
-2026-11-19T08:38:41.6378250Z [command]/usr/bin/git init /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:38:41.6480007Z hint: Using 'master' as the name for the initial branch. This default branch name
-2026-11-19T08:38:41.6485676Z hint: will change to "main" in Git 3.0. To configure the initial branch name
-2026-11-19T08:38:41.6509173Z hint: to use in all of your new repositories, which will suppress this warning,
-2026-11-19T08:38:41.6510509Z hint: call:
-2026-11-19T08:38:41.6511231Z hint:
-2026-11-19T08:38:41.6512225Z hint: 	git config --global init.defaultBranch <name>
-2026-11-19T08:38:41.6513312Z hint:
-2026-11-19T08:38:41.6514328Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2026-11-19T08:38:41.6516336Z hint: 'development'. The just-created branch can be renamed via this command:
-2026-11-19T08:38:41.6517975Z hint:
-2026-11-19T08:38:41.6518814Z hint: 	git branch -m <name>
-2026-11-19T08:38:41.6519737Z hint:
-2026-11-19T08:38:41.6520953Z hint: Disable this message with "git config set advice.defaultBranchName false"
-2026-11-19T08:38:41.6523483Z Initialized empty Git repository in /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/.git/
-2026-11-19T08:38:41.6527838Z [command]/usr/bin/git remote add origin https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:38:41.6602063Z ##[endgroup]
-2026-11-19T08:38:41.6603588Z ##[group]Disabling automatic garbage collection
-2026-11-19T08:38:41.6604934Z [command]/usr/bin/git config --local gc.auto 0
-2026-11-19T08:38:41.6691373Z ##[endgroup]
-2026-11-19T08:38:41.6699418Z ##[group]Setting up auth
-2026-11-19T08:38:41.6701358Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-19T08:38:41.6770578Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-19T08:38:41.7170827Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-19T08:38:41.7206261Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-19T08:38:41.7397674Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-19T08:38:41.7440813Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-19T08:38:41.7641621Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2026-11-19T08:38:41.7688920Z ##[endgroup]
-2026-11-19T08:38:41.7690948Z ##[group]Fetching the repository
-2026-11-19T08:38:41.7698772Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +59adcfcece92934b5acfa7e9d3d6bf268a7a7699:refs/tags/v0.1.0
-2026-11-19T08:38:42.2692226Z From https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:38:42.2702331Z  * [new ref]         59adcfcece92934b5acfa7e9d3d6bf268a7a7699 -> v0.1.0
-2026-11-19T08:38:42.2705228Z ##[endgroup]
-2026-11-19T08:38:42.2705930Z ##[group]Determining the checkout info
-2026-11-19T08:38:42.2706786Z ##[endgroup]
-2026-11-19T08:38:42.2707698Z [command]/usr/bin/git sparse-checkout disable
-2026-11-19T08:38:42.2760711Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
-2026-11-19T08:38:42.2870897Z ##[group]Checking out the ref
-2026-11-19T08:38:42.2873395Z [command]/usr/bin/git checkout --progress --force refs/tags/v0.1.0
-2026-11-19T08:38:42.3175048Z Note: switching to 'refs/tags/v0.1.0'.
-2026-11-19T08:38:42.3184989Z 
-2026-11-19T08:38:42.3186608Z You are in 'detached HEAD' state. You can look around, make experimental
-2026-11-19T08:38:42.3187197Z changes and commit them, and you can discard any commits you make in this
-2026-11-19T08:38:42.3187905Z state without impacting any branches by switching back to a branch.
-2026-11-19T08:38:42.3196811Z 
-2026-11-19T08:38:42.3197829Z If you want to create a new branch to retain commits you create, you may
-2026-11-19T08:38:42.3198705Z do so (now or later) by using -c with the switch command. Example:
-2026-11-19T08:38:42.3199058Z 
-2026-11-19T08:38:42.3199542Z   git switch -c <new-branch-name>
-2026-11-19T08:38:42.3199868Z 
-2026-11-19T08:38:42.3200360Z Or undo this operation with:
-2026-11-19T08:38:42.3200720Z 
-2026-11-19T08:38:42.3201195Z   git switch -
-2026-11-19T08:38:42.3201705Z 
-2026-11-19T08:38:42.3202283Z Turn off this advice by setting config variable advice.detachedHead to false
-2026-11-19T08:38:42.3202861Z 
-2026-11-19T08:38:42.3203494Z HEAD is now at 59adcfc ci: describe why the release pipeline is started by hand
-2026-11-19T08:38:42.3205848Z ##[endgroup]
-2026-11-19T08:38:42.3206402Z [command]/usr/bin/git log -1 --format=%H
-2026-11-19T08:38:42.3222517Z 59adcfcece92934b5acfa7e9d3d6bf268a7a7699
-2026-11-19T08:38:42.3421031Z ##[group]Run : "${DOCKERHUB_USERNAME:?repository variable DOCKERHUB_USERNAME is not set}"
-2026-11-19T08:38:42.3421455Z : "${DOCKERHUB_USERNAME:?repository variable DOCKERHUB_USERNAME is not set}"
-2026-11-19T08:38:42.3421710Z image="docker.io/${DOCKERHUB_USERNAME}/zhongli"
-2026-11-19T08:38:42.3421965Z version="$(sed -n 's/^version = "\(.*\)"$/\1/p' pyproject.toml | head -n1)"
-2026-11-19T08:38:42.3422203Z if [ "$GITHUB_REF_TYPE" = tag ]; then
-2026-11-19T08:38:42.3422392Z   if [ "$GITHUB_REF_NAME" != "v$version" ]; then
-2026-11-19T08:38:42.3422643Z     echo "::error::tag $GITHUB_REF_NAME does not match program version $version"
-2026-11-19T08:38:42.3422898Z     exit 1
-2026-11-19T08:38:42.3423028Z   fi
-2026-11-19T08:38:42.3423143Z   tag="$version"
-2026-11-19T08:38:42.3423267Z else
-2026-11-19T08:38:42.3423391Z   tag="dev-${GITHUB_SHA::12}"
-2026-11-19T08:38:42.3423560Z fi
-2026-11-19T08:38:42.3423665Z {
-2026-11-19T08:38:42.3423779Z   echo "image=$image"
-2026-11-19T08:38:42.3423932Z   echo "version=$version"
-2026-11-19T08:38:42.3424085Z   echo "tag=$tag"
-2026-11-19T08:38:42.3424227Z } >> "$GITHUB_OUTPUT"
-2026-11-19T08:38:42.3441873Z shell: /usr/bin/bash -e {0}
-2026-11-19T08:38:42.3442046Z env:
-2026-11-19T08:38:42.3442173Z   DOCKERHUB_USERNAME: andiframe
-2026-11-19T08:38:42.3442324Z ##[endgroup]
-2026-11-19T08:38:42.3585338Z ##[group]Run docker/setup-buildx-action@v3
-2026-11-19T08:38:42.3585528Z with:
-2026-11-19T08:38:42.3585647Z   driver: docker-container
-2026-11-19T08:38:42.3585776Z   use: true
-2026-11-19T08:38:42.3585885Z   keep-state: false
-2026-11-19T08:38:42.3586003Z   cache-binary: true
-2026-11-19T08:38:42.3586136Z   cleanup: true
-2026-11-19T08:38:42.3586249Z   install: false
-2026-11-19T08:38:42.3586364Z ##[endgroup]
-2026-11-19T08:38:42.5571584Z (node:2019) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-19T08:38:42.5588114Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-19T08:38:42.5746506Z ##[group]Docker info
-2026-11-19T08:38:42.5821863Z [command]/usr/bin/docker version
-2026-11-19T08:38:42.6694626Z Client: Docker Engine - Community
-2026-11-19T08:38:42.6696495Z  Version:           28.0.4
-2026-11-19T08:38:42.6697003Z  API version:       1.48
-2026-11-19T08:38:42.6697625Z  Go version:        go1.23.7
-2026-11-19T08:38:42.6697998Z  Git commit:        b8034c0
-2026-11-19T08:38:42.6698330Z  Built:             Tue Mar 25 15:07:16 2025
-2026-11-19T08:38:42.6698796Z  OS/Arch:           linux/amd64
-2026-11-19T08:38:42.6699119Z  Context:           default
-2026-11-19T08:38:42.6699889Z 
-2026-11-19T08:38:42.6700102Z Server: Docker Engine - Community
-2026-11-19T08:38:42.6700534Z  Engine:
-2026-11-19T08:38:42.6700810Z   Version:          28.0.4
-2026-11-19T08:38:42.6701247Z   API version:      1.48 (minimum version 1.24)
-2026-11-19T08:38:42.6701611Z   Go version:       go1.23.7
-2026-11-19T08:38:42.6702020Z   Git commit:       6430e49
-2026-11-19T08:38:42.6702349Z   Built:            Tue Mar 25 15:07:16 2025
-2026-11-19T08:38:42.6702692Z   OS/Arch:          linux/amd64
-2026-11-19T08:38:42.6703161Z   Experimental:     false
-2026-11-19T08:38:42.6703478Z  containerd:
-2026-11-19T08:38:42.6703762Z   Version:          v2.4.2
-2026-11-19T08:38:42.6704128Z   GitCommit:        b7a25261e029d68978bbf290df0a62fc819b3c51
-2026-11-19T08:38:42.6704616Z  runc:
-2026-11-19T08:38:42.6704986Z   Version:          1.5.2
-2026-11-19T08:38:42.6705319Z   GitCommit:        v1.5.2-0-g29dd3dc2
-2026-11-19T08:38:42.6705653Z  docker-init:
-2026-11-19T08:38:42.6705943Z   Version:          0.19.0
-2026-11-19T08:38:42.6706251Z   GitCommit:        de40ad0
-2026-11-19T08:38:42.6733170Z [command]/usr/bin/docker info
-2026-11-19T08:38:42.8394102Z Client: Docker Engine - Community
-2026-11-19T08:38:42.8398478Z  Version:    28.0.4
-2026-11-19T08:38:42.8398947Z  Context:    default
-2026-11-19T08:38:42.8399296Z  Debug Mode: false
-2026-11-19T08:38:42.8399617Z  Plugins:
-2026-11-19T08:38:42.8399955Z   buildx: Docker Buildx (Docker Inc.)
-2026-11-19T08:38:42.8400335Z     Version:  v0.38.2
-2026-11-19T08:38:42.8400731Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
-2026-11-19T08:38:42.8401170Z   compose: Docker Compose (Docker Inc.)
-2026-11-19T08:38:42.8401544Z     Version:  v2.38.2
-2026-11-19T08:38:42.8401978Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
-2026-11-19T08:38:42.8402333Z 
-2026-11-19T08:38:42.8402556Z Server:
-2026-11-19T08:38:42.8402864Z  Containers: 0
-2026-11-19T08:38:42.8403183Z   Running: 0
-2026-11-19T08:38:42.8403522Z   Paused: 0
-2026-11-19T08:38:42.8403831Z   Stopped: 0
-2026-11-19T08:38:42.8404144Z  Images: 6
-2026-11-19T08:38:42.8404472Z  Server Version: 28.0.4
-2026-11-19T08:38:42.8404820Z  Storage Driver: overlay2
-2026-11-19T08:38:42.8405178Z   Backing Filesystem: extfs
-2026-11-19T08:38:42.8407732Z   Supports d_type: true
-2026-11-19T08:38:42.8425759Z   Using metacopy: false
-2026-11-19T08:38:42.8428121Z   Native Overlay Diff: false
-2026-11-19T08:38:42.8428344Z   userxattr: false
-2026-11-19T08:38:42.8428545Z  Logging Driver: json-file
-2026-11-19T08:38:42.8428753Z  Cgroup Driver: systemd
-2026-11-19T08:38:42.8428956Z  Cgroup Version: 2
-2026-11-19T08:38:42.8429122Z  Plugins:
-2026-11-19T08:38:42.8430628Z   Volume: local
-2026-11-19T08:38:42.8431138Z   Network: bridge host ipvlan macvlan null overlay
-2026-11-19T08:38:42.8432659Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
-2026-11-19T08:38:42.8433293Z  Swarm: inactive
-2026-11-19T08:38:42.8433483Z  Runtimes: io.containerd.runc.v2 runc
-2026-11-19T08:38:42.8433706Z  Default Runtime: runc
-2026-11-19T08:38:42.8433894Z  Init Binary: docker-init
-2026-11-19T08:38:42.8434146Z  containerd version: b7a25261e029d68978bbf290df0a62fc819b3c51
-2026-11-19T08:38:42.8434338Z  runc version: v1.5.2-0-g29dd3dc2
-2026-11-19T08:38:42.8434475Z  init version: de40ad0
-2026-11-19T08:38:42.8434592Z  Security Options:
-2026-11-19T08:38:42.8434701Z   apparmor
-2026-11-19T08:38:42.8434807Z   seccomp
-2026-11-19T08:38:42.8434910Z    Profile: builtin
-2026-11-19T08:38:42.8435025Z   cgroupns
-2026-11-19T08:38:42.8435143Z  Kernel Version: 7.0.0-1017-azure
-2026-11-19T08:38:42.8435287Z  Operating System: Ubuntu 24.04.5 LTS
-2026-11-19T08:38:42.8435423Z  OSType: linux
-2026-11-19T08:38:42.8435532Z  Architecture: x86_64
-2026-11-19T08:38:42.8435645Z  CPUs: 2
-2026-11-19T08:38:42.8435747Z  Total Memory: 7.747GiB
-2026-11-19T08:38:42.8435875Z  Name: runnervm8axu0
-2026-11-19T08:38:42.8436017Z  ID: 0fef2a29-aadb-43ca-98b5-edbc7a28f18a
-2026-11-19T08:38:42.8436170Z  Docker Root Dir: /var/lib/docker
-2026-11-19T08:38:42.8436299Z  Debug Mode: false
-2026-11-19T08:38:42.8436412Z  Username: githubactions
-2026-11-19T08:38:42.8436674Z  Experimental: false
-2026-11-19T08:38:42.8436800Z  Insecure Registries:
-2026-11-19T08:38:42.8442234Z   ::1/128
-2026-11-19T08:38:42.8442359Z   127.0.0.0/8
-2026-11-19T08:38:42.8442479Z  Live Restore Enabled: false
-2026-11-19T08:38:42.8442570Z 
-2026-11-19T08:38:42.8442972Z ##[endgroup]
-2026-11-19T08:38:42.9034429Z ##[group]Buildx version
-2026-11-19T08:38:42.9052015Z [command]/usr/bin/docker buildx version
-2026-11-19T08:38:42.9506398Z github.com/docker/buildx v0.38.2 3c4cbd35852fc1a476923627a780a7836c28b654
-2026-11-19T08:38:42.9536581Z ##[endgroup]
-2026-11-19T08:38:42.9683108Z ##[group]Inspecting default docker context
-2026-11-19T08:38:42.9820304Z [
-2026-11-19T08:38:42.9820885Z   {
-2026-11-19T08:38:42.9821583Z     "Name": "default",
-2026-11-19T08:38:42.9821970Z     "Metadata": {},
-2026-11-19T08:38:42.9822536Z     "Endpoints": {
-2026-11-19T08:38:42.9822964Z       "docker": {
-2026-11-19T08:38:42.9823942Z         "Host": "unix:///var/run/docker.sock",
-2026-11-19T08:38:42.9824429Z         "SkipTLSVerify": false
-2026-11-19T08:38:42.9825216Z       }
-2026-11-19T08:38:42.9825481Z     },
-2026-11-19T08:38:42.9828333Z     "TLSMaterial": {},
-2026-11-19T08:38:42.9828866Z     "Storage": {
-2026-11-19T08:38:42.9829363Z       "MetadataPath": "<IN MEMORY>",
-2026-11-19T08:38:42.9830881Z       "TLSPath": "<IN MEMORY>"
-2026-11-19T08:38:42.9831784Z     }
-2026-11-19T08:38:42.9832182Z   }
-2026-11-19T08:38:42.9832844Z ]
-2026-11-19T08:38:42.9835602Z ##[endgroup]
-2026-11-19T08:38:42.9836095Z ##[group]Creating a new builder instance
-2026-11-19T08:38:43.1081890Z [command]/usr/bin/docker buildx create --name builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1 --driver docker-container --buildkitd-flags --allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host --use
-2026-11-19T08:38:43.1868868Z builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1
-2026-11-19T08:38:43.1923413Z ##[endgroup]
-2026-11-19T08:38:43.1930395Z ##[group]Booting builder
-2026-11-19T08:38:43.1998404Z [command]/usr/bin/docker buildx inspect --bootstrap --builder builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1
-2026-11-19T08:38:43.2652321Z #1 [internal] booting buildkit
-2026-11-19T08:38:43.4152520Z #1 pulling image moby/buildkit:buildx-stable-1
-2026-11-19T08:38:48.9676412Z #1 pulling image moby/buildkit:buildx-stable-1 5.7s done
-2026-11-19T08:38:49.1267855Z #1 creating container buildx_buildkit_builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10
-2026-11-19T08:38:49.2697280Z #1 creating container buildx_buildkit_builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10 0.3s done
-2026-11-19T08:38:49.2973328Z #1 DONE 6.0s
-2026-11-19T08:38:49.3259221Z Name:          builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1
-2026-11-19T08:38:49.3263809Z Driver:        docker-container
-2026-11-19T08:38:49.3264803Z Last Activity: 2026-11-19 08:38:43 +0000 UTC
-2026-11-19T08:38:49.3265198Z 
-2026-11-19T08:38:49.3265377Z Nodes:
-2026-11-19T08:38:49.3265755Z Name:                  builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10
-2026-11-19T08:38:49.3266290Z Endpoint:              unix:///var/run/docker.sock
-2026-11-19T08:38:49.3266773Z Status:                running
-2026-11-19T08:38:49.3267371Z BuildKit daemon flags: --allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host
-2026-11-19T08:38:49.3268164Z BuildKit version:      v0.34.2
-2026-11-19T08:38:49.3268593Z Platforms:             linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/amd64/v4, linux/386
-2026-11-19T08:38:49.3269143Z Labels:
-2026-11-19T08:38:49.3269570Z  org.mobyproject.buildkit.worker.executor:         oci
-2026-11-19T08:38:49.3270027Z  org.mobyproject.buildkit.worker.hostname:         f76d1681f4ef
-2026-11-19T08:38:49.3270741Z  org.mobyproject.buildkit.worker.network:          host
-2026-11-19T08:38:49.3273722Z  org.mobyproject.buildkit.worker.oci.process-mode: sandbox
-2026-11-19T08:38:49.3274294Z  org.mobyproject.buildkit.worker.selinux.enabled:  false
-2026-11-19T08:38:49.3274746Z  org.mobyproject.buildkit.worker.snapshotter:      overlayfs
-2026-11-19T08:38:49.3275259Z GC Policy rule#0:
-2026-11-19T08:38:49.3275841Z  All:            false
-2026-11-19T08:38:49.3276238Z  Filters:        type==source.local type==exec.cachemount type==source.git.checkout
-2026-11-19T08:38:49.3276789Z  Keep Duration:  48h0m0s
-2026-11-19T08:38:49.3277137Z  Max Used Space: 488.3MiB
-2026-11-19T08:38:49.3287846Z GC Policy rule#1:
-2026-11-19T08:38:49.3292547Z  All:            false
-2026-11-19T08:38:49.3292878Z  Keep Duration:  1440h0m0s
-2026-11-19T08:38:49.3293306Z  Reserved Space: 7.451GiB
-2026-11-19T08:38:49.3293606Z  Max Used Space: 54.02GiB
-2026-11-19T08:38:49.3294015Z  Min Free Space: 13.97GiB
-2026-11-19T08:38:49.3294301Z GC Policy rule#2:
-2026-11-19T08:38:49.3294727Z  All:            false
-2026-11-19T08:38:49.3315705Z  Reserved Space: 7.451GiB
-2026-11-19T08:38:49.3348100Z  Max Used Space: 54.02GiB
-2026-11-19T08:38:49.3354078Z  Min Free Space: 13.97GiB
-2026-11-19T08:38:49.3393180Z GC Policy rule#3:
-2026-11-19T08:38:49.3398650Z  All:            true
-2026-11-19T08:38:49.3399014Z  Reserved Space: 7.451GiB
-2026-11-19T08:38:49.3399428Z  Max Used Space: 54.02GiB
-2026-11-19T08:38:49.3399848Z  Min Free Space: 13.97GiB
-2026-11-19T08:38:49.3401162Z ##[endgroup]
-2026-11-19T08:38:49.4173016Z ##[group]Inspect builder
-2026-11-19T08:38:49.4211123Z {
-2026-11-19T08:38:49.4211656Z   "nodes": [
-2026-11-19T08:38:49.4212045Z     {
-2026-11-19T08:38:49.4212440Z       "name": "builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10",
-2026-11-19T08:38:49.4212930Z       "endpoint": "unix:///var/run/docker.sock",
-2026-11-19T08:38:49.4213337Z       "status": "running",
-2026-11-19T08:38:49.4213922Z       "buildkitd-flags": "--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host",
-2026-11-19T08:38:49.4214538Z       "buildkit": "v0.34.2",
-2026-11-19T08:38:49.4215039Z       "platforms": "linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/amd64/v4,linux/386",
-2026-11-19T08:38:49.4215507Z       "features": {
-2026-11-19T08:38:49.4215913Z         "Automatically load images to the Docker Engine image store": true,
-2026-11-19T08:38:49.4216356Z         "Cache export": true,
-2026-11-19T08:38:49.4216717Z         "Direct push": true,
-2026-11-19T08:38:49.4217098Z         "Docker exporter": true,
-2026-11-19T08:38:49.4217627Z         "Multi-platform build": true,
-2026-11-19T08:38:49.4218049Z         "OCI exporter": true
-2026-11-19T08:38:49.4218387Z       },
-2026-11-19T08:38:49.4218711Z       "labels": {
-2026-11-19T08:38:49.4219107Z         "org.mobyproject.buildkit.worker.executor": "oci",
-2026-11-19T08:38:49.4219603Z         "org.mobyproject.buildkit.worker.hostname": "f76d1681f4ef",
-2026-11-19T08:38:49.4220100Z         "org.mobyproject.buildkit.worker.network": "host",
-2026-11-19T08:38:49.4220626Z         "org.mobyproject.buildkit.worker.oci.process-mode": "sandbox",
-2026-11-19T08:38:49.4221498Z         "org.mobyproject.buildkit.worker.selinux.enabled": "false",
-2026-11-19T08:38:49.4222027Z         "org.mobyproject.buildkit.worker.snapshotter": "overlayfs"
-2026-11-19T08:38:49.4222457Z       },
-2026-11-19T08:38:49.4222763Z       "gcPolicy": [
-2026-11-19T08:38:49.4223081Z         {
-2026-11-19T08:38:49.4223417Z           "all": false,
-2026-11-19T08:38:49.4223768Z           "filter": [
-2026-11-19T08:38:49.4224238Z             "type==source.local type==exec.cachemount type==source.git.checkout"
-2026-11-19T08:38:49.4224743Z           ],
-2026-11-19T08:38:49.4225093Z           "keepDuration": "48h0m0s",
-2026-11-19T08:38:49.4225485Z           "maxUsedSpace": "488.3MiB"
-2026-11-19T08:38:49.4225867Z         },
-2026-11-19T08:38:49.4226194Z         {
-2026-11-19T08:38:49.4226573Z           "all": false,
-2026-11-19T08:38:49.4226936Z           "keepDuration": "1440h0m0s",
-2026-11-19T08:38:49.4227271Z           "reservedSpace": "7.451GiB",
-2026-11-19T08:38:49.4227781Z           "maxUsedSpace": "54.02GiB",
-2026-11-19T08:38:49.4228172Z           "minFreeSpace": "13.97GiB"
-2026-11-19T08:38:49.4228567Z         },
-2026-11-19T08:38:49.4228874Z         {
-2026-11-19T08:38:49.4229228Z           "all": false,
-2026-11-19T08:38:49.4229597Z           "reservedSpace": "7.451GiB",
-2026-11-19T08:38:49.4230125Z           "maxUsedSpace": "54.02GiB",
-2026-11-19T08:38:49.4230488Z           "minFreeSpace": "13.97GiB"
-2026-11-19T08:38:49.4230836Z         },
-2026-11-19T08:38:49.4231129Z         {
-2026-11-19T08:38:49.4231424Z           "all": true,
-2026-11-19T08:38:49.4231758Z           "reservedSpace": "7.451GiB",
-2026-11-19T08:38:49.4232157Z           "maxUsedSpace": "54.02GiB",
-2026-11-19T08:38:49.4232519Z           "minFreeSpace": "13.97GiB"
-2026-11-19T08:38:49.4232866Z         }
-2026-11-19T08:38:49.4233161Z       ]
-2026-11-19T08:38:49.4233458Z     }
-2026-11-19T08:38:49.4233750Z   ],
-2026-11-19T08:38:49.4234062Z   "name": "builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1",
-2026-11-19T08:38:49.4234487Z   "driver": "docker-container",
-2026-11-19T08:38:49.4234924Z   "lastActivity": "2026-11-19T08:38:43.000Z"
-2026-11-19T08:38:49.4235359Z }
-2026-11-19T08:38:49.4236008Z ##[endgroup]
-2026-11-19T08:38:49.4236522Z ##[group]BuildKit version
-2026-11-19T08:38:49.4236939Z builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10: v0.34.2
-2026-11-19T08:38:49.4237627Z ##[endgroup]
-2026-11-19T08:38:49.4351742Z ##[group]Run docker/login-action@v3
-2026-11-19T08:38:49.4351893Z with:
-2026-11-19T08:38:49.4351999Z   registry: docker.io
-2026-11-19T08:38:49.4352114Z   username: andiframe
-2026-11-19T08:38:49.4352389Z   password: ***
-2026-11-19T08:38:49.4352498Z   logout: true
-2026-11-19T08:38:49.4352607Z ##[endgroup]
-2026-11-19T08:38:49.6312235Z Logging into docker.io...
-2026-11-19T08:38:49.6358495Z (node:2456) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-19T08:38:49.6379570Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-19T08:38:50.0118660Z Login Succeeded!
-2026-11-19T08:38:50.0269980Z ##[group]Run docker/build-push-action@v6
-2026-11-19T08:38:50.0270138Z with:
-2026-11-19T08:38:50.0270248Z   context: .
-2026-11-19T08:38:50.0270359Z   platforms: linux/amd64
-2026-11-19T08:38:50.0270494Z   push: true
-2026-11-19T08:38:50.0270598Z   provenance: false
-2026-11-19T08:38:50.0270731Z   tags: docker.io/andiframe/zhongli:0.1.0
-2026-11-19T08:38:50.0270942Z   build-args: VERSION=0.1.0
-REVISION=59adcfcece92934b5acfa7e9d3d6bf268a7a7699
+2026-11-19T09:05:33.2322169Z Current runner version: '2.338.2'
+2026-11-19T09:05:33.2399069Z ##[group]Runner Image Provisioner
+2026-11-19T09:05:33.2400841Z Hosted Compute Agent
+2026-11-19T09:05:33.2401880Z Version: 20261111.635
+2026-11-19T09:05:33.2403017Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+2026-11-19T09:05:33.2404601Z Build Date: 2026-11-11T01:49:01Z
+2026-11-19T09:05:33.2405896Z Worker ID: {5186f323-b9ab-4a1e-81a7-6767770b882d}
+2026-11-19T09:05:33.2407262Z Region: eastus2
+2026-11-19T09:05:33.2408298Z Cloud: Azure
+2026-11-19T09:05:33.2409176Z ##[endgroup]
+2026-11-19T09:05:33.2432241Z ##[group]Operating System
+2026-11-19T09:05:33.2433302Z Ubuntu
+2026-11-19T09:05:33.2434512Z 24.04.5
+2026-11-19T09:05:33.2435536Z LTS
+2026-11-19T09:05:33.2437262Z ##[endgroup]
+2026-11-19T09:05:33.2438376Z ##[group]Runner Image
+2026-11-19T09:05:33.2439498Z Image: ubuntu-24.04
+2026-11-19T09:05:33.2441093Z Version: 20261116.376.1
+2026-11-19T09:05:33.2443430Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261116.376/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-19T09:05:33.2446405Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261116.376
+2026-11-19T09:05:33.2448104Z ##[endgroup]
+2026-11-19T09:05:33.2450191Z ##[group]GITHUB_TOKEN Permissions
+2026-11-19T09:05:33.2473765Z Contents: read
+2026-11-19T09:05:33.2474765Z Metadata: read
+2026-11-19T09:05:33.2475858Z ##[endgroup]
+2026-11-19T09:05:33.2478989Z Secret source: Actions
+2026-11-19T09:05:33.2481003Z Cache mode: write
+2026-11-19T09:05:33.2482661Z Prepare workflow directory
+2026-11-19T09:05:33.3486041Z Prepare all required actions
+2026-11-19T09:05:33.3640025Z Getting action download info
+2026-11-19T09:05:33.6522552Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-19T09:05:33.8144387Z Download action repository 'docker/setup-buildx-action@v3' (SHA:8d2750c68a42422c14e847fe6c8ac0403b4cbd6f)
+2026-11-19T09:05:34.0607989Z Download action repository 'docker/login-action@v3' (SHA:c94ce9fb468520275223c153574b00df6fe4bcc9)
+2026-11-19T09:05:34.3113187Z Download action repository 'docker/build-push-action@v6' (SHA:10e90e3645eae34f1e60eeb005ba3a3d33f178e8)
+2026-11-19T09:05:34.6560807Z Complete job name: publish
+2026-11-19T09:05:34.7707959Z ##[group]Run actions/checkout@v4
+2026-11-19T09:05:34.7709038Z with:
+2026-11-19T09:05:34.7709746Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:05:34.7714025Z   token: ***
+2026-11-19T09:05:34.7714575Z   ssh-strict: true
+2026-11-19T09:05:34.7715167Z   ssh-user: git
+2026-11-19T09:05:34.7715736Z   persist-credentials: true
+2026-11-19T09:05:34.7716364Z   clean: true
+2026-11-19T09:05:34.7716998Z   sparse-checkout-cone-mode: true
+2026-11-19T09:05:34.7717622Z   fetch-depth: 1
+2026-11-19T09:05:34.7718190Z   fetch-tags: false
+2026-11-19T09:05:34.7718764Z   show-progress: true
+2026-11-19T09:05:34.7719352Z   lfs: false
+2026-11-19T09:05:34.7719918Z   submodules: false
+2026-11-19T09:05:34.7720676Z   set-safe-directory: true
+2026-11-19T09:05:34.7721337Z   allow-unsafe-pr-checkout: false
+2026-11-19T09:05:34.7722346Z ##[endgroup]
+2026-11-19T09:05:35.0638348Z Syncing repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:05:35.0641543Z ##[group]Getting Git version info
+2026-11-19T09:05:35.0642879Z Working directory is '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
+2026-11-19T09:05:35.0644616Z [command]/usr/bin/git version
+2026-11-19T09:05:35.0972569Z git version 2.56.1
+2026-11-19T09:05:35.1016379Z ##[endgroup]
+2026-11-19T09:05:35.1042729Z Temporarily overriding HOME='/home/runner/work/_temp/1a0f890b-a794-40b3-835a-ff0a6c918a62' before making global git config changes
+2026-11-19T09:05:35.1046349Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-19T09:05:35.1049626Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:05:35.1228962Z Deleting the contents of '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
+2026-11-19T09:05:35.1243897Z ##[group]Initializing the repository
+2026-11-19T09:05:35.1262339Z [command]/usr/bin/git init /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:05:35.1360174Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-19T09:05:35.1363469Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-19T09:05:35.1365943Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-19T09:05:35.1384454Z hint: call:
+2026-11-19T09:05:35.1396590Z hint:
+2026-11-19T09:05:35.1398240Z hint: 	git config --global init.defaultBranch <name>
+2026-11-19T09:05:35.1399833Z hint:
+2026-11-19T09:05:35.1401742Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-19T09:05:35.1404126Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-19T09:05:35.1406289Z hint:
+2026-11-19T09:05:35.1407721Z hint: 	git branch -m <name>
+2026-11-19T09:05:35.1409000Z hint:
+2026-11-19T09:05:35.1411031Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-19T09:05:35.1414302Z Initialized empty Git repository in /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/.git/
+2026-11-19T09:05:35.1419978Z [command]/usr/bin/git remote add origin https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:05:35.1492195Z ##[endgroup]
+2026-11-19T09:05:35.1494394Z ##[group]Disabling automatic garbage collection
+2026-11-19T09:05:35.1496174Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-19T09:05:35.1554067Z ##[endgroup]
+2026-11-19T09:05:35.1557603Z ##[group]Setting up auth
+2026-11-19T09:05:35.1568574Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-19T09:05:35.1694145Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-19T09:05:35.2513074Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-19T09:05:35.2593681Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-19T09:05:35.3011599Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-19T09:05:35.3065802Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-19T09:05:35.3403011Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-19T09:05:35.3456097Z ##[endgroup]
+2026-11-19T09:05:35.3462326Z ##[group]Fetching the repository
+2026-11-19T09:05:35.3470661Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +00b9b1e474de1be818cb9faf9f1179168c9aea2c:refs/tags/v0.1.1
+2026-11-19T09:05:35.7245584Z From https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:05:35.7248464Z  * [new ref]         00b9b1e474de1be818cb9faf9f1179168c9aea2c -> v0.1.1
+2026-11-19T09:05:35.7255046Z ##[endgroup]
+2026-11-19T09:05:35.7258031Z ##[group]Determining the checkout info
+2026-11-19T09:05:35.7261095Z ##[endgroup]
+2026-11-19T09:05:35.7263237Z [command]/usr/bin/git sparse-checkout disable
+2026-11-19T09:05:35.7268909Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-19T09:05:35.7276478Z ##[group]Checking out the ref
+2026-11-19T09:05:35.7278448Z [command]/usr/bin/git checkout --progress --force refs/tags/v0.1.1
+2026-11-19T09:05:35.7655536Z Note: switching to 'refs/tags/v0.1.1'.
+2026-11-19T09:05:35.7657398Z 
+2026-11-19T09:05:35.7659848Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-19T09:05:35.7663539Z changes and commit them, and you can discard any commits you make in this
+2026-11-19T09:05:35.7689583Z state without impacting any branches by switching back to a branch.
+2026-11-19T09:05:35.7691809Z 
+2026-11-19T09:05:35.7693543Z If you want to create a new branch to retain commits you create, you may
+2026-11-19T09:05:35.7696541Z do so (now or later) by using -c with the switch command. Example:
+2026-11-19T09:05:35.7698838Z 
+2026-11-19T09:05:35.7702178Z   git switch -c <new-branch-name>
+2026-11-19T09:05:35.7703584Z 
+2026-11-19T09:05:35.7704396Z Or undo this operation with:
+2026-11-19T09:05:35.7705615Z 
+2026-11-19T09:05:35.7706349Z   git switch -
+2026-11-19T09:05:35.7707311Z 
+2026-11-19T09:05:35.7708751Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-19T09:05:35.7711124Z 
+2026-11-19T09:05:35.7712891Z HEAD is now at 00b9b1e fix: keep large trust stores usable and measure complete CLI commands
+2026-11-19T09:05:35.7719618Z ##[endgroup]
+2026-11-19T09:05:35.7741151Z [command]/usr/bin/git log -1 --format=%H
+2026-11-19T09:05:35.7776613Z 00b9b1e474de1be818cb9faf9f1179168c9aea2c
+2026-11-19T09:05:35.8106903Z ##[group]Run : "${DOCKERHUB_USERNAME:?repository variable DOCKERHUB_USERNAME is not set}"
+2026-11-19T09:05:35.8109794Z : "${DOCKERHUB_USERNAME:?repository variable DOCKERHUB_USERNAME is not set}"
+2026-11-19T09:05:35.8112282Z image="docker.io/${DOCKERHUB_USERNAME}/zhongli"
+2026-11-19T09:05:35.8114392Z version="$(sed -n 's/^version = "\(.*\)"$/\1/p' pyproject.toml | head -n1)"
+2026-11-19T09:05:35.8116438Z if [ "$GITHUB_REF_TYPE" = tag ]; then
+2026-11-19T09:05:35.8118063Z   if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+2026-11-19T09:05:35.8120204Z     echo "::error::tag $GITHUB_REF_NAME does not match program version $version"
+2026-11-19T09:05:35.8122316Z     exit 1
+2026-11-19T09:05:35.8123412Z   fi
+2026-11-19T09:05:35.8124435Z   tag="$version"
+2026-11-19T09:05:35.8125579Z else
+2026-11-19T09:05:35.8126657Z   tag="dev-${GITHUB_SHA::12}"
+2026-11-19T09:05:35.8128003Z fi
+2026-11-19T09:05:35.8128978Z {
+2026-11-19T09:05:35.8129971Z   echo "image=$image"
+2026-11-19T09:05:35.8131339Z   echo "version=$version"
+2026-11-19T09:05:35.8132591Z   echo "tag=$tag"
+2026-11-19T09:05:35.8133735Z } >> "$GITHUB_OUTPUT"
+2026-11-19T09:05:35.8158636Z shell: /usr/bin/bash -e {0}
+2026-11-19T09:05:35.8159812Z env:
+2026-11-19T09:05:35.8160939Z   DOCKERHUB_USERNAME: andiframe
+2026-11-19T09:05:35.8162114Z ##[endgroup]
+2026-11-19T09:05:35.8504976Z ##[group]Run docker/setup-buildx-action@v3
+2026-11-19T09:05:35.8506309Z with:
+2026-11-19T09:05:35.8507192Z   driver: docker-container
+2026-11-19T09:05:35.8508226Z   use: true
+2026-11-19T09:05:35.8509125Z   keep-state: false
+2026-11-19T09:05:35.8510103Z   cache-binary: true
+2026-11-19T09:05:35.8511264Z   cleanup: true
+2026-11-19T09:05:35.8512186Z   install: false
+2026-11-19T09:05:35.8513111Z ##[endgroup]
+2026-11-19T09:05:36.2127202Z (node:2091) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T09:05:36.2131510Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T09:05:36.2253938Z ##[group]Docker info
+2026-11-19T09:05:36.2292161Z [command]/usr/bin/docker version
+2026-11-19T09:05:36.5313835Z Client: Docker Engine - Community
+2026-11-19T09:05:36.5343832Z  Version:           28.0.4
+2026-11-19T09:05:36.5352789Z  API version:       1.48
+2026-11-19T09:05:36.5371698Z  Go version:        go1.23.7
+2026-11-19T09:05:36.5387799Z  Git commit:        b8034c0
+2026-11-19T09:05:36.5391782Z  Built:             Tue Mar 25 15:07:16 2025
+2026-11-19T09:05:36.5395362Z  OS/Arch:           linux/amd64
+2026-11-19T09:05:36.5396232Z  Context:           default
+2026-11-19T09:05:36.5397441Z 
+2026-11-19T09:05:36.5397886Z Server: Docker Engine - Community
+2026-11-19T09:05:36.5398638Z  Engine:
+2026-11-19T09:05:36.5399259Z   Version:          28.0.4
+2026-11-19T09:05:36.5400007Z   API version:      1.48 (minimum version 1.24)
+2026-11-19T09:05:36.5406783Z   Go version:       go1.23.7
+2026-11-19T09:05:36.5407815Z   Git commit:       6430e49
+2026-11-19T09:05:36.5410256Z   Built:            Tue Mar 25 15:07:16 2025
+2026-11-19T09:05:36.5411671Z   OS/Arch:          linux/amd64
+2026-11-19T09:05:36.5412582Z   Experimental:     false
+2026-11-19T09:05:36.5413476Z  containerd:
+2026-11-19T09:05:36.5414235Z   Version:          v2.4.2
+2026-11-19T09:05:36.5415198Z   GitCommit:        b7a25261e029d68978bbf290df0a62fc819b3c51
+2026-11-19T09:05:36.5416120Z  runc:
+2026-11-19T09:05:36.5416988Z   Version:          1.5.3
+2026-11-19T09:05:36.5417747Z   GitCommit:        v1.5.3-0-g46365c62
+2026-11-19T09:05:36.5418472Z  docker-init:
+2026-11-19T09:05:36.5419056Z   Version:          0.19.0
+2026-11-19T09:05:36.5419684Z   GitCommit:        de40ad0
+2026-11-19T09:05:36.5421432Z [command]/usr/bin/docker info
+2026-11-19T09:05:48.5743683Z Client: Docker Engine - Community
+2026-11-19T09:05:48.5744275Z  Version:    28.0.4
+2026-11-19T09:05:48.5744762Z  Context:    default
+2026-11-19T09:05:48.5745237Z  Debug Mode: false
+2026-11-19T09:05:48.5745673Z  Plugins:
+2026-11-19T09:05:48.5751091Z   buildx: Docker Buildx (Docker Inc.)
+2026-11-19T09:05:48.5751661Z     Version:  v0.39.0
+2026-11-19T09:05:48.5752242Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+2026-11-19T09:05:48.5752901Z   compose: Docker Compose (Docker Inc.)
+2026-11-19T09:05:48.5753446Z     Version:  v2.38.2
+2026-11-19T09:05:48.5754049Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
+2026-11-19T09:05:48.5754564Z 
+2026-11-19T09:05:48.5754876Z Server:
+2026-11-19T09:05:48.5755272Z  Containers: 0
+2026-11-19T09:05:48.5755688Z   Running: 0
+2026-11-19T09:05:48.5756092Z   Paused: 0
+2026-11-19T09:05:48.5756488Z   Stopped: 0
+2026-11-19T09:05:48.5756877Z  Images: 6
+2026-11-19T09:05:48.5757368Z  Server Version: 28.0.4
+2026-11-19T09:05:48.5757857Z  Storage Driver: overlay2
+2026-11-19T09:05:48.5758343Z   Backing Filesystem: extfs
+2026-11-19T09:05:48.5758835Z   Supports d_type: true
+2026-11-19T09:05:48.5759303Z   Using metacopy: false
+2026-11-19T09:05:48.5759796Z   Native Overlay Diff: false
+2026-11-19T09:05:48.5760291Z   userxattr: false
+2026-11-19T09:05:48.5760955Z  Logging Driver: json-file
+2026-11-19T09:05:48.5761443Z  Cgroup Driver: systemd
+2026-11-19T09:05:48.5761897Z  Cgroup Version: 2
+2026-11-19T09:05:48.5762313Z  Plugins:
+2026-11-19T09:05:48.5762733Z   Volume: local
+2026-11-19T09:05:48.5763793Z   Network: bridge host ipvlan macvlan null overlay
+2026-11-19T09:05:48.5765236Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+2026-11-19T09:05:48.5766169Z  Swarm: inactive
+2026-11-19T09:05:48.5766739Z  Runtimes: runc io.containerd.runc.v2
+2026-11-19T09:05:48.5767347Z  Default Runtime: runc
+2026-11-19T09:05:48.5767883Z  Init Binary: docker-init
+2026-11-19T09:05:48.5768548Z  containerd version: b7a25261e029d68978bbf290df0a62fc819b3c51
+2026-11-19T09:05:48.5769263Z  runc version: v1.5.3-0-g46365c62
+2026-11-19T09:05:48.5769852Z  init version: de40ad0
+2026-11-19T09:05:48.5770618Z  Security Options:
+2026-11-19T09:05:48.5771196Z   apparmor
+2026-11-19T09:05:48.5771638Z   seccomp
+2026-11-19T09:05:48.5772047Z    Profile: builtin
+2026-11-19T09:05:48.5772525Z   cgroupns
+2026-11-19T09:05:48.5772993Z  Kernel Version: 7.0.0-1017-azure
+2026-11-19T09:05:48.5773631Z  Operating System: Ubuntu 24.04.5 LTS
+2026-11-19T09:05:48.5774332Z  OSType: linux
+2026-11-19T09:05:48.5774806Z  Architecture: x86_64
+2026-11-19T09:05:48.5775292Z  CPUs: 2
+2026-11-19T09:05:48.5775784Z  Total Memory: 7.747GiB
+2026-11-19T09:05:48.5776325Z  Name: runnervmeozm8
+2026-11-19T09:05:48.5776897Z  ID: fb20f451-b428-4d99-946c-e0f8dfac42c1
+2026-11-19T09:05:48.5777576Z  Docker Root Dir: /var/lib/docker
+2026-11-19T09:05:48.5778176Z  Debug Mode: false
+2026-11-19T09:05:48.5778723Z  Username: githubactions
+2026-11-19T09:05:48.5779682Z  Experimental: false
+2026-11-19T09:05:48.5780249Z  Insecure Registries:
+2026-11-19T09:05:48.5786836Z   ::1/128
+2026-11-19T09:05:48.5787391Z   127.0.0.0/8
+2026-11-19T09:05:48.5787906Z  Live Restore Enabled: false
+2026-11-19T09:05:48.5788345Z 
+2026-11-19T09:05:48.5789145Z ##[endgroup]
+2026-11-19T09:05:48.6865263Z ##[group]Buildx version
+2026-11-19T09:05:48.6901894Z [command]/usr/bin/docker buildx version
+2026-11-19T09:05:48.7897863Z github.com/docker/buildx v0.39.0 360040a78d6113dc84e5d4dcdf0f438e1be7a41f
+2026-11-19T09:05:48.7942074Z ##[endgroup]
+2026-11-19T09:05:48.8172530Z ##[group]Inspecting default docker context
+2026-11-19T09:05:48.8371383Z [
+2026-11-19T09:05:48.8372111Z   {
+2026-11-19T09:05:48.8372682Z     "Name": "default",
+2026-11-19T09:05:48.8373306Z     "Metadata": {},
+2026-11-19T09:05:48.8373822Z     "Endpoints": {
+2026-11-19T09:05:48.8374395Z       "docker": {
+2026-11-19T09:05:48.8374966Z         "Host": "unix:///var/run/docker.sock",
+2026-11-19T09:05:48.8375640Z         "SkipTLSVerify": false
+2026-11-19T09:05:48.8376333Z       }
+2026-11-19T09:05:48.8376839Z     },
+2026-11-19T09:05:48.8377347Z     "TLSMaterial": {},
+2026-11-19T09:05:48.8377952Z     "Storage": {
+2026-11-19T09:05:48.8378659Z       "MetadataPath": "<IN MEMORY>",
+2026-11-19T09:05:48.8379408Z       "TLSPath": "<IN MEMORY>"
+2026-11-19T09:05:48.8380069Z     }
+2026-11-19T09:05:48.8380804Z   }
+2026-11-19T09:05:48.8381320Z ]
+2026-11-19T09:05:48.8382634Z ##[endgroup]
+2026-11-19T09:05:48.8383244Z ##[group]Creating a new builder instance
+2026-11-19T09:05:49.0367440Z [command]/usr/bin/docker buildx create --name builder-3999fbf2-cc1c-4508-96ca-bf79a350589a --driver docker-container --buildkitd-flags --allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host --use
+2026-11-19T09:05:49.1179329Z builder-3999fbf2-cc1c-4508-96ca-bf79a350589a
+2026-11-19T09:05:49.1227492Z ##[endgroup]
+2026-11-19T09:05:49.1229541Z ##[group]Booting builder
+2026-11-19T09:05:49.1276874Z [command]/usr/bin/docker buildx inspect --bootstrap --builder builder-3999fbf2-cc1c-4508-96ca-bf79a350589a
+2026-11-19T09:05:49.2011945Z #1 [internal] booting buildkit
+2026-11-19T09:05:49.3513743Z #1 pulling image moby/buildkit:buildx-stable-1
+2026-11-19T09:05:53.8918203Z #1 pulling image moby/buildkit:buildx-stable-1 4.7s done
+2026-11-19T09:05:54.0439766Z #1 creating container buildx_buildkit_builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0
+2026-11-19T09:05:54.3475007Z #1 creating container buildx_buildkit_builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0 0.5s done
+2026-11-19T09:05:54.3831317Z #1 DONE 5.1s
+2026-11-19T09:05:54.4249431Z Name:          builder-3999fbf2-cc1c-4508-96ca-bf79a350589a
+2026-11-19T09:05:54.4253615Z Driver:        docker-container
+2026-11-19T09:05:54.4254830Z Last Activity: 2026-11-19 09:05:49 +0000 UTC
+2026-11-19T09:05:54.4255361Z 
+2026-11-19T09:05:54.4255722Z Nodes:
+2026-11-19T09:05:54.4256312Z Name:                  builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0
+2026-11-19T09:05:54.4257094Z Endpoint:              unix:///var/run/docker.sock
+2026-11-19T09:05:54.4257756Z Status:                running
+2026-11-19T09:05:54.4258826Z BuildKit daemon flags: --allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host
+2026-11-19T09:05:54.4259940Z BuildKit version:      v0.34.2
+2026-11-19T09:05:54.4260950Z Platforms:             linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
+2026-11-19T09:05:54.4261732Z Labels:
+2026-11-19T09:05:54.4262301Z  org.mobyproject.buildkit.worker.executor:         oci
+2026-11-19T09:05:54.4263140Z  org.mobyproject.buildkit.worker.hostname:         a1d352dfbbe7
+2026-11-19T09:05:54.4263995Z  org.mobyproject.buildkit.worker.network:          host
+2026-11-19T09:05:54.4264855Z  org.mobyproject.buildkit.worker.oci.process-mode: sandbox
+2026-11-19T09:05:54.4265736Z  org.mobyproject.buildkit.worker.selinux.enabled:  false
+2026-11-19T09:05:54.4266611Z  org.mobyproject.buildkit.worker.snapshotter:      overlayfs
+2026-11-19T09:05:54.4267380Z GC Policy rule#0:
+2026-11-19T09:05:54.4268088Z  All:            false
+2026-11-19T09:05:54.4268842Z  Filters:        type==source.local type==exec.cachemount type==source.git.checkout
+2026-11-19T09:05:54.4269681Z  Keep Duration:  48h0m0s
+2026-11-19T09:05:54.4270197Z  Max Used Space: 488.3MiB
+2026-11-19T09:05:54.4270941Z GC Policy rule#1:
+2026-11-19T09:05:54.4271504Z  All:            false
+2026-11-19T09:05:54.4272029Z  Keep Duration:  1440h0m0s
+2026-11-19T09:05:54.4272580Z  Reserved Space: 7.451GiB
+2026-11-19T09:05:54.4273083Z  Max Used Space: 54.02GiB
+2026-11-19T09:05:54.4273574Z  Min Free Space: 13.97GiB
+2026-11-19T09:05:54.4274054Z GC Policy rule#2:
+2026-11-19T09:05:54.4274495Z  All:            false
+2026-11-19T09:05:54.4274965Z  Reserved Space: 7.451GiB
+2026-11-19T09:05:54.4275461Z  Max Used Space: 54.02GiB
+2026-11-19T09:05:54.4275959Z  Min Free Space: 13.97GiB
+2026-11-19T09:05:54.4276454Z GC Policy rule#3:
+2026-11-19T09:05:54.4276897Z  All:            true
+2026-11-19T09:05:54.4277374Z  Reserved Space: 7.451GiB
+2026-11-19T09:05:54.4277856Z  Max Used Space: 54.02GiB
+2026-11-19T09:05:54.4278372Z  Min Free Space: 13.97GiB
+2026-11-19T09:05:54.4328948Z ##[endgroup]
+2026-11-19T09:05:54.5561083Z ##[group]Inspect builder
+2026-11-19T09:05:54.6369909Z {
+2026-11-19T09:05:54.6370703Z   "nodes": [
+2026-11-19T09:05:54.6371478Z     {
+2026-11-19T09:05:54.6372754Z       "name": "builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0",
+2026-11-19T09:05:54.6373782Z       "endpoint": "unix:///var/run/docker.sock",
+2026-11-19T09:05:54.6374530Z       "status": "running",
+2026-11-19T09:05:54.6375749Z       "buildkitd-flags": "--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host",
+2026-11-19T09:05:54.6377128Z       "buildkit": "v0.34.2",
+2026-11-19T09:05:54.6378081Z       "platforms": "linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386",
+2026-11-19T09:05:54.6378986Z       "features": {
+2026-11-19T09:05:54.6379761Z         "Automatically load images to the Docker Engine image store": true,
+2026-11-19T09:05:54.6380857Z         "Cache export": true,
+2026-11-19T09:05:54.6381474Z         "Direct push": true,
+2026-11-19T09:05:54.6382065Z         "Docker exporter": true,
+2026-11-19T09:05:54.6382858Z         "Multi-platform build": true,
+2026-11-19T09:05:54.6383525Z         "OCI exporter": true
+2026-11-19T09:05:54.6384178Z       },
+2026-11-19T09:05:54.6384763Z       "labels": {
+2026-11-19T09:05:54.6385500Z         "org.mobyproject.buildkit.worker.executor": "oci",
+2026-11-19T09:05:54.6386489Z         "org.mobyproject.buildkit.worker.hostname": "a1d352dfbbe7",
+2026-11-19T09:05:54.6387360Z         "org.mobyproject.buildkit.worker.network": "host",
+2026-11-19T09:05:54.6388315Z         "org.mobyproject.buildkit.worker.oci.process-mode": "sandbox",
+2026-11-19T09:05:54.6389793Z         "org.mobyproject.buildkit.worker.selinux.enabled": "false",
+2026-11-19T09:05:54.6391154Z         "org.mobyproject.buildkit.worker.snapshotter": "overlayfs"
+2026-11-19T09:05:54.6392345Z       },
+2026-11-19T09:05:54.6402321Z       "gcPolicy": [
+2026-11-19T09:05:54.6403171Z         {
+2026-11-19T09:05:54.6403904Z           "all": false,
+2026-11-19T09:05:54.6404648Z           "filter": [
+2026-11-19T09:05:54.6405628Z             "type==source.local type==exec.cachemount type==source.git.checkout"
+2026-11-19T09:05:54.6406620Z           ],
+2026-11-19T09:05:54.6407258Z           "keepDuration": "48h0m0s",
+2026-11-19T09:05:54.6408102Z           "maxUsedSpace": "488.3MiB"
+2026-11-19T09:05:54.6408818Z         },
+2026-11-19T09:05:54.6409357Z         {
+2026-11-19T09:05:54.6409967Z           "all": false,
+2026-11-19T09:05:54.6410833Z           "keepDuration": "1440h0m0s",
+2026-11-19T09:05:54.6411611Z           "reservedSpace": "7.451GiB",
+2026-11-19T09:05:54.6412350Z           "maxUsedSpace": "54.02GiB",
+2026-11-19T09:05:54.6413110Z           "minFreeSpace": "13.97GiB"
+2026-11-19T09:05:54.6413998Z         },
+2026-11-19T09:05:54.6416907Z         {
+2026-11-19T09:05:54.6417558Z           "all": false,
+2026-11-19T09:05:54.6418236Z           "reservedSpace": "7.451GiB",
+2026-11-19T09:05:54.6419042Z           "maxUsedSpace": "54.02GiB",
+2026-11-19T09:05:54.6420112Z           "minFreeSpace": "13.97GiB"
+2026-11-19T09:05:54.6421103Z         },
+2026-11-19T09:05:54.6421717Z         {
+2026-11-19T09:05:54.6422317Z           "all": true,
+2026-11-19T09:05:54.6422982Z           "reservedSpace": "7.451GiB",
+2026-11-19T09:05:54.6429684Z           "maxUsedSpace": "54.02GiB",
+2026-11-19T09:05:54.6430821Z           "minFreeSpace": "13.97GiB"
+2026-11-19T09:05:54.6446808Z         }
+2026-11-19T09:05:54.6447437Z       ]
+2026-11-19T09:05:54.6447993Z     }
+2026-11-19T09:05:54.6448513Z   ],
+2026-11-19T09:05:54.6449123Z   "name": "builder-3999fbf2-cc1c-4508-96ca-bf79a350589a",
+2026-11-19T09:05:54.6450009Z   "driver": "docker-container",
+2026-11-19T09:05:54.6450992Z   "lastActivity": "2026-11-19T09:05:49.000Z"
+2026-11-19T09:05:54.6451761Z }
+2026-11-19T09:05:54.6452852Z ##[endgroup]
+2026-11-19T09:05:54.6453683Z ##[group]BuildKit version
+2026-11-19T09:05:54.6455497Z builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0: v0.34.2
+2026-11-19T09:05:54.6456592Z ##[endgroup]
+2026-11-19T09:05:54.6634731Z ##[group]Run docker/login-action@v3
+2026-11-19T09:05:54.6635272Z with:
+2026-11-19T09:05:54.6635617Z   registry: docker.io
+2026-11-19T09:05:54.6636012Z   username: andiframe
+2026-11-19T09:05:54.6636803Z   password: ***
+2026-11-19T09:05:54.6637160Z   logout: true
+2026-11-19T09:05:54.6637509Z ##[endgroup]
+2026-11-19T09:05:55.0739159Z Logging into docker.io...
+2026-11-19T09:05:55.0792949Z (node:2583) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T09:05:55.0841278Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T09:05:55.2570650Z Login Succeeded!
+2026-11-19T09:05:55.2792643Z ##[group]Run docker/build-push-action@v6
+2026-11-19T09:05:55.2792960Z with:
+2026-11-19T09:05:55.2793156Z   context: .
+2026-11-19T09:05:55.2793355Z   platforms: linux/amd64
+2026-11-19T09:05:55.2793574Z   push: true
+2026-11-19T09:05:55.2793760Z   provenance: false
+2026-11-19T09:05:55.2793996Z   tags: docker.io/andiframe/zhongli:0.1.1
+2026-11-19T09:05:55.2794388Z   build-args: VERSION=0.1.1
+REVISION=00b9b1e474de1be818cb9faf9f1179168c9aea2c
 
-2026-11-19T08:38:50.0271153Z   load: false
-2026-11-19T08:38:50.0271257Z   no-cache: false
-2026-11-19T08:38:50.0271364Z   pull: false
-2026-11-19T08:38:50.0272686Z   github-token: ***
-2026-11-19T08:38:50.0272797Z ##[endgroup]
-2026-11-19T08:38:50.1802317Z (node:2476) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-19T08:38:50.1803262Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-19T08:38:50.1816016Z ##[group]GitHub Actions runtime token ACs
-2026-11-19T08:38:50.1822224Z refs/heads/refs/tags/v0.1.0: read/write
-2026-11-19T08:38:50.1822883Z refs/heads/main: read
-2026-11-19T08:38:50.1823471Z ##[endgroup]
-2026-11-19T08:38:50.1823925Z ##[group]Docker info
-2026-11-19T08:38:50.1875706Z [command]/usr/bin/docker version
-2026-11-19T08:38:50.2138851Z Client: Docker Engine - Community
-2026-11-19T08:38:50.2152950Z  Version:           28.0.4
-2026-11-19T08:38:50.2169650Z  API version:       1.48
-2026-11-19T08:38:50.2178462Z  Go version:        go1.23.7
-2026-11-19T08:38:50.2178854Z  Git commit:        b8034c0
-2026-11-19T08:38:50.2179198Z  Built:             Tue Mar 25 15:07:16 2025
-2026-11-19T08:38:50.2179559Z  OS/Arch:           linux/amd64
-2026-11-19T08:38:50.2179879Z  Context:           default
-2026-11-19T08:38:50.2180115Z 
-2026-11-19T08:38:50.2180322Z Server: Docker Engine - Community
-2026-11-19T08:38:50.2181746Z  Engine:
-2026-11-19T08:38:50.2182031Z   Version:          28.0.4
-2026-11-19T08:38:50.2182368Z   API version:      1.48 (minimum version 1.24)
-2026-11-19T08:38:50.2182765Z   Go version:       go1.23.7
-2026-11-19T08:38:50.2183075Z   Git commit:       6430e49
-2026-11-19T08:38:50.2183388Z   Built:            Tue Mar 25 15:07:16 2025
-2026-11-19T08:38:50.2184206Z   OS/Arch:          linux/amd64
-2026-11-19T08:38:50.2184539Z   Experimental:     false
-2026-11-19T08:38:50.2185358Z  containerd:
-2026-11-19T08:38:50.2185639Z   Version:          v2.4.2
-2026-11-19T08:38:50.2186007Z   GitCommit:        b7a25261e029d68978bbf290df0a62fc819b3c51
-2026-11-19T08:38:50.2186397Z  runc:
-2026-11-19T08:38:50.2186680Z   Version:          1.5.2
-2026-11-19T08:38:50.2187061Z   GitCommit:        v1.5.2-0-g29dd3dc2
-2026-11-19T08:38:50.2187390Z  docker-init:
-2026-11-19T08:38:50.2188105Z   Version:          0.19.0
-2026-11-19T08:38:50.2188420Z   GitCommit:        de40ad0
-2026-11-19T08:38:50.2214930Z [command]/usr/bin/docker info
-2026-11-19T08:38:50.3196049Z Client: Docker Engine - Community
-2026-11-19T08:38:50.3196633Z  Version:    28.0.4
-2026-11-19T08:38:50.3196892Z  Context:    default
-2026-11-19T08:38:50.3197218Z  Debug Mode: false
-2026-11-19T08:38:50.3197588Z  Plugins:
-2026-11-19T08:38:50.3197834Z   buildx: Docker Buildx (Docker Inc.)
-2026-11-19T08:38:50.3198122Z     Version:  v0.38.2
-2026-11-19T08:38:50.3198425Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
-2026-11-19T08:38:50.3198786Z   compose: Docker Compose (Docker Inc.)
-2026-11-19T08:38:50.3199063Z     Version:  v2.38.2
-2026-11-19T08:38:50.3199352Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
-2026-11-19T08:38:50.3199611Z 
-2026-11-19T08:38:50.3199741Z Server:
-2026-11-19T08:38:50.3199956Z  Containers: 1
-2026-11-19T08:38:50.3200178Z   Running: 1
-2026-11-19T08:38:50.3200397Z   Paused: 0
-2026-11-19T08:38:50.3200614Z   Stopped: 0
-2026-11-19T08:38:50.3200837Z  Images: 7
-2026-11-19T08:38:50.3201062Z  Server Version: 28.0.4
-2026-11-19T08:38:50.3201310Z  Storage Driver: overlay2
-2026-11-19T08:38:50.3201567Z   Backing Filesystem: extfs
-2026-11-19T08:38:50.3201829Z   Supports d_type: true
-2026-11-19T08:38:50.3202389Z   Using metacopy: false
-2026-11-19T08:38:50.3207872Z   Native Overlay Diff: false
-2026-11-19T08:38:50.3208161Z   userxattr: false
-2026-11-19T08:38:50.3208406Z  Logging Driver: json-file
-2026-11-19T08:38:50.3208665Z  Cgroup Driver: systemd
-2026-11-19T08:38:50.3208909Z  Cgroup Version: 2
-2026-11-19T08:38:50.3209151Z  Plugins:
-2026-11-19T08:38:50.3209373Z   Volume: local
-2026-11-19T08:38:50.3209635Z   Network: bridge host ipvlan macvlan null overlay
-2026-11-19T08:38:50.3210025Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
-2026-11-19T08:38:50.3210452Z  Swarm: inactive
-2026-11-19T08:38:50.3210703Z  Runtimes: io.containerd.runc.v2 runc
-2026-11-19T08:38:50.3210993Z  Default Runtime: runc
-2026-11-19T08:38:50.3211242Z  Init Binary: docker-init
-2026-11-19T08:38:50.3211555Z  containerd version: b7a25261e029d68978bbf290df0a62fc819b3c51
-2026-11-19T08:38:50.3211898Z  runc version: v1.5.2-0-g29dd3dc2
-2026-11-19T08:38:50.3212163Z  init version: de40ad0
-2026-11-19T08:38:50.3212415Z  Security Options:
-2026-11-19T08:38:50.3212646Z   apparmor
-2026-11-19T08:38:50.3212862Z   seccomp
-2026-11-19T08:38:50.3213080Z    Profile: builtin
-2026-11-19T08:38:50.3213311Z   cgroupns
-2026-11-19T08:38:50.3213540Z  Kernel Version: 7.0.0-1017-azure
-2026-11-19T08:38:50.3213822Z  Operating System: Ubuntu 24.04.5 LTS
-2026-11-19T08:38:50.3214104Z  OSType: linux
-2026-11-19T08:38:50.3214337Z  Architecture: x86_64
-2026-11-19T08:38:50.3214578Z  CPUs: 2
-2026-11-19T08:38:50.3214796Z  Total Memory: 7.747GiB
-2026-11-19T08:38:50.3215037Z  Name: runnervm8axu0
-2026-11-19T08:38:50.3215298Z  ID: 0fef2a29-aadb-43ca-98b5-edbc7a28f18a
-2026-11-19T08:38:50.3215596Z  Docker Root Dir: /var/lib/docker
-2026-11-19T08:38:50.3215934Z  Debug Mode: false
-2026-11-19T08:38:50.3216165Z  Username: andiframe
-2026-11-19T08:38:50.3216403Z  Experimental: false
-2026-11-19T08:38:50.3216794Z  Insecure Registries:
-2026-11-19T08:38:50.3217096Z   ::1/128
-2026-11-19T08:38:50.3217314Z   127.0.0.0/8
-2026-11-19T08:38:50.3217680Z  Live Restore Enabled: false
-2026-11-19T08:38:50.3217892Z 
-2026-11-19T08:38:50.3220406Z ##[endgroup]
-2026-11-19T08:38:50.3220834Z ##[group]Proxy configuration
-2026-11-19T08:38:50.3223365Z No proxy configuration found
-2026-11-19T08:38:50.3228034Z ##[endgroup]
-2026-11-19T08:38:50.3741713Z ##[group]Buildx version
-2026-11-19T08:38:50.3775783Z [command]/usr/bin/docker buildx version
-2026-11-19T08:38:50.4225454Z github.com/docker/buildx v0.38.2 3c4cbd35852fc1a476923627a780a7836c28b654
-2026-11-19T08:38:50.4278973Z ##[endgroup]
-2026-11-19T08:38:50.4279533Z ##[group]Builder info
-2026-11-19T08:38:50.5101460Z {
-2026-11-19T08:38:50.5101795Z   "nodes": [
-2026-11-19T08:38:50.5102329Z     {
-2026-11-19T08:38:50.5102834Z       "name": "builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10",
-2026-11-19T08:38:50.5103324Z       "endpoint": "unix:///var/run/docker.sock",
-2026-11-19T08:38:50.5103685Z       "status": "running",
-2026-11-19T08:38:50.5104234Z       "buildkitd-flags": "--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host",
-2026-11-19T08:38:50.5104884Z       "buildkit": "v0.34.2",
-2026-11-19T08:38:50.5105342Z       "platforms": "linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/amd64/v4,linux/386",
-2026-11-19T08:38:50.5105802Z       "features": {
-2026-11-19T08:38:50.5106201Z         "Automatically load images to the Docker Engine image store": true,
-2026-11-19T08:38:50.5106675Z         "Cache export": true,
-2026-11-19T08:38:50.5107000Z         "Direct push": true,
-2026-11-19T08:38:50.5107343Z         "Docker exporter": true,
-2026-11-19T08:38:50.5108349Z         "Multi-platform build": true,
-2026-11-19T08:38:50.5108693Z         "OCI exporter": true
-2026-11-19T08:38:50.5109025Z       },
-2026-11-19T08:38:50.5109316Z       "labels": {
-2026-11-19T08:38:50.5109695Z         "org.mobyproject.buildkit.worker.executor": "oci",
-2026-11-19T08:38:50.5110175Z         "org.mobyproject.buildkit.worker.hostname": "f76d1681f4ef",
-2026-11-19T08:38:50.5110642Z         "org.mobyproject.buildkit.worker.network": "host",
-2026-11-19T08:38:50.5111517Z         "org.mobyproject.buildkit.worker.oci.process-mode": "sandbox",
-2026-11-19T08:38:50.5112067Z         "org.mobyproject.buildkit.worker.selinux.enabled": "false",
-2026-11-19T08:38:50.5112601Z         "org.mobyproject.buildkit.worker.snapshotter": "overlayfs"
-2026-11-19T08:38:50.5113030Z       },
-2026-11-19T08:38:50.5113311Z       "gcPolicy": [
-2026-11-19T08:38:50.5113600Z         {
-2026-11-19T08:38:50.5113890Z           "all": false,
-2026-11-19T08:38:50.5114194Z           "filter": [
-2026-11-19T08:38:50.5114579Z             "type==source.local type==exec.cachemount type==source.git.checkout"
-2026-11-19T08:38:50.5115080Z           ],
-2026-11-19T08:38:50.5115369Z           "keepDuration": "48h0m0s",
-2026-11-19T08:38:50.5115727Z           "maxUsedSpace": "488.3MiB"
-2026-11-19T08:38:50.5116068Z         },
-2026-11-19T08:38:50.5116335Z         {
-2026-11-19T08:38:50.5116607Z           "all": false,
-2026-11-19T08:38:50.5116941Z           "keepDuration": "1440h0m0s",
-2026-11-19T08:38:50.5117294Z           "reservedSpace": "7.451GiB",
-2026-11-19T08:38:50.5117813Z           "maxUsedSpace": "54.02GiB",
-2026-11-19T08:38:50.5118169Z           "minFreeSpace": "13.97GiB"
-2026-11-19T08:38:50.5118487Z         },
-2026-11-19T08:38:50.5118753Z         {
-2026-11-19T08:38:50.5119027Z           "all": false,
-2026-11-19T08:38:50.5119348Z           "reservedSpace": "7.451GiB",
-2026-11-19T08:38:50.5119696Z           "maxUsedSpace": "54.02GiB",
-2026-11-19T08:38:50.5120016Z           "minFreeSpace": "13.97GiB"
-2026-11-19T08:38:50.5120333Z         },
-2026-11-19T08:38:50.5120605Z         {
-2026-11-19T08:38:50.5120876Z           "all": true,
-2026-11-19T08:38:50.5121225Z           "reservedSpace": "7.451GiB",
-2026-11-19T08:38:50.5121595Z           "maxUsedSpace": "54.02GiB",
-2026-11-19T08:38:50.5121950Z           "minFreeSpace": "13.97GiB"
-2026-11-19T08:38:50.5122278Z         }
-2026-11-19T08:38:50.5122544Z       ]
-2026-11-19T08:38:50.5122809Z     }
-2026-11-19T08:38:50.5123099Z   ],
-2026-11-19T08:38:50.5123433Z   "name": "builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1",
-2026-11-19T08:38:50.5123862Z   "driver": "docker-container",
-2026-11-19T08:38:50.5124215Z   "lastActivity": "2026-11-19T08:38:43.000Z"
-2026-11-19T08:38:50.5124552Z }
-2026-11-19T08:38:50.5125125Z ##[endgroup]
-2026-11-19T08:38:50.5878131Z [command]/usr/bin/docker buildx build --build-arg VERSION=0.1.0 --build-arg REVISION=59adcfcece92934b5acfa7e9d3d6bf268a7a7699 --iidfile /home/runner/work/_temp/docker-actions-toolkit-CgfDQU/build-iidfile-c3cec30574.txt --platform linux/amd64 --attest type=provenance,disabled=true --tag docker.io/andiframe/zhongli:0.1.0 --metadata-file /home/runner/work/_temp/docker-actions-toolkit-CgfDQU/build-metadata-38d2dbd7d1.json --push .
-2026-11-19T08:38:50.8180768Z #0 building with "builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1" instance using docker-container driver
-2026-11-19T08:38:50.8182145Z 
-2026-11-19T08:38:50.8183983Z #1 [internal] load build definition from Dockerfile
-2026-11-19T08:38:50.8184343Z #1 transferring dockerfile: 1.32kB done
-2026-11-19T08:38:50.8184607Z #1 DONE 0.0s
-2026-11-19T08:38:50.8184735Z 
-2026-11-19T08:38:50.8184968Z #2 [auth] docker/dockerfile:pull token for registry-1.docker.io
-2026-11-19T08:38:50.9683358Z #2 DONE 0.0s
-2026-11-19T08:38:50.9683730Z 
-2026-11-19T08:38:50.9684047Z #3 resolve image config for docker-image://docker.io/docker/dockerfile:1
-2026-11-19T08:38:51.3502069Z #3 DONE 0.7s
-2026-11-19T08:38:51.5087960Z 
-2026-11-19T08:38:51.5088989Z #4 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
-2026-11-19T08:38:51.5090101Z #4 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
-2026-11-19T08:38:51.5174707Z #4 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 9.44MB / 14.28MB 0.2s
-2026-11-19T08:38:51.6551097Z #4 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 14.28MB / 14.28MB 0.3s done
-2026-11-19T08:38:51.7598923Z #4 extracting sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 0.1s done
-2026-11-19T08:38:51.7600919Z #4 DONE 0.4s
-2026-11-19T08:38:51.9951775Z 
-2026-11-19T08:38:51.9952380Z #5 [auth] library/python:pull token for registry-1.docker.io
-2026-11-19T08:38:51.9952667Z #5 DONE 0.0s
-2026-11-19T08:38:51.9952799Z 
-2026-11-19T08:38:51.9953012Z #6 [internal] load metadata for docker.io/library/python:3.13-slim-bookworm
-2026-11-19T08:38:52.2664320Z #6 DONE 0.5s
-2026-11-19T08:38:52.2665839Z 
-2026-11-19T08:38:52.2665985Z #7 [internal] load metadata for ghcr.io/astral-sh/uv:0.13.4
-2026-11-19T08:38:52.4660135Z #7 DONE 0.5s
-2026-11-19T08:38:52.4660355Z 
-2026-11-19T08:38:52.4660495Z #8 [internal] load .dockerignore
-2026-11-19T08:38:52.4660663Z #8 transferring context: 184B done
-2026-11-19T08:38:52.4660804Z #8 DONE 0.0s
-2026-11-19T08:38:52.7625852Z 
-2026-11-19T08:38:52.7627005Z #9 [internal] load build context
-2026-11-19T08:38:52.7627377Z #9 transferring context: 152.57kB 0.0s done
-2026-11-19T08:38:52.7630532Z #9 DONE 0.0s
-2026-11-19T08:38:52.7630639Z 
-2026-11-19T08:38:52.7631046Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
-2026-11-19T08:38:52.7631547Z #10 resolve docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72 done
-2026-11-19T08:38:52.7632160Z #10 sha256:f565bd0f3fa6077930c1eaa4a21872eb5bc5590bf2b1d2753845ed21d10704bf 248B / 248B 0.1s done
-2026-11-19T08:38:52.9707220Z #10 sha256:a2e654eaec5b2906de585b934a48a3240b92979100174090795933855f5436b3 0B / 3.34MB 0.2s
-2026-11-19T08:38:52.9708041Z #10 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 10.49MB / 28.25MB 0.2s
-2026-11-19T08:38:52.9709358Z #10 sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2 12.61MB / 12.61MB 0.2s
-2026-11-19T08:38:53.1202848Z #10 sha256:a2e654eaec5b2906de585b934a48a3240b92979100174090795933855f5436b3 3.34MB / 3.34MB 0.3s
-2026-11-19T08:38:53.1204490Z #10 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 28.25MB / 28.25MB 0.3s
-2026-11-19T08:38:53.3923722Z #10 sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2 12.61MB / 12.61MB 0.7s done
-2026-11-19T08:38:53.5693882Z #10 sha256:a2e654eaec5b2906de585b934a48a3240b92979100174090795933855f5436b3 3.34MB / 3.34MB 0.7s done
-2026-11-19T08:38:53.5695125Z #10 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 28.25MB / 28.25MB 0.7s done
-2026-11-19T08:38:53.5695728Z #10 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3
-2026-11-19T08:38:53.7036264Z #10 ...
-2026-11-19T08:38:53.7036480Z 
-2026-11-19T08:38:53.7036797Z #11 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b
-2026-11-19T08:38:53.7037553Z #11 resolve ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b done
-2026-11-19T08:38:53.7038152Z #11 sha256:a7a4c1c28acfa0600954ba762985b04fd8db0ecd249573405f86e458150e26a0 96B / 96B 0.1s done
-2026-11-19T08:38:53.7038699Z #11 sha256:78fa515da939df1a7735518cd8483877c98aa632744a890e35c0b8c94edae9a6 19.40MB / 19.40MB 0.7s done
-2026-11-19T08:38:53.7039245Z #11 extracting sha256:78fa515da939df1a7735518cd8483877c98aa632744a890e35c0b8c94edae9a6 0.3s done
-2026-11-19T08:38:53.7039633Z #11 DONE 1.0s
-2026-11-19T08:38:53.8630960Z 
-2026-11-19T08:38:53.8631781Z #11 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b
-2026-11-19T08:38:53.8632382Z #11 extracting sha256:a7a4c1c28acfa0600954ba762985b04fd8db0ecd249573405f86e458150e26a0 done
-2026-11-19T08:38:53.8632764Z #11 DONE 1.1s
-2026-11-19T08:38:53.8632862Z 
-2026-11-19T08:38:53.8633198Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
-2026-11-19T08:38:54.0739796Z #10 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 0.7s done
-2026-11-19T08:38:54.0740881Z #10 DONE 1.4s
-2026-11-19T08:38:54.3102480Z 
-2026-11-19T08:38:54.3105830Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
-2026-11-19T08:38:54.3106756Z #10 extracting sha256:a2e654eaec5b2906de585b934a48a3240b92979100174090795933855f5436b3 0.1s done
-2026-11-19T08:38:54.3107593Z #10 extracting sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2
-2026-11-19T08:38:54.4266161Z #10 extracting sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2 0.3s done
-2026-11-19T08:38:54.4269930Z #10 DONE 1.8s
-2026-11-19T08:38:54.5870638Z 
-2026-11-19T08:38:54.5871860Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
-2026-11-19T08:38:54.5872526Z #10 extracting sha256:f565bd0f3fa6077930c1eaa4a21872eb5bc5590bf2b1d2753845ed21d10704bf done
-2026-11-19T08:38:54.5872891Z #10 DONE 1.8s
-2026-11-19T08:38:54.5872992Z 
-2026-11-19T08:38:54.5873151Z #12 [build 2/7] COPY --from=uv /uv /usr/local/bin/uv
-2026-11-19T08:38:56.9034098Z #12 DONE 2.5s
-2026-11-19T08:38:57.0689529Z 
-2026-11-19T08:38:57.0693258Z #13 [build 3/7] WORKDIR /src
-2026-11-19T08:38:57.0693768Z #13 DONE 0.0s
-2026-11-19T08:38:57.0693976Z 
-2026-11-19T08:38:57.0694199Z #14 [build 4/7] COPY pyproject.toml uv.lock .python-version README.md ./
-2026-11-19T08:38:57.0694499Z #14 DONE 0.0s
-2026-11-19T08:38:57.0694596Z 
-2026-11-19T08:38:57.0694747Z #15 [build 5/7] RUN uv sync --locked --no-dev --no-install-project
-2026-11-19T08:38:57.0695120Z #15 0.143 Using CPython 3.13.18 interpreter at: /usr/local/bin/python3.13
-2026-11-19T08:38:57.2282274Z #15 0.143 Creating virtual environment at: /opt/venv
-2026-11-19T08:38:57.2288690Z #15 0.146 Resolved 14 packages in 0.76ms
-2026-11-19T08:38:57.2289211Z #15 0.211 Downloading cryptography (4.5MiB)
-2026-11-19T08:38:57.2289594Z #15 0.302  Downloaded cryptography
-2026-11-19T08:38:57.3796052Z #15 0.302 Prepared 3 packages in 155ms
-2026-11-19T08:38:57.4123801Z #15 0.486 Installed 3 packages in 182ms
-2026-11-19T08:38:57.6079797Z #15 0.682 Bytecode compiled 105 files in 196ms
-2026-11-19T08:38:57.7595343Z #15 0.682  + cffi==2.1.1
-2026-11-19T08:38:57.7595723Z #15 0.683  + cryptography==50.0.2
-2026-11-19T08:38:57.7595947Z #15 0.683  + pycparser==3.12
-2026-11-19T08:38:57.8212566Z #15 DONE 0.9s
-2026-11-19T08:38:57.9539737Z 
-2026-11-19T08:38:57.9540443Z #16 [build 6/7] COPY src ./src
-2026-11-19T08:38:57.9540841Z #16 DONE 0.0s
-2026-11-19T08:38:57.9541015Z 
-2026-11-19T08:38:57.9541229Z #17 [build 7/7] RUN uv sync --locked --no-dev --no-editable
-2026-11-19T08:38:58.0643700Z #17 0.117 Resolved 14 packages in 0.75ms
-2026-11-19T08:38:58.0644245Z #17 0.119    Building zhongli @ file:///src
-2026-11-19T08:38:58.0644996Z #17 0.120 warning: `build_system.requires = ["uv-build>=0.12.7,<0.13.0"]` does not contain the current uv version 0.13.4
-2026-11-19T08:38:58.0645512Z #17 0.124       Built zhongli @ file:///src
-2026-11-19T08:38:58.0645923Z #17 0.135 Prepared 1 package in 16ms
-2026-11-19T08:38:58.0646148Z #17 0.143 Installed 1 package in 8ms
-2026-11-19T08:38:58.0646653Z #17 0.184 Bytecode compiled 125 files in 40ms
-2026-11-19T08:38:58.0646819Z #17 0.184  + zhongli==0.1.0 (from file:///src)
-2026-11-19T08:38:58.0646970Z #17 DONE 0.2s
-2026-11-19T08:38:58.0647035Z 
-2026-11-19T08:38:58.0647131Z #18 [stage-2 2/3] COPY --from=build /opt/venv /opt/venv
-2026-11-19T08:38:58.2768395Z #18 DONE 0.2s
-2026-11-19T08:38:58.4384820Z 
-2026-11-19T08:38:58.4387131Z #19 [stage-2 3/3] WORKDIR /work
-2026-11-19T08:38:58.4387808Z #19 DONE 0.0s
-2026-11-19T08:38:58.4388058Z 
-2026-11-19T08:38:58.4388273Z #20 exporting to image
-2026-11-19T08:38:58.4388604Z #20 exporting layers
-2026-11-19T08:38:58.7374766Z #20 exporting layers 0.4s done
-2026-11-19T08:38:58.9290086Z #20 ...
-2026-11-19T08:38:58.9290577Z 
-2026-11-19T08:38:58.9290954Z #21 [auth] andiframe/zhongli:pull,push token for registry-1.docker.io
-2026-11-19T08:38:58.9291369Z #21 DONE 0.0s
-2026-11-19T08:38:58.9291479Z 
-2026-11-19T08:38:58.9291952Z #20 exporting to image
-2026-11-19T08:38:58.9292302Z #20 exporting manifest sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620 done
-2026-11-19T08:38:58.9292850Z #20 exporting config sha256:842e3d950b2c2c68fe86ad8b77fd884848a06b2e4ad5eded7f2d258070781c5d done
-2026-11-19T08:38:58.9293234Z #20 pushing layers
-2026-11-19T08:39:00.0509677Z #20 pushing layers 1.3s done
-2026-11-19T08:39:00.0511480Z #20 pushing manifest for docker.io/andiframe/zhongli:0.1.0@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:01.5680598Z #20 pushing manifest for docker.io/andiframe/zhongli:0.1.0@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620 1.5s done
-2026-11-19T08:39:01.5681507Z #20 DONE 3.3s
-2026-11-19T08:39:01.5912805Z 
-2026-11-19T08:39:01.5917221Z #22 resolving provenance for metadata file
-2026-11-19T08:39:01.5926338Z #22 DONE 0.0s
-2026-11-19T08:39:01.6017556Z ##[group]ImageID
-2026-11-19T08:39:01.6018405Z sha256:842e3d950b2c2c68fe86ad8b77fd884848a06b2e4ad5eded7f2d258070781c5d
-2026-11-19T08:39:01.6019248Z ##[endgroup]
-2026-11-19T08:39:01.6022685Z ##[group]Digest
-2026-11-19T08:39:01.6023143Z sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:01.6023734Z ##[endgroup]
-2026-11-19T08:39:01.6024180Z ##[group]Metadata
-2026-11-19T08:39:01.6025733Z {
-2026-11-19T08:39:01.6026039Z   "buildx.build.provenance": {
-2026-11-19T08:39:01.6026387Z     "builder": {
-2026-11-19T08:39:01.6026660Z       "id": ""
-2026-11-19T08:39:01.6026920Z     },
-2026-11-19T08:39:01.6027297Z     "buildType": "https://mobyproject.org/buildkit@v1",
-2026-11-19T08:39:01.6028390Z     "materials": [
-2026-11-19T08:39:01.6028663Z       {
-2026-11-19T08:39:01.6029034Z         "uri": "pkg:docker/docker/dockerfile@1",
-2026-11-19T08:39:01.6029449Z         "digest": {
-2026-11-19T08:39:01.6039791Z           "sha256": "4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e"
-2026-11-19T08:39:01.6040303Z         }
-2026-11-19T08:39:01.6040655Z       },
-2026-11-19T08:39:01.6040959Z       {
-2026-11-19T08:39:01.6041368Z         "uri": "pkg:docker/python@3.13-slim-bookworm?platform=linux%2Famd64",
-2026-11-19T08:39:01.6041841Z         "digest": {
-2026-11-19T08:39:01.6042268Z           "sha256": "a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72"
-2026-11-19T08:39:01.6043058Z         }
-2026-11-19T08:39:01.6043336Z       },
-2026-11-19T08:39:01.6043601Z       {
-2026-11-19T08:39:01.6043987Z         "uri": "pkg:docker/ghcr.io/astral-sh/uv@0.13.4?platform=linux%2Famd64",
-2026-11-19T08:39:01.6044456Z         "digest": {
-2026-11-19T08:39:01.6044892Z           "sha256": "9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b"
-2026-11-19T08:39:01.6045327Z         }
-2026-11-19T08:39:01.6045490Z       }
-2026-11-19T08:39:01.6045631Z     ],
-2026-11-19T08:39:01.6045792Z     "invocation": {
-2026-11-19T08:39:01.6045987Z       "configSource": {
-2026-11-19T08:39:01.6046179Z         "entryPoint": "Dockerfile"
-2026-11-19T08:39:01.6046387Z       },
-2026-11-19T08:39:01.6046555Z       "parameters": {
-2026-11-19T08:39:01.6046749Z         "frontend": "gateway.v0",
-2026-11-19T08:39:01.6046952Z         "args": {
-2026-11-19T08:39:01.6047198Z           "build-arg:REVISION": "59adcfcece92934b5acfa7e9d3d6bf268a7a7699",
-2026-11-19T08:39:01.6048394Z           "build-arg:VERSION": "0.1.0",
-2026-11-19T08:39:01.6048635Z           "cmdline": "docker/dockerfile:1",
-2026-11-19T08:39:01.6048867Z           "source": "docker/dockerfile:1"
-2026-11-19T08:39:01.6049079Z         },
-2026-11-19T08:39:01.6049234Z         "locals": [
-2026-11-19T08:39:01.6049395Z           {
-2026-11-19T08:39:01.6049556Z             "name": "context"
-2026-11-19T08:39:01.6049740Z           },
-2026-11-19T08:39:01.6049891Z           {
-2026-11-19T08:39:01.6050051Z             "name": "dockerfile"
-2026-11-19T08:39:01.6050238Z           }
-2026-11-19T08:39:01.6050386Z         ],
-2026-11-19T08:39:01.6050533Z         "root": {
-2026-11-19T08:39:01.6050700Z           "configSource": {
-2026-11-19T08:39:01.6050834Z             "path": "Dockerfile"
-2026-11-19T08:39:01.6051096Z           },
-2026-11-19T08:39:01.6051201Z           "request": {
-2026-11-19T08:39:01.6051317Z             "args": {
-2026-11-19T08:39:01.6051492Z               "build-arg:REVISION": "59adcfcece92934b5acfa7e9d3d6bf268a7a7699",
-2026-11-19T08:39:01.6051695Z               "build-arg:VERSION": "0.1.0",
-2026-11-19T08:39:01.6051852Z               "vcs:localdir:context": ".",
-2026-11-19T08:39:01.6052007Z               "vcs:localdir:dockerfile": ".",
-2026-11-19T08:39:01.6052196Z               "vcs:revision": "59adcfcece92934b5acfa7e9d3d6bf268a7a7699",
-2026-11-19T08:39:01.6052472Z               "vcs:source": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020"
-2026-11-19T08:39:01.6052690Z             }
-2026-11-19T08:39:01.6052822Z           }
-2026-11-19T08:39:01.6052919Z         },
-2026-11-19T08:39:01.6053033Z         "compatibilityVersion": 30
-2026-11-19T08:39:01.6053167Z       },
-2026-11-19T08:39:01.6053267Z       "environment": {
-2026-11-19T08:39:01.6053394Z         "github_actor": "DaDecky",
-2026-11-19T08:39:01.6053534Z         "github_actor_id": "76481845",
-2026-11-19T08:39:01.6053677Z         "github_event_name": "push",
-2026-11-19T08:39:01.6053822Z         "github_event_payload": {
-2026-11-19T08:39:01.6053983Z           "after": "59fbc7b7260a319ee766cd767fdf8a5aaa84f7f9",
-2026-11-19T08:39:01.6054151Z           "base_ref": null,
-2026-11-19T08:39:01.6054291Z           "before": "0000000000000000000000000000000000000000",
-2026-11-19T08:39:01.6054445Z           "commits": [],
-2026-11-19T08:39:01.6054666Z           "compare": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/compare/v0.1.0",
-2026-11-19T08:39:01.6054902Z           "created": true,
-2026-11-19T08:39:01.6055039Z           "deleted": false,
-2026-11-19T08:39:01.6055320Z           "forced": false,
-2026-11-19T08:39:01.6055512Z           "head_commit": {
-2026-11-19T08:39:01.6055835Z             "author": {
-2026-11-19T08:39:01.6056042Z               "email": "andifarhan1094@gmail.com",
-2026-11-19T08:39:01.6056263Z               "name": "andi-frame",
-2026-11-19T08:39:01.6056549Z               "username": "andi-frame"
-2026-11-19T08:39:01.6056753Z             },
-2026-11-19T08:39:01.6056988Z             "committer": {
-2026-11-19T08:39:01.6057192Z               "email": "andifarhan1094@gmail.com",
-2026-11-19T08:39:01.6057841Z               "name": "andi-frame",
-2026-11-19T08:39:01.6072253Z               "username": "andi-frame"
-2026-11-19T08:39:01.6072511Z             },
-2026-11-19T08:39:01.6072702Z             "distinct": true,
-2026-11-19T08:39:01.6072959Z             "id": "59adcfcece92934b5acfa7e9d3d6bf268a7a7699",
-2026-11-19T08:39:01.6073719Z             "message": "ci: describe why the release pipeline is started by hand\n\nThe header comment still asked for a push trigger once a digest was pinned. The report PDF is rebuilt with a wording fix in the theory chapter.",
-2026-11-19T08:39:01.6074472Z             "timestamp": "2026-11-15T20:58:28+07:00",
-2026-11-19T08:39:01.6074783Z             "tree_id": "00294cfc23595672c77b2aab586987dca6e39fbb",
-2026-11-19T08:39:01.6075329Z             "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/commit/59adcfcece92934b5acfa7e9d3d6bf268a7a7699"
-2026-11-19T08:39:01.6075794Z           },
-2026-11-19T08:39:01.6075976Z           "pusher": {
-2026-11-19T08:39:01.6076228Z             "email": "76481845+DaDecky@users.noreply.github.com",
-2026-11-19T08:39:01.6076511Z             "name": "DaDecky"
-2026-11-19T08:39:01.6076714Z           },
-2026-11-19T08:39:01.6076881Z           "ref": "refs/tags/v0.1.0",
-2026-11-19T08:39:01.6077113Z           "repository": {
-2026-11-19T08:39:01.6077310Z             "allow_forking": true,
-2026-11-19T08:39:01.6078031Z             "archive_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/{archive_format}{/ref}",
-2026-11-19T08:39:01.6078450Z             "archived": false,
-2026-11-19T08:39:01.6079024Z             "assignees_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/assignees{/user}",
-2026-11-19T08:39:01.6079578Z             "blobs_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/blobs{/sha}",
-2026-11-19T08:39:01.6080317Z             "branches_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/branches{/branch}",
-2026-11-19T08:39:01.6080973Z             "clone_url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020.git",
-2026-11-19T08:39:01.6081589Z             "collaborators_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/collaborators{/collaborator}",
-2026-11-19T08:39:01.6082299Z             "comments_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/comments{/number}",
-2026-11-19T08:39:01.6082943Z             "commits_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/commits{/sha}",
-2026-11-19T08:39:01.6083606Z             "compare_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/compare/{base}...{head}",
-2026-11-19T08:39:01.6084274Z             "contents_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/contents/{+path}",
-2026-11-19T08:39:01.6084928Z             "contributors_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/contributors",
-2026-11-19T08:39:01.6085380Z             "created_at": 1794305487,
-2026-11-19T08:39:01.6085614Z             "default_branch": "main",
-2026-11-19T08:39:01.6086036Z             "deployments_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/deployments",
-2026-11-19T08:39:01.6086472Z             "description": null,
-2026-11-19T08:39:01.6086696Z             "disabled": false,
-2026-11-19T08:39:01.6087088Z             "downloads_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/downloads",
-2026-11-19T08:39:01.6093756Z             "events_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/events",
-2026-11-19T08:39:01.6094176Z             "fork": false,
-2026-11-19T08:39:01.6094381Z             "forks": 0,
-2026-11-19T08:39:01.6094568Z             "forks_count": 0,
-2026-11-19T08:39:01.6095154Z             "forks_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/forks",
-2026-11-19T08:39:01.6095618Z             "full_name": "andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
-2026-11-19T08:39:01.6096145Z             "git_commits_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/commits{/sha}",
-2026-11-19T08:39:01.6096816Z             "git_refs_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/refs{/sha}",
-2026-11-19T08:39:01.6097573Z             "git_tags_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/tags{/sha}",
-2026-11-19T08:39:01.6098080Z             "git_url": "git://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020.git",
-2026-11-19T08:39:01.6098434Z             "has_discussions": false,
-2026-11-19T08:39:01.6098647Z             "has_downloads": true,
-2026-11-19T08:39:01.6098878Z             "has_issues": true,
-2026-11-19T08:39:01.6099093Z             "has_pages": true,
-2026-11-19T08:39:01.6099296Z             "has_projects": true,
-2026-11-19T08:39:01.6099522Z             "has_pull_requests": true,
-2026-11-19T08:39:01.6099733Z             "has_wiki": false,
-2026-11-19T08:39:01.6100089Z             "homepage": "https://andi-frame.github.io/13523075_13523128_13523154_Tugas3_IF4020/",
-2026-11-19T08:39:01.6100626Z             "hooks_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/hooks",
-2026-11-19T08:39:01.6101208Z             "html_url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
-2026-11-19T08:39:01.6101518Z             "id": 1452496738,
-2026-11-19T08:39:01.6101851Z             "is_template": false,
-2026-11-19T08:39:01.6102275Z             "issue_comment_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/issues/comments{/number}",
-2026-11-19T08:39:01.6102953Z             "issue_events_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/issues/events{/number}",
-2026-11-19T08:39:01.6103628Z             "issues_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/issues{/number}",
-2026-11-19T08:39:01.6104242Z             "keys_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/keys{/key_id}",
-2026-11-19T08:39:01.6104807Z             "labels_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/labels{/name}",
-2026-11-19T08:39:01.6105198Z             "language": "Python",
-2026-11-19T08:39:01.6105569Z             "languages_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/languages",
-2026-11-19T08:39:01.6105982Z             "license": null,
-2026-11-19T08:39:01.6106169Z             "master_branch": "main",
-2026-11-19T08:39:01.6106525Z             "merges_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/merges",
-2026-11-19T08:39:01.6107109Z             "milestones_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/milestones{/number}",
-2026-11-19T08:39:01.6108559Z             "mirror_url": null,
-2026-11-19T08:39:01.6108803Z             "name": "13523075_13523128_13523154_Tugas3_IF4020",
-2026-11-19T08:39:01.6109081Z             "node_id": "R_kgDOVpNXYg",
-2026-11-19T08:39:01.6109583Z             "notifications_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/notifications{?since,all,participating}",
-2026-11-19T08:39:01.6110075Z             "open_issues": 0,
-2026-11-19T08:39:01.6110266Z             "open_issues_count": 0,
-2026-11-19T08:39:01.6110468Z             "owner": {
-2026-11-19T08:39:01.6110733Z               "avatar_url": "https://avatars.githubusercontent.com/u/132210040?v=4",
-2026-11-19T08:39:01.6111091Z               "email": "132210040+andi-frame@users.noreply.github.com",
-2026-11-19T08:39:01.6111447Z               "events_url": "https://api.github.com/users/andi-frame/events{/privacy}",
-2026-11-19T08:39:01.6111989Z               "followers_url": "https://api.github.com/users/andi-frame/followers",
-2026-11-19T08:39:01.6112408Z               "following_url": "https://api.github.com/users/andi-frame/following{/other_user}",
-2026-11-19T08:39:01.6112820Z               "gists_url": "https://api.github.com/users/andi-frame/gists{/gist_id}",
-2026-11-19T08:39:01.6113120Z               "gravatar_id": "",
-2026-11-19T08:39:01.6113347Z               "html_url": "https://github.com/andi-frame",
-2026-11-19T08:39:01.6113586Z               "id": 132210040,
-2026-11-19T08:39:01.6113774Z               "login": "andi-frame",
-2026-11-19T08:39:01.6113982Z               "name": "andi-frame",
-2026-11-19T08:39:01.6114187Z               "node_id": "U_kgDOB-FdeA",
-2026-11-19T08:39:01.6114480Z               "organizations_url": "https://api.github.com/users/andi-frame/orgs",
-2026-11-19T08:39:01.6114898Z               "received_events_url": "https://api.github.com/users/andi-frame/received_events",
-2026-11-19T08:39:01.6115299Z               "repos_url": "https://api.github.com/users/andi-frame/repos",
-2026-11-19T08:39:01.6115578Z               "site_admin": false,
-2026-11-19T08:39:01.6115894Z               "starred_url": "https://api.github.com/users/andi-frame/starred{/owner}{/repo}",
-2026-11-19T08:39:01.6116323Z               "subscriptions_url": "https://api.github.com/users/andi-frame/subscriptions",
-2026-11-19T08:39:01.6116645Z               "type": "User",
-2026-11-19T08:39:01.6116868Z               "url": "https://api.github.com/users/andi-frame",
-2026-11-19T08:39:01.6117125Z               "user_view_type": "public"
-2026-11-19T08:39:01.6117566Z             },
-2026-11-19T08:39:01.6117730Z             "private": true,
-2026-11-19T08:39:01.6117937Z             "pull_request_creation_policy": "all",
-2026-11-19T08:39:01.6118352Z             "pulls_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/pulls{/number}",
-2026-11-19T08:39:01.6118755Z             "pushed_at": 1795077513,
-2026-11-19T08:39:01.6119142Z             "releases_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/releases{/id}",
-2026-11-19T08:39:01.6119527Z             "size": 1139,
-2026-11-19T08:39:01.6119807Z             "ssh_url": "git@github.com:andi-frame/13523075_13523128_13523154_Tugas3_IF4020.git",
-2026-11-19T08:39:01.6120123Z             "stargazers": 0,
-2026-11-19T08:39:01.6120313Z             "stargazers_count": 0,
-2026-11-19T08:39:01.6120703Z             "stargazers_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/stargazers",
-2026-11-19T08:39:01.6121310Z             "statuses_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/statuses/{sha}",
-2026-11-19T08:39:01.6121918Z             "subscribers_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/subscribers",
-2026-11-19T08:39:01.6122540Z             "subscription_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/subscription",
-2026-11-19T08:39:01.6123056Z             "svn_url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
-2026-11-19T08:39:01.6123527Z             "tags_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/tags",
-2026-11-19T08:39:01.6124075Z             "teams_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/teams",
-2026-11-19T08:39:01.6124440Z             "topics": [],
-2026-11-19T08:39:01.6124807Z             "trees_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/trees{/sha}",
-2026-11-19T08:39:01.6125210Z             "updated_at": "2026-11-15T13:09:49Z",
-2026-11-19T08:39:01.6125553Z             "url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
-2026-11-19T08:39:01.6125897Z             "visibility": "private",
-2026-11-19T08:39:01.6126223Z             "watchers": 0,
-2026-11-19T08:39:01.6126408Z             "watchers_count": 0,
-2026-11-19T08:39:01.6126615Z             "web_commit_signoff_required": false
-2026-11-19T08:39:01.6126828Z           },
-2026-11-19T08:39:01.6126978Z           "sender": {
-2026-11-19T08:39:01.6127239Z             "avatar_url": "https://avatars.githubusercontent.com/u/76481845?v=4",
-2026-11-19T08:39:01.6127739Z             "events_url": "https://api.github.com/users/DaDecky/events{/privacy}",
-2026-11-19T08:39:01.6128113Z             "followers_url": "https://api.github.com/users/DaDecky/followers",
-2026-11-19T08:39:01.6128506Z             "following_url": "https://api.github.com/users/DaDecky/following{/other_user}",
-2026-11-19T08:39:01.6128795Z             "gists_url": "https://api.github.com/users/DaDecky/gists{/gist_id}",
-2026-11-19T08:39:01.6128986Z             "gravatar_id": "",
-2026-11-19T08:39:01.6129137Z             "html_url": "https://github.com/DaDecky",
-2026-11-19T08:39:01.6129290Z             "id": 76481845,
-2026-11-19T08:39:01.6129410Z             "login": "DaDecky",
-2026-11-19T08:39:01.6129548Z             "node_id": "MDQ6VXNlcjc2NDgxODQ1",
-2026-11-19T08:39:01.6129741Z             "organizations_url": "https://api.github.com/users/DaDecky/orgs",
-2026-11-19T08:39:01.6129993Z             "received_events_url": "https://api.github.com/users/DaDecky/received_events",
-2026-11-19T08:39:01.6130235Z             "repos_url": "https://api.github.com/users/DaDecky/repos",
-2026-11-19T08:39:01.6130409Z             "site_admin": false,
-2026-11-19T08:39:01.6130599Z             "starred_url": "https://api.github.com/users/DaDecky/starred{/owner}{/repo}",
-2026-11-19T08:39:01.6132922Z             "subscriptions_url": "https://api.github.com/users/DaDecky/subscriptions",
-2026-11-19T08:39:01.6133253Z             "type": "User",
-2026-11-19T08:39:01.6133466Z             "url": "https://api.github.com/users/DaDecky",
-2026-11-19T08:39:01.6133713Z             "user_view_type": "public"
-2026-11-19T08:39:01.6133913Z           }
-2026-11-19T08:39:01.6134060Z         },
-2026-11-19T08:39:01.6134219Z         "github_job": "publish",
-2026-11-19T08:39:01.6134424Z         "github_ref": "refs/tags/v0.1.0",
-2026-11-19T08:39:01.6134643Z         "github_ref_name": "v0.1.0",
-2026-11-19T08:39:01.6134858Z         "github_ref_protected": "false",
-2026-11-19T08:39:01.6135075Z         "github_ref_type": "tag",
-2026-11-19T08:39:01.6135358Z         "github_repository": "andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
-2026-11-19T08:39:01.6135669Z         "github_repository_id": "1452496738",
-2026-11-19T08:39:01.6135909Z         "github_repository_owner": "andi-frame",
-2026-11-19T08:39:01.6136162Z         "github_repository_owner_id": "132210040",
-2026-11-19T08:39:01.6136395Z         "github_run_attempt": "1",
-2026-11-19T08:39:01.6136598Z         "github_run_id": "44489338377",
-2026-11-19T08:39:01.6136808Z         "github_run_number": "7",
-2026-11-19T08:39:01.6137012Z         "github_runner_arch": "X64",
-2026-11-19T08:39:01.6137251Z         "github_runner_environment": "github-hosted",
-2026-11-19T08:39:01.6137594Z         "github_runner_image_os": "ubuntu24",
-2026-11-19T08:39:01.6137843Z         "github_runner_image_version": "20261111.370.1",
-2026-11-19T08:39:01.6138110Z         "github_runner_name": "GitHub Actions 1000000807",
-2026-11-19T08:39:01.6138359Z         "github_runner_os": "Linux",
-2026-11-19T08:39:01.6138656Z         "github_runner_tracking_id": "github_7ca8811d-3d0e-4669-b6e8-dbfb33b7c01a",
-2026-11-19T08:39:01.6138988Z         "github_server_url": "https://github.com",
-2026-11-19T08:39:01.6139233Z         "github_triggering_actor": "DaDecky",
-2026-11-19T08:39:01.6139468Z         "github_workflow": "Publish image",
-2026-11-19T08:39:01.6139919Z         "github_workflow_ref": "andi-frame/13523075_13523128_13523154_Tugas3_IF4020/.github/workflows/publish-image.yml@refs/tags/v0.1.0",
-2026-11-19T08:39:01.6140437Z         "github_workflow_sha": "59adcfcece92934b5acfa7e9d3d6bf268a7a7699",
-2026-11-19T08:39:01.6140777Z         "platform": "linux/amd64"
-2026-11-19T08:39:01.6141124Z       }
-2026-11-19T08:39:01.6141265Z     }
-2026-11-19T08:39:01.6141409Z   },
-2026-11-19T08:39:01.6141849Z   "buildx.build.ref": "builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1/builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10/ln2n0wykn563lr5xjr570hk8w",
-2026-11-19T08:39:01.6142539Z   "containerimage.config.digest": "sha256:842e3d950b2c2c68fe86ad8b77fd884848a06b2e4ad5eded7f2d258070781c5d",
-2026-11-19T08:39:01.6142951Z   "containerimage.descriptor": {
-2026-11-19T08:39:01.6143220Z     "mediaType": "application/vnd.oci.image.manifest.v1+json",
-2026-11-19T08:39:01.6143602Z     "digest": "sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620",
-2026-11-19T08:39:01.6143928Z     "size": 1435,
-2026-11-19T08:39:01.6144089Z     "platform": {
-2026-11-19T08:39:01.6144257Z       "architecture": "amd64",
-2026-11-19T08:39:01.6144441Z       "os": "linux"
-2026-11-19T08:39:01.6144597Z     }
-2026-11-19T08:39:01.6144733Z   },
-2026-11-19T08:39:01.6145041Z   "containerimage.digest": "sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620",
-2026-11-19T08:39:01.6145447Z   "image.name": "docker.io/andiframe/zhongli:0.1.0"
-2026-11-19T08:39:01.6145680Z }
-2026-11-19T08:39:01.6146055Z ##[endgroup]
-2026-11-19T08:39:01.6146335Z ##[group]Reference
-2026-11-19T08:39:01.6146733Z builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1/builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a10/ln2n0wykn563lr5xjr570hk8w
-2026-11-19T08:39:01.6147275Z ##[endgroup]
-2026-11-19T08:39:01.6147742Z ##[group]Check build summary support
-2026-11-19T08:39:01.6148073Z Build summary supported!
-2026-11-19T08:39:01.6148359Z ##[endgroup]
-2026-11-19T08:39:01.6200586Z ##[group]Run docker logout docker.io
-2026-11-19T08:39:01.6200771Z docker logout docker.io
-2026-11-19T08:39:01.6200934Z docker image rm -f "$REF" 2>/dev/null || true
-2026-11-19T08:39:01.6201101Z docker pull "$REF"
-2026-11-19T08:39:01.6201293Z docker run --rm --network none --user "$(id -u):$(id -g)" "$REF" --version
-2026-11-19T08:39:01.6201579Z docker run --rm --network none --user "$(id -u):$(id -g)" "$REF" --help > /dev/null
-2026-11-19T08:39:01.6218740Z shell: /usr/bin/bash -e {0}
-2026-11-19T08:39:01.6218997Z env:
-2026-11-19T08:39:01.6219334Z   REF: docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:01.6219720Z ##[endgroup]
-2026-11-19T08:39:01.6376347Z Removing login credentials for docker.io
-2026-11-19T08:39:02.0305570Z docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620: Pulling from andiframe/zhongli
-2026-11-19T08:39:02.0308799Z dd051e1b8c92: Pulling fs layer
-2026-11-19T08:39:02.0309134Z a2e654eaec5b: Pulling fs layer
-2026-11-19T08:39:02.0309456Z a3e87ca60ef5: Pulling fs layer
-2026-11-19T08:39:02.0309740Z f565bd0f3fa6: Pulling fs layer
-2026-11-19T08:39:02.0310111Z 200329ea9cba: Pulling fs layer
-2026-11-19T08:39:02.0310435Z 2afedb1d628a: Pulling fs layer
-2026-11-19T08:39:02.0310860Z f565bd0f3fa6: Waiting
-2026-11-19T08:39:02.0311157Z 200329ea9cba: Waiting
-2026-11-19T08:39:02.0311415Z 2afedb1d628a: Waiting
-2026-11-19T08:39:02.2351615Z a2e654eaec5b: Verifying Checksum
-2026-11-19T08:39:02.2351962Z a2e654eaec5b: Download complete
-2026-11-19T08:39:02.3196551Z a3e87ca60ef5: Verifying Checksum
-2026-11-19T08:39:02.3196957Z a3e87ca60ef5: Download complete
-2026-11-19T08:39:02.3237659Z dd051e1b8c92: Verifying Checksum
-2026-11-19T08:39:02.3238058Z dd051e1b8c92: Download complete
-2026-11-19T08:39:02.4168512Z f565bd0f3fa6: Verifying Checksum
-2026-11-19T08:39:02.4168841Z f565bd0f3fa6: Download complete
-2026-11-19T08:39:02.5454769Z 2afedb1d628a: Verifying Checksum
-2026-11-19T08:39:02.5455249Z 2afedb1d628a: Download complete
-2026-11-19T08:39:02.7094105Z 200329ea9cba: Verifying Checksum
-2026-11-19T08:39:02.7094444Z 200329ea9cba: Download complete
-2026-11-19T08:39:03.0696700Z dd051e1b8c92: Pull complete
-2026-11-19T08:39:04.5137717Z a2e654eaec5b: Pull complete
-2026-11-19T08:39:05.3848257Z a3e87ca60ef5: Pull complete
-2026-11-19T08:39:05.4103980Z f565bd0f3fa6: Pull complete
-2026-11-19T08:39:05.7036702Z 200329ea9cba: Pull complete
-2026-11-19T08:39:05.7175964Z 2afedb1d628a: Pull complete
-2026-11-19T08:39:05.7224948Z Digest: sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:05.7231540Z Status: Downloaded newer image for andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:05.7239252Z docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:06.0519170Z zhongli 0.1.0
-2026-11-19T08:39:06.4881936Z ##[group]Run {
-2026-11-19T08:39:06.4882088Z {
-2026-11-19T08:39:06.4882202Z   echo "### Published image"
-2026-11-19T08:39:06.4882342Z   echo
-2026-11-19T08:39:06.4882488Z   echo "| Program version | Source | Tag | Digest |"
-2026-11-19T08:39:06.4882679Z   echo "| --- | --- | --- | --- |"
-2026-11-19T08:39:06.4882914Z   echo "| 0.1.0 | \`$GITHUB_REF_NAME\` @ \`${GITHUB_SHA::12}\` | \`$IMAGE:$TAG\` | \`$DIGEST\` |"
-2026-11-19T08:39:06.4883137Z   echo
-2026-11-19T08:39:06.4883290Z   echo "Pin in \`ci/pipeline.env\`: \`IMAGE=$IMAGE@$DIGEST\`"
-2026-11-19T08:39:06.4883477Z } >> "$GITHUB_STEP_SUMMARY"
-2026-11-19T08:39:06.4899330Z shell: /usr/bin/bash -e {0}
-2026-11-19T08:39:06.4899470Z env:
-2026-11-19T08:39:06.4899580Z   IMAGE: docker.io/andiframe/zhongli
-2026-11-19T08:39:06.4899717Z   TAG: 0.1.0
-2026-11-19T08:39:06.4899928Z   DIGEST: sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
-2026-11-19T08:39:06.4900140Z ##[endgroup]
-2026-11-19T08:39:06.4998039Z Post job cleanup.
-2026-11-19T08:39:06.6541868Z ##[group]Generating build summary
-2026-11-19T08:39:06.6544293Z exporting build record to /home/runner/work/_temp/docker-actions-toolkit-hALMcx/export
-2026-11-19T08:39:06.6554885Z (node:3095) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-19T08:39:06.6555759Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-19T08:39:06.8576204Z [command]/usr/bin/docker buildx history export --builder builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1 --output /home/runner/work/_temp/docker-actions-toolkit-hALMcx/export/andi-frame~13523075_13523128_13523154_Tugas3_IF4020~LN2N0W.dockerbuild ln2n0wykn563lr5xjr570hk8w --finalize
-2026-11-19T08:39:07.0056376Z Build record written to /home/runner/work/_temp/docker-actions-toolkit-hALMcx/export/andi-frame~13523075_13523128_13523154_Tugas3_IF4020~LN2N0W.dockerbuild (47.7 KB)
-2026-11-19T08:39:07.0128385Z Uploading andi-frame~13523075_13523128_13523154_Tugas3_IF4020~LN2N0W.dockerbuild to blob storage
-2026-11-19T08:39:07.3046609Z Beginning upload of artifact content to blob storage
-2026-11-19T08:39:07.3102330Z (node:3095) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-2026-11-19T08:39:07.3108803Z Uploaded bytes 48847
-2026-11-19T08:39:07.5448984Z Finished uploading artifact content to blob storage!
-2026-11-19T08:39:07.5452779Z SHA256 hash of uploaded artifact is 015c10a750c1ce4c73a017b0538c2cf4a63585c3d595b02d7ee5d650bf64e10c
-2026-11-19T08:39:07.5453848Z Finalizing artifact upload
-2026-11-19T08:39:08.0084096Z Artifact successfully finalized (14511986676)
-2026-11-19T08:39:08.0085266Z Artifact download URL: https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489338377/artifacts/14511986676
-2026-11-19T08:39:08.0103147Z Writing summary
-2026-11-19T08:39:08.0112852Z ##[endgroup]
-2026-11-19T08:39:08.0113429Z ##[group]Removing temp folder /home/runner/work/_temp/docker-actions-toolkit-CgfDQU
-2026-11-19T08:39:08.0118264Z ##[endgroup]
-2026-11-19T08:39:08.0118811Z ##[group]Post cache
-2026-11-19T08:39:08.0119183Z State not set
-2026-11-19T08:39:08.0119666Z ##[endgroup]
-2026-11-19T08:39:08.0255019Z Post job cleanup.
-2026-11-19T08:39:08.2336103Z ##[group]Logout from docker.io
-2026-11-19T08:39:08.2353116Z (node:3215) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-19T08:39:08.2353946Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-19T08:39:08.2388175Z [command]/usr/bin/docker logout docker.io
-2026-11-19T08:39:08.2563134Z Removing login credentials for docker.io
-2026-11-19T08:39:08.2608574Z ##[endgroup]
-2026-11-19T08:39:08.2631832Z ##[group]Post cache
-2026-11-19T08:39:08.2637993Z State not set
-2026-11-19T08:39:08.2658232Z ##[endgroup]
-2026-11-19T08:39:08.2877963Z Post job cleanup.
-2026-11-19T08:39:08.4510043Z ##[group]Removing builder
-2026-11-19T08:39:08.4513177Z (node:3234) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-19T08:39:08.4513938Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-19T08:39:08.5701695Z [command]/usr/bin/docker buildx rm builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1
-2026-11-19T08:39:09.5828002Z builder-e798e44a-e9d2-4fd2-aa2d-f313a3b610a1 removed
-2026-11-19T08:39:09.5872173Z ##[endgroup]
-2026-11-19T08:39:09.5872726Z ##[group]Cleaning up certificates
-2026-11-19T08:39:09.5873582Z ##[endgroup]
-2026-11-19T08:39:09.5874112Z ##[group]Post cache
-2026-11-19T08:39:09.5876133Z State not set
-2026-11-19T08:39:09.5876527Z ##[endgroup]
-2026-11-19T08:39:09.6027669Z Post job cleanup.
-2026-11-19T08:39:09.6825818Z [command]/usr/bin/git version
-2026-11-19T08:39:09.6858456Z git version 2.56.1
-2026-11-19T08:39:09.6902878Z Temporarily overriding HOME='/home/runner/work/_temp/f61d1fe1-5068-4631-a0fc-dfd089484d75' before making global git config changes
-2026-11-19T08:39:09.6905085Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-19T08:39:09.6905959Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-19T08:39:09.6974062Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-19T08:39:09.7039649Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-19T08:39:09.7454454Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-19T08:39:09.7491674Z http.https://github.com/.extraheader
-2026-11-19T08:39:09.7502586Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-11-19T08:39:09.7544777Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-19T08:39:09.7774722Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-19T08:39:09.7803823Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-19T08:39:09.8170416Z Cleaning up orphan processes
-2026-11-19T08:39:09.8407692Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, docker/build-push-action@v6, docker/login-action@v3, docker/setup-buildx-action@v3. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-11-19T09:05:55.2794776Z   load: false
+2026-11-19T09:05:55.2794962Z   no-cache: false
+2026-11-19T09:05:55.2795153Z   pull: false
+2026-11-19T09:05:55.2797520Z   github-token: ***
+2026-11-19T09:05:55.2797734Z ##[endgroup]
+2026-11-19T09:05:55.5921928Z (node:2603) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T09:05:55.5941168Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T09:05:55.5961702Z ##[group]GitHub Actions runtime token ACs
+2026-11-19T09:05:55.5981026Z refs/heads/refs/tags/v0.1.1: read/write
+2026-11-19T09:05:55.5984011Z refs/heads/main: read
+2026-11-19T09:05:55.5984835Z ##[endgroup]
+2026-11-19T09:05:55.5985561Z ##[group]Docker info
+2026-11-19T09:05:55.6055452Z [command]/usr/bin/docker version
+2026-11-19T09:05:55.6461657Z Client: Docker Engine - Community
+2026-11-19T09:05:55.6463807Z  Version:           28.0.4
+2026-11-19T09:05:55.6464463Z  API version:       1.48
+2026-11-19T09:05:55.6465064Z  Go version:        go1.23.7
+2026-11-19T09:05:55.6465601Z  Git commit:        b8034c0
+2026-11-19T09:05:55.6466137Z  Built:             Tue Mar 25 15:07:16 2025
+2026-11-19T09:05:55.6466709Z  OS/Arch:           linux/amd64
+2026-11-19T09:05:55.6467239Z  Context:           default
+2026-11-19T09:05:55.6467632Z 
+2026-11-19T09:05:55.6467933Z Server: Docker Engine - Community
+2026-11-19T09:05:55.6468474Z  Engine:
+2026-11-19T09:05:55.6468915Z   Version:          28.0.4
+2026-11-19T09:05:55.6469519Z   API version:      1.48 (minimum version 1.24)
+2026-11-19T09:05:55.6470161Z   Go version:       go1.23.7
+2026-11-19T09:05:55.6471022Z   Git commit:       6430e49
+2026-11-19T09:05:55.6471576Z   Built:            Tue Mar 25 15:07:16 2025
+2026-11-19T09:05:55.6472169Z   OS/Arch:          linux/amd64
+2026-11-19T09:05:55.6472705Z   Experimental:     false
+2026-11-19T09:05:55.6473583Z  containerd:
+2026-11-19T09:05:55.6474032Z   Version:          v2.4.2
+2026-11-19T09:05:55.6474633Z   GitCommit:        b7a25261e029d68978bbf290df0a62fc819b3c51
+2026-11-19T09:05:55.6475299Z  runc:
+2026-11-19T09:05:55.6475731Z   Version:          1.5.3
+2026-11-19T09:05:55.6476241Z   GitCommit:        v1.5.3-0-g46365c62
+2026-11-19T09:05:55.6476798Z  docker-init:
+2026-11-19T09:05:55.6477256Z   Version:          0.19.0
+2026-11-19T09:05:55.6477762Z   GitCommit:        de40ad0
+2026-11-19T09:05:55.6631139Z [command]/usr/bin/docker info
+2026-11-19T09:05:55.7815842Z Client: Docker Engine - Community
+2026-11-19T09:05:55.7838934Z  Version:    28.0.4
+2026-11-19T09:05:55.7851018Z  Context:    default
+2026-11-19T09:05:55.7871030Z  Debug Mode: false
+2026-11-19T09:05:55.7903992Z  Plugins:
+2026-11-19T09:05:55.7915718Z   buildx: Docker Buildx (Docker Inc.)
+2026-11-19T09:05:55.7950689Z     Version:  v0.39.0
+2026-11-19T09:05:55.7956347Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+2026-11-19T09:05:55.7957156Z   compose: Docker Compose (Docker Inc.)
+2026-11-19T09:05:55.7957755Z     Version:  v2.38.2
+2026-11-19T09:05:55.7958366Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
+2026-11-19T09:05:55.7958935Z 
+2026-11-19T09:05:55.7959202Z Server:
+2026-11-19T09:05:55.7959648Z  Containers: 1
+2026-11-19T09:05:55.7960106Z   Running: 1
+2026-11-19T09:05:55.7960829Z   Paused: 0
+2026-11-19T09:05:55.7961331Z   Stopped: 0
+2026-11-19T09:05:55.7961792Z  Images: 7
+2026-11-19T09:05:55.7962251Z  Server Version: 28.0.4
+2026-11-19T09:05:55.7962822Z  Storage Driver: overlay2
+2026-11-19T09:05:55.7963386Z   Backing Filesystem: extfs
+2026-11-19T09:05:55.7971150Z   Supports d_type: true
+2026-11-19T09:05:55.7972216Z   Using metacopy: false
+2026-11-19T09:05:55.7972871Z   Native Overlay Diff: false
+2026-11-19T09:05:55.7973471Z   userxattr: false
+2026-11-19T09:05:55.7974016Z  Logging Driver: json-file
+2026-11-19T09:05:55.7974594Z  Cgroup Driver: systemd
+2026-11-19T09:05:55.7975168Z  Cgroup Version: 2
+2026-11-19T09:05:55.7975706Z  Plugins:
+2026-11-19T09:05:55.7976191Z   Volume: local
+2026-11-19T09:05:55.7976786Z   Network: bridge host ipvlan macvlan null overlay
+2026-11-19T09:05:55.7977684Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+2026-11-19T09:05:55.7978526Z  Swarm: inactive
+2026-11-19T09:05:55.7979078Z  Runtimes: io.containerd.runc.v2 runc
+2026-11-19T09:05:55.7979711Z  Default Runtime: runc
+2026-11-19T09:05:55.7980263Z  Init Binary: docker-init
+2026-11-19T09:05:55.7981329Z  containerd version: b7a25261e029d68978bbf290df0a62fc819b3c51
+2026-11-19T09:05:55.7982134Z  runc version: v1.5.3-0-g46365c62
+2026-11-19T09:05:55.7982749Z  init version: de40ad0
+2026-11-19T09:05:55.7983304Z  Security Options:
+2026-11-19T09:05:55.7983824Z   apparmor
+2026-11-19T09:05:55.7984299Z   seccomp
+2026-11-19T09:05:55.7984783Z    Profile: builtin
+2026-11-19T09:05:55.7985322Z   cgroupns
+2026-11-19T09:05:55.7985837Z  Kernel Version: 7.0.0-1017-azure
+2026-11-19T09:05:55.7986460Z  Operating System: Ubuntu 24.04.5 LTS
+2026-11-19T09:05:55.7987086Z  OSType: linux
+2026-11-19T09:05:55.7987611Z  Architecture: x86_64
+2026-11-19T09:05:55.7988138Z  CPUs: 2
+2026-11-19T09:05:55.7988624Z  Total Memory: 7.747GiB
+2026-11-19T09:05:55.7989175Z  Name: runnervmeozm8
+2026-11-19T09:05:55.7989742Z  ID: fb20f451-b428-4d99-946c-e0f8dfac42c1
+2026-11-19T09:05:55.7990610Z  Docker Root Dir: /var/lib/docker
+2026-11-19T09:05:55.7991301Z  Debug Mode: false
+2026-11-19T09:05:55.7991830Z  Username: andiframe
+2026-11-19T09:05:55.7992375Z  Experimental: false
+2026-11-19T09:05:55.7992914Z  Insecure Registries:
+2026-11-19T09:05:55.7993480Z   ::1/128
+2026-11-19T09:05:55.7993928Z   127.0.0.0/8
+2026-11-19T09:05:55.7994410Z  Live Restore Enabled: false
+2026-11-19T09:05:55.7994832Z 
+2026-11-19T09:05:55.7995492Z ##[endgroup]
+2026-11-19T09:05:55.7996274Z ##[group]Proxy configuration
+2026-11-19T09:05:55.7996892Z No proxy configuration found
+2026-11-19T09:05:55.7997678Z ##[endgroup]
+2026-11-19T09:05:55.8680952Z ##[group]Buildx version
+2026-11-19T09:05:55.8710100Z [command]/usr/bin/docker buildx version
+2026-11-19T09:05:55.9378208Z github.com/docker/buildx v0.39.0 360040a78d6113dc84e5d4dcdf0f438e1be7a41f
+2026-11-19T09:05:55.9422769Z ##[endgroup]
+2026-11-19T09:05:55.9423649Z ##[group]Builder info
+2026-11-19T09:05:56.1131732Z {
+2026-11-19T09:05:56.1157247Z   "nodes": [
+2026-11-19T09:05:56.1157882Z     {
+2026-11-19T09:05:56.1158786Z       "name": "builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0",
+2026-11-19T09:05:56.1180271Z       "endpoint": "unix:///var/run/docker.sock",
+2026-11-19T09:05:56.1200995Z       "status": "running",
+2026-11-19T09:05:56.1214056Z       "buildkitd-flags": "--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host",
+2026-11-19T09:05:56.1222751Z       "buildkit": "v0.34.2",
+2026-11-19T09:05:56.1241587Z       "platforms": "linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386",
+2026-11-19T09:05:56.1257102Z       "features": {
+2026-11-19T09:05:56.1275785Z         "Automatically load images to the Docker Engine image store": true,
+2026-11-19T09:05:56.1290989Z         "Cache export": true,
+2026-11-19T09:05:56.1300301Z         "Direct push": true,
+2026-11-19T09:05:56.1322043Z         "Docker exporter": true,
+2026-11-19T09:05:56.1325449Z         "Multi-platform build": true,
+2026-11-19T09:05:56.1351015Z         "OCI exporter": true
+2026-11-19T09:05:56.1361151Z       },
+2026-11-19T09:05:56.1381263Z       "labels": {
+2026-11-19T09:05:56.1391895Z         "org.mobyproject.buildkit.worker.executor": "oci",
+2026-11-19T09:05:56.1408153Z         "org.mobyproject.buildkit.worker.hostname": "a1d352dfbbe7",
+2026-11-19T09:05:56.1412959Z         "org.mobyproject.buildkit.worker.network": "host",
+2026-11-19T09:05:56.1432086Z         "org.mobyproject.buildkit.worker.oci.process-mode": "sandbox",
+2026-11-19T09:05:56.1433456Z         "org.mobyproject.buildkit.worker.selinux.enabled": "false",
+2026-11-19T09:05:56.1434515Z         "org.mobyproject.buildkit.worker.snapshotter": "overlayfs"
+2026-11-19T09:05:56.1435392Z       },
+2026-11-19T09:05:56.1435918Z       "gcPolicy": [
+2026-11-19T09:05:56.1436519Z         {
+2026-11-19T09:05:56.1437068Z           "all": false,
+2026-11-19T09:05:56.1437640Z           "filter": [
+2026-11-19T09:05:56.1438685Z             "type==source.local type==exec.cachemount type==source.git.checkout"
+2026-11-19T09:05:56.1439901Z           ],
+2026-11-19T09:05:56.1440709Z           "keepDuration": "48h0m0s",
+2026-11-19T09:05:56.1441474Z           "maxUsedSpace": "488.3MiB"
+2026-11-19T09:05:56.1442178Z         },
+2026-11-19T09:05:56.1442762Z         {
+2026-11-19T09:05:56.1443325Z           "all": false,
+2026-11-19T09:05:56.1443985Z           "keepDuration": "1440h0m0s",
+2026-11-19T09:05:56.1444729Z           "reservedSpace": "7.451GiB",
+2026-11-19T09:05:56.1445523Z           "maxUsedSpace": "54.02GiB",
+2026-11-19T09:05:56.1446491Z           "minFreeSpace": "13.97GiB"
+2026-11-19T09:05:56.1447273Z         },
+2026-11-19T09:05:56.1447822Z         {
+2026-11-19T09:05:56.1448411Z           "all": false,
+2026-11-19T09:05:56.1449093Z           "reservedSpace": "7.451GiB",
+2026-11-19T09:05:56.1449842Z           "maxUsedSpace": "54.02GiB",
+2026-11-19T09:05:56.1463809Z           "minFreeSpace": "13.97GiB"
+2026-11-19T09:05:56.1464524Z         },
+2026-11-19T09:05:56.1465050Z         {
+2026-11-19T09:05:56.1465609Z           "all": true,
+2026-11-19T09:05:56.1466290Z           "reservedSpace": "7.451GiB",
+2026-11-19T09:05:56.1467045Z           "maxUsedSpace": "54.02GiB",
+2026-11-19T09:05:56.1467773Z           "minFreeSpace": "13.97GiB"
+2026-11-19T09:05:56.1468447Z         }
+2026-11-19T09:05:56.1469142Z       ]
+2026-11-19T09:05:56.1469662Z     }
+2026-11-19T09:05:56.1470202Z   ],
+2026-11-19T09:05:56.1471104Z   "name": "builder-3999fbf2-cc1c-4508-96ca-bf79a350589a",
+2026-11-19T09:05:56.1471904Z   "driver": "docker-container",
+2026-11-19T09:05:56.1472615Z   "lastActivity": "2026-11-19T09:05:49.000Z"
+2026-11-19T09:05:56.1473540Z }
+2026-11-19T09:05:56.1474401Z ##[endgroup]
+2026-11-19T09:05:56.2373413Z [command]/usr/bin/docker buildx build --build-arg VERSION=0.1.1 --build-arg REVISION=00b9b1e474de1be818cb9faf9f1179168c9aea2c --iidfile /home/runner/work/_temp/docker-actions-toolkit-90u8yX/build-iidfile-3fbc4075f4.txt --platform linux/amd64 --attest type=provenance,disabled=true --tag docker.io/andiframe/zhongli:0.1.1 --metadata-file /home/runner/work/_temp/docker-actions-toolkit-90u8yX/build-metadata-16d6176852.json --push .
+2026-11-19T09:05:56.5746572Z #0 building with "builder-3999fbf2-cc1c-4508-96ca-bf79a350589a" instance using docker-container driver
+2026-11-19T09:05:56.5747326Z 
+2026-11-19T09:05:56.5747671Z #1 [internal] load build definition from Dockerfile
+2026-11-19T09:05:56.5748196Z #1 transferring dockerfile: 1.32kB done
+2026-11-19T09:05:56.5748713Z #1 DONE 0.0s
+2026-11-19T09:05:56.5749097Z 
+2026-11-19T09:05:56.5749479Z #2 [auth] docker/dockerfile:pull token for registry-1.docker.io
+2026-11-19T09:05:56.5749943Z #2 DONE 0.0s
+2026-11-19T09:05:56.5750092Z 
+2026-11-19T09:05:56.5750814Z #3 resolve image config for docker-image://docker.io/docker/dockerfile:1
+2026-11-19T09:05:56.7823425Z #3 DONE 0.4s
+2026-11-19T09:05:56.8882656Z 
+2026-11-19T09:05:56.8885918Z #4 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+2026-11-19T09:05:56.8890238Z #4 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
+2026-11-19T09:05:56.8892568Z #4 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 14.28MB / 14.28MB 0.1s done
+2026-11-19T09:05:57.0414632Z #4 extracting sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62
+2026-11-19T09:05:57.0477095Z #4 extracting sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 0.2s done
+2026-11-19T09:05:57.0477945Z #4 DONE 0.3s
+2026-11-19T09:05:57.2800386Z 
+2026-11-19T09:05:57.2801219Z #5 [auth] library/python:pull token for registry-1.docker.io
+2026-11-19T09:05:57.2801955Z #5 DONE 0.0s
+2026-11-19T09:05:57.2802157Z 
+2026-11-19T09:05:57.2802538Z #6 [internal] load metadata for docker.io/library/python:3.13-slim-bookworm
+2026-11-19T09:05:57.4087837Z #6 DONE 0.3s
+2026-11-19T09:05:57.4089606Z 
+2026-11-19T09:05:57.4090097Z #7 [internal] load metadata for ghcr.io/astral-sh/uv:0.13.4
+2026-11-19T09:05:57.5372226Z #7 DONE 0.4s
+2026-11-19T09:05:57.5372519Z 
+2026-11-19T09:05:57.5372693Z #8 [internal] load .dockerignore
+2026-11-19T09:05:57.5373189Z #8 transferring context: 184B done
+2026-11-19T09:05:57.5373686Z #8 DONE 0.0s
+2026-11-19T09:05:57.6429510Z 
+2026-11-19T09:05:57.6431369Z #9 [internal] load build context
+2026-11-19T09:05:57.6433724Z #9 transferring context: 153.41kB 0.0s done
+2026-11-19T09:05:57.6435642Z #9 DONE 0.1s
+2026-11-19T09:05:57.6436029Z 
+2026-11-19T09:05:57.6438235Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
+2026-11-19T09:05:57.6439810Z #10 resolve docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72 done
+2026-11-19T09:05:57.6441434Z #10 sha256:f565bd0f3fa6077930c1eaa4a21872eb5bc5590bf2b1d2753845ed21d10704bf 248B / 248B 0.0s done
+2026-11-19T09:05:57.7484968Z #10 ...
+2026-11-19T09:05:57.7486860Z 
+2026-11-19T09:05:57.7487838Z #11 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b
+2026-11-19T09:05:57.7489251Z #11 resolve ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b done
+2026-11-19T09:05:57.7491145Z #11 sha256:a7a4c1c28acfa0600954ba762985b04fd8db0ecd249573405f86e458150e26a0 96B / 96B 0.1s done
+2026-11-19T09:05:57.7492467Z #11 sha256:78fa515da939df1a7735518cd8483877c98aa632744a890e35c0b8c94edae9a6 19.40MB / 19.40MB 0.2s done
+2026-11-19T09:05:57.7493332Z #11 DONE 0.2s
+2026-11-19T09:05:57.7493531Z 
+2026-11-19T09:05:57.7494293Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
+2026-11-19T09:05:57.7495808Z #10 sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2 12.61MB / 12.61MB 0.1s done
+2026-11-19T09:05:57.7497180Z #10 sha256:a2e654eaec5b2906de585b934a48a3240b92979100174090795933855f5436b3 3.34MB / 3.34MB 0.1s done
+2026-11-19T09:05:57.9571635Z #10 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 28.25MB / 28.25MB 0.2s done
+2026-11-19T09:05:58.1767036Z #10 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3
+2026-11-19T09:05:58.1767861Z #10 ...
+2026-11-19T09:05:58.1768537Z 
+2026-11-19T09:05:58.1769643Z #11 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b
+2026-11-19T09:05:58.1771262Z #11 extracting sha256:78fa515da939df1a7735518cd8483877c98aa632744a890e35c0b8c94edae9a6 0.4s done
+2026-11-19T09:05:58.1772107Z #11 DONE 0.6s
+2026-11-19T09:05:58.3397493Z 
+2026-11-19T09:05:58.3398810Z #11 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.13.4@sha256:9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b
+2026-11-19T09:05:58.3399967Z #11 extracting sha256:a7a4c1c28acfa0600954ba762985b04fd8db0ecd249573405f86e458150e26a0 done
+2026-11-19T09:05:58.3403863Z #11 DONE 0.6s
+2026-11-19T09:05:58.3404281Z 
+2026-11-19T09:05:58.3404904Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
+2026-11-19T09:05:58.8821998Z #10 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 1.1s done
+2026-11-19T09:05:58.8824553Z #10 DONE 1.3s
+2026-11-19T09:05:58.9969313Z 
+2026-11-19T09:05:58.9971768Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
+2026-11-19T09:05:58.9973732Z #10 extracting sha256:a2e654eaec5b2906de585b934a48a3240b92979100174090795933855f5436b3 0.1s done
+2026-11-19T09:05:58.9974729Z #10 DONE 1.5s
+2026-11-19T09:05:59.1473311Z 
+2026-11-19T09:05:59.1474706Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
+2026-11-19T09:05:59.1476658Z #10 extracting sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2
+2026-11-19T09:05:59.4279579Z #10 extracting sha256:a3e87ca60ef5542058ba2bbf58ae97b73da916ff72012fbbfdd48161691b56d2 0.4s done
+2026-11-19T09:05:59.4282957Z #10 DONE 1.9s
+2026-11-19T09:05:59.5848430Z 
+2026-11-19T09:05:59.5856034Z #10 [build 1/7] FROM docker.io/library/python:3.13-slim-bookworm@sha256:a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72
+2026-11-19T09:05:59.5857574Z #10 extracting sha256:f565bd0f3fa6077930c1eaa4a21872eb5bc5590bf2b1d2753845ed21d10704bf done
+2026-11-19T09:05:59.5858758Z #10 DONE 1.9s
+2026-11-19T09:05:59.5859360Z 
+2026-11-19T09:05:59.5859811Z #12 [build 2/7] COPY --from=uv /uv /usr/local/bin/uv
+2026-11-19T09:06:00.2954644Z #12 DONE 0.9s
+2026-11-19T09:06:00.4698541Z 
+2026-11-19T09:06:00.4704224Z #13 [build 3/7] WORKDIR /src
+2026-11-19T09:06:00.4705069Z #13 DONE 0.0s
+2026-11-19T09:06:00.4705533Z 
+2026-11-19T09:06:00.4706101Z #14 [build 4/7] COPY pyproject.toml uv.lock .python-version README.md ./
+2026-11-19T09:06:00.4706951Z #14 DONE 0.0s
+2026-11-19T09:06:00.4707323Z 
+2026-11-19T09:06:00.4707807Z #15 [build 5/7] RUN uv sync --locked --no-dev --no-install-project
+2026-11-19T09:06:00.5414520Z #15 0.222 Using CPython 3.13.18 interpreter at: /usr/local/bin/python3.13
+2026-11-19T09:06:00.7553505Z #15 0.223 Creating virtual environment at: /opt/venv
+2026-11-19T09:06:00.7554147Z #15 0.227 Resolved 14 packages in 1ms
+2026-11-19T09:06:00.7554477Z #15 0.286 Downloading cryptography (4.5MiB)
+2026-11-19T09:06:00.8049603Z #15 0.486  Downloaded cryptography
+2026-11-19T09:06:00.9892809Z #15 0.486 Prepared 3 packages in 258ms
+2026-11-19T09:06:00.9893452Z #15 0.518 Installed 3 packages in 30ms
+2026-11-19T09:06:01.1699691Z #15 0.851 Bytecode compiled 105 files in 332ms
+2026-11-19T09:06:01.1700563Z #15 0.851  + cffi==2.1.1
+2026-11-19T09:06:01.3623313Z #15 0.851  + cryptography==50.0.2
+2026-11-19T09:06:01.3624214Z #15 0.851  + pycparser==3.12
+2026-11-19T09:06:01.3625343Z #15 DONE 0.9s
+2026-11-19T09:06:01.3625779Z 
+2026-11-19T09:06:01.3626090Z #16 [build 6/7] COPY src ./src
+2026-11-19T09:06:01.3633432Z #16 DONE 0.0s
+2026-11-19T09:06:01.3633681Z 
+2026-11-19T09:06:01.3633968Z #17 [build 7/7] RUN uv sync --locked --no-dev --no-editable
+2026-11-19T09:06:01.3965027Z #17 0.182 Resolved 14 packages in 0.93ms
+2026-11-19T09:06:01.4973319Z #17 0.184    Building zhongli @ file:///src
+2026-11-19T09:06:01.4974756Z #17 0.186 warning: `build_system.requires = ["uv-build>=0.12.7,<0.13.0"]` does not contain the current uv version 0.13.4
+2026-11-19T09:06:01.4975879Z #17 0.193       Built zhongli @ file:///src
+2026-11-19T09:06:01.4976668Z #17 0.200 Prepared 1 package in 16ms
+2026-11-19T09:06:01.4977297Z #17 0.208 Installed 1 package in 7ms
+2026-11-19T09:06:01.4977925Z #17 0.274 Bytecode compiled 125 files in 66ms
+2026-11-19T09:06:01.4978461Z #17 0.274  + zhongli==0.1.1 (from file:///src)
+2026-11-19T09:06:01.4978930Z #17 DONE 0.3s
+2026-11-19T09:06:01.6084322Z 
+2026-11-19T09:06:01.6085667Z #18 [stage-2 2/3] COPY --from=build /opt/venv /opt/venv
+2026-11-19T09:06:01.6086306Z #18 DONE 0.1s
+2026-11-19T09:06:01.7731580Z 
+2026-11-19T09:06:01.7736036Z #19 [stage-2 3/3] WORKDIR /work
+2026-11-19T09:06:01.7736722Z #19 DONE 0.0s
+2026-11-19T09:06:01.7737182Z 
+2026-11-19T09:06:01.7737473Z #20 exporting to image
+2026-11-19T09:06:01.7737995Z #20 exporting layers
+2026-11-19T09:06:02.2429511Z #20 exporting layers 0.6s done
+2026-11-19T09:06:02.4139423Z #20 ...
+2026-11-19T09:06:02.4139872Z 
+2026-11-19T09:06:02.4140265Z #21 [auth] andiframe/zhongli:pull,push token for registry-1.docker.io
+2026-11-19T09:06:02.4141208Z #21 DONE 0.0s
+2026-11-19T09:06:02.4141399Z 
+2026-11-19T09:06:02.4141799Z #20 exporting to image
+2026-11-19T09:06:02.4142347Z #20 exporting manifest sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b done
+2026-11-19T09:06:02.4143191Z #20 exporting config sha256:7f15e81edcd1f4089dadf762217b687d32f6461aa59f7f4176262fc2a6091c6b done
+2026-11-19T09:06:02.4143780Z #20 pushing layers
+2026-11-19T09:06:03.2014525Z #20 pushing layers 0.9s done
+2026-11-19T09:06:03.2015629Z #20 pushing manifest for docker.io/andiframe/zhongli:0.1.1@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:04.6350167Z #20 pushing manifest for docker.io/andiframe/zhongli:0.1.1@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b 1.4s done
+2026-11-19T09:06:04.6353923Z #20 DONE 3.0s
+2026-11-19T09:06:04.6647220Z 
+2026-11-19T09:06:04.6647635Z #22 resolving provenance for metadata file
+2026-11-19T09:06:04.6648215Z #22 DONE 0.0s
+2026-11-19T09:06:04.6795563Z ##[group]ImageID
+2026-11-19T09:06:04.6796269Z sha256:7f15e81edcd1f4089dadf762217b687d32f6461aa59f7f4176262fc2a6091c6b
+2026-11-19T09:06:04.6798546Z ##[endgroup]
+2026-11-19T09:06:04.6801796Z ##[group]Digest
+2026-11-19T09:06:04.6802671Z sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:04.6803908Z ##[endgroup]
+2026-11-19T09:06:04.6804802Z ##[group]Metadata
+2026-11-19T09:06:04.6805310Z {
+2026-11-19T09:06:04.6805748Z   "buildx.build.provenance": {
+2026-11-19T09:06:04.6806281Z     "builder": {
+2026-11-19T09:06:04.6807338Z       "id": ""
+2026-11-19T09:06:04.6807866Z     },
+2026-11-19T09:06:04.6808504Z     "buildType": "https://mobyproject.org/buildkit@v1",
+2026-11-19T09:06:04.6809269Z     "materials": [
+2026-11-19T09:06:04.6809845Z       {
+2026-11-19T09:06:04.6810842Z         "uri": "pkg:docker/docker/dockerfile@1",
+2026-11-19T09:06:04.6811510Z         "digest": {
+2026-11-19T09:06:04.6812260Z           "sha256": "4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e"
+2026-11-19T09:06:04.6813160Z         }
+2026-11-19T09:06:04.6813606Z       },
+2026-11-19T09:06:04.6814091Z       {
+2026-11-19T09:06:04.6814819Z         "uri": "pkg:docker/python@3.13-slim-bookworm?platform=linux%2Famd64",
+2026-11-19T09:06:04.6815642Z         "digest": {
+2026-11-19T09:06:04.6816494Z           "sha256": "a5a7017efc5969e00ae2b91c8eb0631049a569652aa4ffc4501769049ae45c72"
+2026-11-19T09:06:04.6818876Z         }
+2026-11-19T09:06:04.6819293Z       },
+2026-11-19T09:06:04.6819670Z       {
+2026-11-19T09:06:04.6820255Z         "uri": "pkg:docker/ghcr.io/astral-sh/uv@0.13.4?platform=linux%2Famd64",
+2026-11-19T09:06:04.6821339Z         "digest": {
+2026-11-19T09:06:04.6822038Z           "sha256": "9f130421e930bfbdc563c00740466603f8723158e90297d07957c2294640262b"
+2026-11-19T09:06:04.6822889Z         }
+2026-11-19T09:06:04.6823333Z       }
+2026-11-19T09:06:04.6823725Z     ],
+2026-11-19T09:06:04.6824105Z     "invocation": {
+2026-11-19T09:06:04.6824524Z       "configSource": {
+2026-11-19T09:06:04.6824972Z         "entryPoint": "Dockerfile"
+2026-11-19T09:06:04.6825499Z       },
+2026-11-19T09:06:04.6825955Z       "parameters": {
+2026-11-19T09:06:04.6826487Z         "frontend": "gateway.v0",
+2026-11-19T09:06:04.6826989Z         "args": {
+2026-11-19T09:06:04.6827558Z           "build-arg:REVISION": "00b9b1e474de1be818cb9faf9f1179168c9aea2c",
+2026-11-19T09:06:04.6828275Z           "build-arg:VERSION": "0.1.1",
+2026-11-19T09:06:04.6828891Z           "cmdline": "docker/dockerfile:1",
+2026-11-19T09:06:04.6829586Z           "source": "docker/dockerfile:1"
+2026-11-19T09:06:04.6830155Z         },
+2026-11-19T09:06:04.6831029Z         "locals": [
+2026-11-19T09:06:04.6831530Z           {
+2026-11-19T09:06:04.6832021Z             "name": "context"
+2026-11-19T09:06:04.6832526Z           },
+2026-11-19T09:06:04.6832958Z           {
+2026-11-19T09:06:04.6833407Z             "name": "dockerfile"
+2026-11-19T09:06:04.6833928Z           }
+2026-11-19T09:06:04.6834351Z         ],
+2026-11-19T09:06:04.6834754Z         "root": {
+2026-11-19T09:06:04.6835267Z           "configSource": {
+2026-11-19T09:06:04.6836049Z             "path": "Dockerfile"
+2026-11-19T09:06:04.6836666Z           },
+2026-11-19T09:06:04.6837076Z           "request": {
+2026-11-19T09:06:04.6837485Z             "args": {
+2026-11-19T09:06:04.6838071Z               "build-arg:REVISION": "00b9b1e474de1be818cb9faf9f1179168c9aea2c",
+2026-11-19T09:06:04.6838808Z               "build-arg:VERSION": "0.1.1",
+2026-11-19T09:06:04.6839343Z               "vcs:localdir:context": ".",
+2026-11-19T09:06:04.6839946Z               "vcs:localdir:dockerfile": ".",
+2026-11-19T09:06:04.6840875Z               "vcs:revision": "00b9b1e474de1be818cb9faf9f1179168c9aea2c",
+2026-11-19T09:06:04.6841849Z               "vcs:source": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020"
+2026-11-19T09:06:04.6842660Z             }
+2026-11-19T09:06:04.6843047Z           }
+2026-11-19T09:06:04.6843438Z         },
+2026-11-19T09:06:04.6844024Z         "compatibilityVersion": 30
+2026-11-19T09:06:04.6844668Z       },
+2026-11-19T09:06:04.6856316Z       "environment": {
+2026-11-19T09:06:04.6858200Z         "github_actor": "DaDecky",
+2026-11-19T09:06:04.6863635Z         "github_actor_id": "76481845",
+2026-11-19T09:06:04.6864334Z         "github_event_name": "push",
+2026-11-19T09:06:04.6864955Z         "github_event_payload": {
+2026-11-19T09:06:04.6865665Z           "after": "5d6d6d020e6c9f4d87976bae52b5ffd310f9e3ff",
+2026-11-19T09:06:04.6866381Z           "base_ref": null,
+2026-11-19T09:06:04.6867032Z           "before": "0000000000000000000000000000000000000000",
+2026-11-19T09:06:04.6867734Z           "commits": [],
+2026-11-19T09:06:04.6868706Z           "compare": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/compare/v0.1.1",
+2026-11-19T09:06:04.6869974Z           "created": true,
+2026-11-19T09:06:04.6870751Z           "deleted": false,
+2026-11-19T09:06:04.6871308Z           "forced": false,
+2026-11-19T09:06:04.6871891Z           "head_commit": {
+2026-11-19T09:06:04.6872444Z             "author": {
+2026-11-19T09:06:04.6873007Z               "email": "mdikiisra98@gmail.com",
+2026-11-19T09:06:04.6873630Z               "name": "DaDecky",
+2026-11-19T09:06:04.6874216Z               "username": "DaDecky"
+2026-11-19T09:06:04.6874775Z             },
+2026-11-19T09:06:04.6875236Z             "committer": {
+2026-11-19T09:06:04.6875790Z               "email": "mdikiisra98@gmail.com",
+2026-11-19T09:06:04.6876748Z               "name": "DaDecky",
+2026-11-19T09:06:04.6877310Z               "username": "DaDecky"
+2026-11-19T09:06:04.6877849Z             },
+2026-11-19T09:06:04.6878332Z             "distinct": true,
+2026-11-19T09:06:04.6878978Z             "id": "00b9b1e474de1be818cb9faf9f1179168c9aea2c",
+2026-11-19T09:06:04.6879936Z             "message": "fix: keep large trust stores usable and measure complete CLI commands",
+2026-11-19T09:06:04.6881168Z             "timestamp": "2026-11-19T16:05:20+07:00",
+2026-11-19T09:06:04.6881949Z             "tree_id": "2cdbbd9957fe45924bfa992062dffc0e8107ff69",
+2026-11-19T09:06:04.6883259Z             "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/commit/00b9b1e474de1be818cb9faf9f1179168c9aea2c"
+2026-11-19T09:06:04.6884423Z           },
+2026-11-19T09:06:04.6884921Z           "pusher": {
+2026-11-19T09:06:04.6885544Z             "email": "76481845+DaDecky@users.noreply.github.com",
+2026-11-19T09:06:04.6886438Z             "name": "DaDecky"
+2026-11-19T09:06:04.6887051Z           },
+2026-11-19T09:06:04.6887561Z           "ref": "refs/tags/v0.1.1",
+2026-11-19T09:06:04.6888243Z           "repository": {
+2026-11-19T09:06:04.6888786Z             "allow_forking": true,
+2026-11-19T09:06:04.6889849Z             "archive_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/{archive_format}{/ref}",
+2026-11-19T09:06:04.6891210Z             "archived": false,
+2026-11-19T09:06:04.6892273Z             "assignees_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/assignees{/user}",
+2026-11-19T09:06:04.6894049Z             "blobs_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/blobs{/sha}",
+2026-11-19T09:06:04.6896175Z             "branches_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/branches{/branch}",
+2026-11-19T09:06:04.6898871Z             "clone_url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020.git",
+2026-11-19T09:06:04.6900282Z             "collaborators_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/collaborators{/collaborator}",
+2026-11-19T09:06:04.6902141Z             "comments_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/comments{/number}",
+2026-11-19T09:06:04.6903536Z             "commits_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/commits{/sha}",
+2026-11-19T09:06:04.6904925Z             "compare_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/compare/{base}...{head}",
+2026-11-19T09:06:04.6906367Z             "contents_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/contents/{+path}",
+2026-11-19T09:06:04.6907765Z             "contributors_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/contributors",
+2026-11-19T09:06:04.6908755Z             "created_at": 1794305487,
+2026-11-19T09:06:04.6909264Z             "default_branch": "main",
+2026-11-19T09:06:04.6910153Z             "deployments_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/deployments",
+2026-11-19T09:06:04.6912529Z             "description": null,
+2026-11-19T09:06:04.6913054Z             "disabled": false,
+2026-11-19T09:06:04.6914010Z             "downloads_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/downloads",
+2026-11-19T09:06:04.6915323Z             "events_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/events",
+2026-11-19T09:06:04.6916197Z             "fork": false,
+2026-11-19T09:06:04.6916646Z             "forks": 0,
+2026-11-19T09:06:04.6917114Z             "forks_count": 0,
+2026-11-19T09:06:04.6917904Z             "forks_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/forks",
+2026-11-19T09:06:04.6919182Z             "full_name": "andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
+2026-11-19T09:06:04.6921260Z             "git_commits_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/commits{/sha}",
+2026-11-19T09:06:04.6922939Z             "git_refs_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/refs{/sha}",
+2026-11-19T09:06:04.6924471Z             "git_tags_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/tags{/sha}",
+2026-11-19T09:06:04.6925737Z             "git_url": "git://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020.git",
+2026-11-19T09:06:04.6926576Z             "has_discussions": false,
+2026-11-19T09:06:04.6927109Z             "has_downloads": true,
+2026-11-19T09:06:04.6927608Z             "has_issues": true,
+2026-11-19T09:06:04.6928101Z             "has_pages": true,
+2026-11-19T09:06:04.6928610Z             "has_projects": true,
+2026-11-19T09:06:04.6929131Z             "has_pull_requests": true,
+2026-11-19T09:06:04.6929653Z             "has_wiki": false,
+2026-11-19T09:06:04.6931094Z             "homepage": "https://andi-frame.github.io/13523075_13523128_13523154_Tugas3_IF4020/",
+2026-11-19T09:06:04.6932340Z             "hooks_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/hooks",
+2026-11-19T09:06:04.6946257Z             "html_url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
+2026-11-19T09:06:04.6947335Z             "id": 1452496738,
+2026-11-19T09:06:04.6947827Z             "is_template": false,
+2026-11-19T09:06:04.6949083Z             "issue_comment_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/issues/comments{/number}",
+2026-11-19T09:06:04.6951102Z             "issue_events_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/issues/events{/number}",
+2026-11-19T09:06:04.6952618Z             "issues_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/issues{/number}",
+2026-11-19T09:06:04.6953979Z             "keys_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/keys{/key_id}",
+2026-11-19T09:06:04.6955333Z             "labels_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/labels{/name}",
+2026-11-19T09:06:04.6956383Z             "language": "Python",
+2026-11-19T09:06:04.6957309Z             "languages_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/languages",
+2026-11-19T09:06:04.6958271Z             "license": null,
+2026-11-19T09:06:04.6958764Z             "master_branch": "main",
+2026-11-19T09:06:04.6959667Z             "merges_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/merges",
+2026-11-19T09:06:04.6961350Z             "milestones_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/milestones{/number}",
+2026-11-19T09:06:04.6962401Z             "mirror_url": null,
+2026-11-19T09:06:04.6962925Z             "name": "13523075_13523128_13523154_Tugas3_IF4020",
+2026-11-19T09:06:04.6963578Z             "node_id": "R_kgDOVpNXYg",
+2026-11-19T09:06:04.6964854Z             "notifications_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/notifications{?since,all,participating}",
+2026-11-19T09:06:04.6966086Z             "open_issues": 0,
+2026-11-19T09:06:04.6966587Z             "open_issues_count": 0,
+2026-11-19T09:06:04.6967085Z             "owner": {
+2026-11-19T09:06:04.6967750Z               "avatar_url": "https://avatars.githubusercontent.com/u/132210040?v=4",
+2026-11-19T09:06:04.6968618Z               "email": "132210040+andi-frame@users.noreply.github.com",
+2026-11-19T09:06:04.6969516Z               "events_url": "https://api.github.com/users/andi-frame/events{/privacy}",
+2026-11-19T09:06:04.6970672Z               "followers_url": "https://api.github.com/users/andi-frame/followers",
+2026-11-19T09:06:04.6972022Z               "following_url": "https://api.github.com/users/andi-frame/following{/other_user}",
+2026-11-19T09:06:04.6973070Z               "gists_url": "https://api.github.com/users/andi-frame/gists{/gist_id}",
+2026-11-19T09:06:04.6973819Z               "gravatar_id": "",
+2026-11-19T09:06:04.6974418Z               "html_url": "https://github.com/andi-frame",
+2026-11-19T09:06:04.6975179Z               "id": 132210040,
+2026-11-19T09:06:04.6975568Z               "login": "andi-frame",
+2026-11-19T09:06:04.6975997Z               "name": "andi-frame",
+2026-11-19T09:06:04.6976421Z               "node_id": "U_kgDOB-FdeA",
+2026-11-19T09:06:04.6977179Z               "organizations_url": "https://api.github.com/users/andi-frame/orgs",
+2026-11-19T09:06:04.6979060Z               "received_events_url": "https://api.github.com/users/andi-frame/received_events",
+2026-11-19T09:06:04.6980231Z               "repos_url": "https://api.github.com/users/andi-frame/repos",
+2026-11-19T09:06:04.6981383Z               "site_admin": false,
+2026-11-19T09:06:04.6982259Z               "starred_url": "https://api.github.com/users/andi-frame/starred{/owner}{/repo}",
+2026-11-19T09:06:04.6983432Z               "subscriptions_url": "https://api.github.com/users/andi-frame/subscriptions",
+2026-11-19T09:06:04.6984335Z               "type": "User",
+2026-11-19T09:06:04.6985031Z               "url": "https://api.github.com/users/andi-frame",
+2026-11-19T09:06:04.6985801Z               "user_view_type": "public"
+2026-11-19T09:06:04.6986392Z             },
+2026-11-19T09:06:04.6986877Z             "private": true,
+2026-11-19T09:06:04.6987700Z             "pull_request_creation_policy": "all",
+2026-11-19T09:06:04.6988928Z             "pulls_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/pulls{/number}",
+2026-11-19T09:06:04.6990068Z             "pushed_at": 1795079127,
+2026-11-19T09:06:04.6991448Z             "releases_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/releases{/id}",
+2026-11-19T09:06:04.6992390Z             "size": 1139,
+2026-11-19T09:06:04.6993010Z             "ssh_url": "git@github.com:andi-frame/13523075_13523128_13523154_Tugas3_IF4020.git",
+2026-11-19T09:06:04.6993712Z             "stargazers": 0,
+2026-11-19T09:06:04.6994113Z             "stargazers_count": 0,
+2026-11-19T09:06:04.6994984Z             "stargazers_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/stargazers",
+2026-11-19T09:06:04.6995937Z             "statuses_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/statuses/{sha}",
+2026-11-19T09:06:04.6996715Z             "subscribers_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/subscribers",
+2026-11-19T09:06:04.6997514Z             "subscription_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/subscription",
+2026-11-19T09:06:04.6998181Z             "svn_url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
+2026-11-19T09:06:04.6998782Z             "tags_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/tags",
+2026-11-19T09:06:04.6999435Z             "teams_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/teams",
+2026-11-19T09:06:04.6999895Z             "topics": [],
+2026-11-19T09:06:04.7000734Z             "trees_url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/git/trees{/sha}",
+2026-11-19T09:06:04.7001307Z             "updated_at": "2026-11-15T13:09:49Z",
+2026-11-19T09:06:04.7001776Z             "url": "https://api.github.com/repos/andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
+2026-11-19T09:06:04.7002234Z             "visibility": "private",
+2026-11-19T09:06:04.7002499Z             "watchers": 0,
+2026-11-19T09:06:04.7002729Z             "watchers_count": 0,
+2026-11-19T09:06:04.7003270Z             "web_commit_signoff_required": false
+2026-11-19T09:06:04.7003544Z           },
+2026-11-19T09:06:04.7003740Z           "sender": {
+2026-11-19T09:06:04.7004072Z             "avatar_url": "https://avatars.githubusercontent.com/u/76481845?v=4",
+2026-11-19T09:06:04.7004575Z             "events_url": "https://api.github.com/users/DaDecky/events{/privacy}",
+2026-11-19T09:06:04.7005052Z             "followers_url": "https://api.github.com/users/DaDecky/followers",
+2026-11-19T09:06:04.7005556Z             "following_url": "https://api.github.com/users/DaDecky/following{/other_user}",
+2026-11-19T09:06:04.7006058Z             "gists_url": "https://api.github.com/users/DaDecky/gists{/gist_id}",
+2026-11-19T09:06:04.7006421Z             "gravatar_id": "",
+2026-11-19T09:06:04.7006695Z             "html_url": "https://github.com/DaDecky",
+2026-11-19T09:06:04.7006985Z             "id": 76481845,
+2026-11-19T09:06:04.7007216Z             "login": "DaDecky",
+2026-11-19T09:06:04.7007482Z             "node_id": "MDQ6VXNlcjc2NDgxODQ1",
+2026-11-19T09:06:04.7007871Z             "organizations_url": "https://api.github.com/users/DaDecky/orgs",
+2026-11-19T09:06:04.7008367Z             "received_events_url": "https://api.github.com/users/DaDecky/received_events",
+2026-11-19T09:06:04.7008845Z             "repos_url": "https://api.github.com/users/DaDecky/repos",
+2026-11-19T09:06:04.7009191Z             "site_admin": false,
+2026-11-19T09:06:04.7009570Z             "starred_url": "https://api.github.com/users/DaDecky/starred{/owner}{/repo}",
+2026-11-19T09:06:04.7010091Z             "subscriptions_url": "https://api.github.com/users/DaDecky/subscriptions",
+2026-11-19T09:06:04.7010798Z             "type": "User",
+2026-11-19T09:06:04.7011220Z             "url": "https://api.github.com/users/DaDecky",
+2026-11-19T09:06:04.7011545Z             "user_view_type": "public"
+2026-11-19T09:06:04.7011787Z           }
+2026-11-19T09:06:04.7011969Z         },
+2026-11-19T09:06:04.7012156Z         "github_job": "publish",
+2026-11-19T09:06:04.7012409Z         "github_ref": "refs/tags/v0.1.1",
+2026-11-19T09:06:04.7012674Z         "github_ref_name": "v0.1.1",
+2026-11-19T09:06:04.7012928Z         "github_ref_protected": "false",
+2026-11-19T09:06:04.7013189Z         "github_ref_type": "tag",
+2026-11-19T09:06:04.7013537Z         "github_repository": "andi-frame/13523075_13523128_13523154_Tugas3_IF4020",
+2026-11-19T09:06:04.7013932Z         "github_repository_id": "1452496738",
+2026-11-19T09:06:04.7014223Z         "github_repository_owner": "andi-frame",
+2026-11-19T09:06:04.7014567Z         "github_repository_owner_id": "132210040",
+2026-11-19T09:06:04.7014850Z         "github_run_attempt": "1",
+2026-11-19T09:06:04.7015102Z         "github_run_id": "44493218129",
+2026-11-19T09:06:04.7015355Z         "github_run_number": "8",
+2026-11-19T09:06:04.7015601Z         "github_runner_arch": "X64",
+2026-11-19T09:06:04.7015882Z         "github_runner_environment": "github-hosted",
+2026-11-19T09:06:04.7016189Z         "github_runner_image_os": "ubuntu24",
+2026-11-19T09:06:04.7016493Z         "github_runner_image_version": "20261116.376.1",
+2026-11-19T09:06:04.7016821Z         "github_runner_name": "GitHub Actions 1000000824",
+2026-11-19T09:06:04.7017121Z         "github_runner_os": "Linux",
+2026-11-19T09:06:04.7017488Z         "github_runner_tracking_id": "github_24fbca21-15dd-4f2c-9074-560bd5e778ec",
+2026-11-19T09:06:04.7017910Z         "github_server_url": "https://github.com",
+2026-11-19T09:06:04.7018210Z         "github_triggering_actor": "DaDecky",
+2026-11-19T09:06:04.7018490Z         "github_workflow": "Publish image",
+2026-11-19T09:06:04.7019063Z         "github_workflow_ref": "andi-frame/13523075_13523128_13523154_Tugas3_IF4020/.github/workflows/publish-image.yml@refs/tags/v0.1.1",
+2026-11-19T09:06:04.7019720Z         "github_workflow_sha": "00b9b1e474de1be818cb9faf9f1179168c9aea2c",
+2026-11-19T09:06:04.7020079Z         "platform": "linux/amd64"
+2026-11-19T09:06:04.7021100Z       }
+2026-11-19T09:06:04.7021311Z     }
+2026-11-19T09:06:04.7021489Z   },
+2026-11-19T09:06:04.7022215Z   "buildx.build.ref": "builder-3999fbf2-cc1c-4508-96ca-bf79a350589a/builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0/56y60osfs9kt8ioa5hzxhcjv4",
+2026-11-19T09:06:04.7023101Z   "containerimage.config.digest": "sha256:7f15e81edcd1f4089dadf762217b687d32f6461aa59f7f4176262fc2a6091c6b",
+2026-11-19T09:06:04.7023615Z   "containerimage.descriptor": {
+2026-11-19T09:06:04.7023948Z     "mediaType": "application/vnd.oci.image.manifest.v1+json",
+2026-11-19T09:06:04.7024430Z     "digest": "sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b",
+2026-11-19T09:06:04.7024831Z     "size": 1434,
+2026-11-19T09:06:04.7025029Z     "platform": {
+2026-11-19T09:06:04.7025246Z       "architecture": "amd64",
+2026-11-19T09:06:04.7025473Z       "os": "linux"
+2026-11-19T09:06:04.7025658Z     }
+2026-11-19T09:06:04.7025825Z   },
+2026-11-19T09:06:04.7026206Z   "containerimage.digest": "sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b",
+2026-11-19T09:06:04.7026711Z   "image.name": "docker.io/andiframe/zhongli:0.1.1"
+2026-11-19T09:06:04.7027000Z }
+2026-11-19T09:06:04.7027382Z ##[endgroup]
+2026-11-19T09:06:04.7027714Z ##[group]Reference
+2026-11-19T09:06:04.7028200Z builder-3999fbf2-cc1c-4508-96ca-bf79a350589a/builder-3999fbf2-cc1c-4508-96ca-bf79a350589a0/56y60osfs9kt8ioa5hzxhcjv4
+2026-11-19T09:06:04.7028870Z ##[endgroup]
+2026-11-19T09:06:04.7029190Z ##[group]Check build summary support
+2026-11-19T09:06:04.7029579Z Build summary supported!
+2026-11-19T09:06:04.7029922Z ##[endgroup]
+2026-11-19T09:06:04.7064554Z ##[group]Run docker logout docker.io
+2026-11-19T09:06:04.7064900Z docker logout docker.io
+2026-11-19T09:06:04.7065209Z docker image rm -f "$REF" 2>/dev/null || true
+2026-11-19T09:06:04.7065530Z docker pull "$REF"
+2026-11-19T09:06:04.7065888Z docker run --rm --network none --user "$(id -u):$(id -g)" "$REF" --version
+2026-11-19T09:06:04.7066423Z docker run --rm --network none --user "$(id -u):$(id -g)" "$REF" --help > /dev/null
+2026-11-19T09:06:04.7090730Z shell: /usr/bin/bash -e {0}
+2026-11-19T09:06:04.7090986Z env:
+2026-11-19T09:06:04.7091415Z   REF: docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:04.7091912Z ##[endgroup]
+2026-11-19T09:06:04.7265102Z Removing login credentials for docker.io
+2026-11-19T09:06:04.9437323Z docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b: Pulling from andiframe/zhongli
+2026-11-19T09:06:04.9440480Z dd051e1b8c92: Pulling fs layer
+2026-11-19T09:06:04.9441597Z a2e654eaec5b: Pulling fs layer
+2026-11-19T09:06:04.9444255Z a3e87ca60ef5: Pulling fs layer
+2026-11-19T09:06:04.9444640Z f565bd0f3fa6: Pulling fs layer
+2026-11-19T09:06:04.9445014Z 14c99a71238f: Pulling fs layer
+2026-11-19T09:06:04.9445333Z 91f0458cd902: Pulling fs layer
+2026-11-19T09:06:04.9445647Z f565bd0f3fa6: Waiting
+2026-11-19T09:06:04.9445935Z 14c99a71238f: Waiting
+2026-11-19T09:06:04.9446210Z 91f0458cd902: Waiting
+2026-11-19T09:06:05.2563555Z a3e87ca60ef5: Verifying Checksum
+2026-11-19T09:06:05.2564529Z a3e87ca60ef5: Download complete
+2026-11-19T09:06:05.3092712Z f565bd0f3fa6: Verifying Checksum
+2026-11-19T09:06:05.3098704Z f565bd0f3fa6: Download complete
+2026-11-19T09:06:05.4336914Z a2e654eaec5b: Verifying Checksum
+2026-11-19T09:06:05.4345094Z a2e654eaec5b: Download complete
+2026-11-19T09:06:05.5221470Z 91f0458cd902: Verifying Checksum
+2026-11-19T09:06:05.5222078Z 91f0458cd902: Download complete
+2026-11-19T09:06:05.5279813Z 14c99a71238f: Verifying Checksum
+2026-11-19T09:06:05.5280126Z 14c99a71238f: Download complete
+2026-11-19T09:06:05.5481579Z dd051e1b8c92: Download complete
+2026-11-19T09:06:06.8382652Z dd051e1b8c92: Pull complete
+2026-11-19T09:06:07.2874900Z a2e654eaec5b: Pull complete
+2026-11-19T09:06:08.0044106Z a3e87ca60ef5: Pull complete
+2026-11-19T09:06:08.0208507Z f565bd0f3fa6: Pull complete
+2026-11-19T09:06:08.2501706Z 14c99a71238f: Pull complete
+2026-11-19T09:06:08.2607470Z 91f0458cd902: Pull complete
+2026-11-19T09:06:08.2643888Z Digest: sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:08.2656329Z Status: Downloaded newer image for andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:08.2663265Z docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:08.7562799Z zhongli 0.1.1
+2026-11-19T09:06:09.3680013Z ##[group]Run {
+2026-11-19T09:06:09.3680860Z {
+2026-11-19T09:06:09.3681229Z   echo "### Published image"
+2026-11-19T09:06:09.3681692Z   echo
+2026-11-19T09:06:09.3682158Z   echo "| Program version | Source | Tag | Digest |"
+2026-11-19T09:06:09.3682789Z   echo "| --- | --- | --- | --- |"
+2026-11-19T09:06:09.3683571Z   echo "| 0.1.1 | \`$GITHUB_REF_NAME\` @ \`${GITHUB_SHA::12}\` | \`$IMAGE:$TAG\` | \`$DIGEST\` |"
+2026-11-19T09:06:09.3684334Z   echo
+2026-11-19T09:06:09.3684889Z   echo "Pin in \`ci/pipeline.env\`: \`IMAGE=$IMAGE@$DIGEST\`"
+2026-11-19T09:06:09.3685574Z } >> "$GITHUB_STEP_SUMMARY"
+2026-11-19T09:06:09.3714637Z shell: /usr/bin/bash -e {0}
+2026-11-19T09:06:09.3715063Z env:
+2026-11-19T09:06:09.3715395Z   IMAGE: docker.io/andiframe/zhongli
+2026-11-19T09:06:09.3715837Z   TAG: 0.1.1
+2026-11-19T09:06:09.3716475Z   DIGEST: sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+2026-11-19T09:06:09.3717190Z ##[endgroup]
+2026-11-19T09:06:09.3894033Z Post job cleanup.
+2026-11-19T09:06:09.6709499Z ##[group]Generating build summary
+2026-11-19T09:06:09.6731338Z exporting build record to /home/runner/work/_temp/docker-actions-toolkit-JxZLtE/export
+2026-11-19T09:06:09.6781994Z (node:3157) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T09:06:09.6812369Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T09:06:09.9774851Z [command]/usr/bin/docker buildx history export --builder builder-3999fbf2-cc1c-4508-96ca-bf79a350589a --output /home/runner/work/_temp/docker-actions-toolkit-JxZLtE/export/andi-frame~13523075_13523128_13523154_Tugas3_IF4020~56Y60O.dockerbuild 56y60osfs9kt8ioa5hzxhcjv4 --finalize
+2026-11-19T09:06:10.1637558Z Build record written to /home/runner/work/_temp/docker-actions-toolkit-JxZLtE/export/andi-frame~13523075_13523128_13523154_Tugas3_IF4020~56Y60O.dockerbuild (49.44 KB)
+2026-11-19T09:06:10.1684571Z Uploading andi-frame~13523075_13523128_13523154_Tugas3_IF4020~56Y60O.dockerbuild to blob storage
+2026-11-19T09:06:10.3940159Z Beginning upload of artifact content to blob storage
+2026-11-19T09:06:10.4091628Z (node:3157) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-19T09:06:10.4125966Z Uploaded bytes 50622
+2026-11-19T09:06:10.4458623Z Finished uploading artifact content to blob storage!
+2026-11-19T09:06:10.4476198Z SHA256 hash of uploaded artifact is 0bfdfed2e86cd1a3de8e07359a4d904ce249483bbe4795a1a5ef7e3367157acf
+2026-11-19T09:06:10.4499236Z Finalizing artifact upload
+2026-11-19T09:06:10.8442596Z Artifact successfully finalized (14513548114)
+2026-11-19T09:06:10.8443802Z Artifact download URL: https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493218129/artifacts/14513548114
+2026-11-19T09:06:10.8469872Z Writing summary
+2026-11-19T09:06:10.8485283Z ##[endgroup]
+2026-11-19T09:06:10.8486504Z ##[group]Removing temp folder /home/runner/work/_temp/docker-actions-toolkit-90u8yX
+2026-11-19T09:06:10.8490281Z ##[endgroup]
+2026-11-19T09:06:10.8491595Z ##[group]Post cache
+2026-11-19T09:06:10.8492925Z State not set
+2026-11-19T09:06:10.8493782Z ##[endgroup]
+2026-11-19T09:06:10.8691052Z Post job cleanup.
+2026-11-19T09:06:11.2070062Z ##[group]Logout from docker.io
+2026-11-19T09:06:11.2096064Z (node:3283) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T09:06:11.2098897Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T09:06:11.2161277Z [command]/usr/bin/docker logout docker.io
+2026-11-19T09:06:11.2470752Z Removing login credentials for docker.io
+2026-11-19T09:06:11.2507144Z ##[endgroup]
+2026-11-19T09:06:11.2531294Z ##[group]Post cache
+2026-11-19T09:06:11.2544499Z State not set
+2026-11-19T09:06:11.2561500Z ##[endgroup]
+2026-11-19T09:06:11.2841503Z Post job cleanup.
+2026-11-19T09:06:11.6131374Z ##[group]Removing builder
+2026-11-19T09:06:11.6151898Z (node:3302) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T09:06:11.6167598Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T09:06:11.8476657Z [command]/usr/bin/docker buildx rm builder-3999fbf2-cc1c-4508-96ca-bf79a350589a
+2026-11-19T09:06:12.6569307Z builder-3999fbf2-cc1c-4508-96ca-bf79a350589a removed
+2026-11-19T09:06:12.6624719Z ##[endgroup]
+2026-11-19T09:06:12.6626866Z ##[group]Cleaning up certificates
+2026-11-19T09:06:12.6628056Z ##[endgroup]
+2026-11-19T09:06:12.6628886Z ##[group]Post cache
+2026-11-19T09:06:12.6631610Z State not set
+2026-11-19T09:06:12.6632479Z ##[endgroup]
+2026-11-19T09:06:12.6878696Z Post job cleanup.
+2026-11-19T09:06:12.7920980Z [command]/usr/bin/git version
+2026-11-19T09:06:12.8013441Z git version 2.56.1
+2026-11-19T09:06:12.8093103Z Temporarily overriding HOME='/home/runner/work/_temp/8c20a1d4-821d-4719-aa17-9f209544f395' before making global git config changes
+2026-11-19T09:06:12.8111265Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-19T09:06:12.8122617Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T09:06:12.8170306Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-19T09:06:12.8184198Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-19T09:06:12.8866952Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-19T09:06:12.8941360Z http.https://github.com/.extraheader
+2026-11-19T09:06:12.8981624Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-19T09:06:12.9103720Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-19T09:06:12.9675312Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-19T09:06:12.9727188Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-19T09:06:13.0157823Z Cleaning up orphan processes
+2026-11-19T09:06:13.0712252Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, docker/build-push-action@v6, docker/login-action@v3, docker/setup-buildx-action@v3. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

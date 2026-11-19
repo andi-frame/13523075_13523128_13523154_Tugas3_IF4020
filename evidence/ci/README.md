@@ -5,10 +5,10 @@ the logs. Secrets appear as `***` in the logs, as masked by GitHub Actions.
 
 | Item | Value |
 | --- | --- |
-| Release pipeline run | <https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209> (success, commit `98d423c183ec`) |
-| Publish image run | <https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489338377> (success, commit `59adcfcece92`) |
-| Source tag | `v0.1.0` (program 0.1.0, image tag `0.1.0`) |
-| Image | `docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620` |
+| Release pipeline run | <https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731> (success, commit `67d8690562c3`) |
+| Publish image run | <https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493218129> (success, commit `00b9b1e474de`) |
+| Source tag | `v0.1.1` (program 0.1.1, image tag `0.1.1`) |
+| Image | `docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b` |
 | Runner | GitHub-hosted `ubuntu-24.04` (Linux amd64), a new virtual machine for every job |
 
 ## Results

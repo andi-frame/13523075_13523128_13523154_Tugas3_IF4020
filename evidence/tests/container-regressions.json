@@ -1,0 +1,27 @@
+{
+  "image": "docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b",
+  "cases": [
+    {
+      "case": "trust store remains usable after growing past 1 MiB",
+      "initial_bytes": 1005294,
+      "updated_bytes": 1140388,
+      "verify": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "demo",
+        "version": "1.0"
+      },
+      "exit": 0
+    },
+    {
+      "case": "SEC1 disguised as PKCS8 is rejected",
+      "exit": 2,
+      "stderr": "INPUT_ERROR: Expected canonical PKCS8 P-256 encoding",
+      "bundle_created": false
+    }
+  ],
+  "version": "zhongli 0.1.1"
+}

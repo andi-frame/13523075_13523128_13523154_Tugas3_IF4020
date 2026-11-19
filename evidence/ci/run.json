@@ -1,93 +1,93 @@
 {
   "release_pipeline": {
     "conclusion": "success",
-    "createdAt": "2026-11-19T08:39:56Z",
+    "createdAt": "2026-11-19T09:06:52Z",
     "event": "workflow_dispatch",
-    "headSha": "98d423c183ec6cddca1352fc3d2174c52fcd6dad",
-    "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209"
+    "headSha": "67d8690562c379c8141470de21f6b648eb9a8be6",
+    "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731"
   },
   "publish_image": {
     "conclusion": "success",
-    "createdAt": "2026-11-19T08:38:36Z",
+    "createdAt": "2026-11-19T09:05:30Z",
     "event": "push",
-    "headSha": "59adcfcece92934b5acfa7e9d3d6bf268a7a7699",
-    "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489338377"
+    "headSha": "00b9b1e474de1be818cb9faf9f1179168c9aea2c",
+    "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493218129"
   },
   "jobs": [
     {
-      "name": "Build artifact",
-      "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441310323"
-    },
-    {
       "name": "Runner UID/GID, no TTY, no network",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441310751"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454526658"
     },
     {
-      "name": "Sign (ed25519)",
+      "name": "Build artifact",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441385099"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454527099"
     },
     {
       "name": "Sign (ecdsa-p256-sha256)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441385147"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454591473"
     },
     {
       "name": "Sign (rsa-pss-sha256)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441385326"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454591517"
     },
     {
-      "name": "C04 artifact-missing (ecdsa-p256-sha256)",
+      "name": "Sign (ed25519)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528696"
-    },
-    {
-      "name": "C03 empty-trust-store (ecdsa-p256-sha256)",
-      "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528741"
-    },
-    {
-      "name": "C03 key-not-allowed-for-package (ecdsa-p256-sha256)",
-      "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528755"
-    },
-    {
-      "name": "Verify (rsa-pss-sha256)",
-      "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528771"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454591596"
     },
     {
       "name": "Verify (ecdsa-p256-sha256)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528775"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751626"
+    },
+    {
+      "name": "Verify (rsa-pss-sha256)",
+      "conclusion": "success",
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751635"
+    },
+    {
+      "name": "C04 artifact-missing (ecdsa-p256-sha256)",
+      "conclusion": "success",
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751663"
     },
     {
       "name": "C02 artifact-byte-changed (ecdsa-p256-sha256)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528786"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751701"
     },
     {
       "name": "Verify (ed25519)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441528815"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751715"
     },
     {
-      "name": "Deploy (ed25519, simulated)",
+      "name": "C03 empty-trust-store (ecdsa-p256-sha256)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441665750"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751726"
+    },
+    {
+      "name": "C03 key-not-allowed-for-package (ecdsa-p256-sha256)",
+      "conclusion": "success",
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454751789"
     },
     {
       "name": "Deploy (rsa-pss-sha256, simulated)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441665802"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454943978"
+    },
+    {
+      "name": "Deploy (ed25519, simulated)",
+      "conclusion": "success",
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454944042"
     },
     {
       "name": "Deploy (ecdsa-p256-sha256, simulated)",
       "conclusion": "success",
-      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/job/135441665828"
+      "url": "https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731/job/135454944181"
     }
   ]
 }

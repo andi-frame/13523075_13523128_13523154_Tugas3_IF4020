@@ -1,8 +1,8 @@
 scenario=C02-artifact-byte-changed
 profile=ecdsa-p256-sha256
 trust_store=ci/trust.json
-image=docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
+image=docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
 expected=ARTIFACT_MISMATCH exit 1
 actual=ARTIFACT_MISMATCH exit 1 valid=false
 deployment_marker=absent
-run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209
+run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731
