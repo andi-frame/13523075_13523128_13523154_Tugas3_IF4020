@@ -1,16 +1,16 @@
 runner uid:gid = 1001:1001
-zhongli 0.1.1
+zhongli 0.1.2
 --help: ok
 Generated ed25519 key pair
   private key: /output/runtime.key.pem
   public key:  /output/runtime.pub.pem
-  keyid:       f13aca2bd87b1f524d7330157749a5cf7b6a4e074be8ec30106d5fbbf0e86788
+  keyid:       adc530060be8f6254a2ce9b468e230b13f7c48b1c82e169f011e892733f1b61b
 Trusted key (added)
-  keyid:     f13aca2bd87b1f524d7330157749a5cf7b6a4e074be8ec30106d5fbbf0e86788
+  keyid:     adc530060be8f6254a2ce9b468e230b13f7c48b1c82e169f011e892733f1b61b
   algorithm: ed25519
   package:   runtime-demo
   packages:  runtime-demo
-f13aca2bd87b1f524d7330157749a5cf7b6a4e074be8ec30106d5fbbf0e86788  ed25519  runtime-demo
+adc530060be8f6254a2ce9b468e230b13f7c48b1c82e169f011e892733f1b61b  ed25519  runtime-demo
 keygen without --out: exit 2
 runtime.key.pem owner 1001:1001
 runtime.pub.pem owner 1001:1001

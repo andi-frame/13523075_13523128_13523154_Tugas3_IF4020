@@ -1,6 +1,6 @@
 deployed=contoh-app.zip
-sha256=c33ba55d9ff17d614d360389d3707cd9f7b1a950bbeb74787fc039f5d37b6f22
+sha256=2349f781b471b254aab33bdf5c2350af1ee718695991a39a0cc10a15115d1e8c
 profile=rsa-pss-sha256
 keyid=a8f599b03f91e26d62cfdc8ae1aa9014c634df9f3e418c475fb7fac5725b9d07
-image=docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
-run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493425731
+image=docker.io/andiframe/zhongli@sha256:cdc390179abb33411089224169be0f351eb04d13906edfa3a6bbe7d26432779a
+run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44501086111

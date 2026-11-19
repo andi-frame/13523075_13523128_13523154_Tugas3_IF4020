@@ -1,10 +1,51 @@
 {
-  "image": "docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b",
+  "image": "docker.io/andiframe/zhongli@sha256:cdc390179abb33411089224169be0f351eb04d13906edfa3a6bbe7d26432779a",
   "cases": [
     {
-      "case": "trust store remains usable after growing past 1 MiB",
-      "initial_bytes": 1005294,
-      "updated_bytes": 1140388,
+      "case": "standard PKCS8 friendlyName accepted",
+      "profile": "rsa",
+      "verify": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "rsa-pss-sha256",
+        "keyid": "f36592964fda64bab39f3886962826b83535cc15fc1e22f893df30915a6970a7",
+        "package": "demo",
+        "version": "1.0"
+      },
+      "exit": 0
+    },
+    {
+      "case": "PKCS1 or SEC1 disguised as PKCS8 rejected",
+      "profile": "rsa",
+      "exit": 2,
+      "stderr": "INPUT_ERROR: Invalid PKCS8 envelope: Expected PKCS8 version, algorithm and private key",
+      "bundle_created": false
+    },
+    {
+      "case": "standard PKCS8 friendlyName accepted",
+      "profile": "ecdsa",
+      "verify": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ecdsa-p256-sha256",
+        "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668",
+        "package": "demo",
+        "version": "1.0"
+      },
+      "exit": 0
+    },
+    {
+      "case": "PKCS1 or SEC1 disguised as PKCS8 rejected",
+      "profile": "ecdsa",
+      "exit": 2,
+      "stderr": "INPUT_ERROR: Invalid PKCS8 envelope: Expected PKCS8 version, algorithm and private key",
+      "bundle_created": false
+    },
+    {
+      "case": "standard PKCS8 friendlyName accepted",
+      "profile": "ed25519",
       "verify": {
         "valid": true,
         "status": "OK",
@@ -17,11 +58,81 @@
       "exit": 0
     },
     {
-      "case": "SEC1 disguised as PKCS8 is rejected",
+      "case": "verify JSON usage error",
+      "extra": [
+        "--unknown"
+      ],
       "exit": 2,
-      "stderr": "INPUT_ERROR: Expected canonical PKCS8 P-256 encoding",
-      "bundle_created": false
+      "result": {
+        "valid": false,
+        "status": "INPUT_ERROR",
+        "message": "Usage error: unrecognized arguments: --unknown",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      }
+    },
+    {
+      "case": "verify JSON usage error",
+      "extra": [
+        "unexpected"
+      ],
+      "exit": 2,
+      "result": {
+        "valid": false,
+        "status": "INPUT_ERROR",
+        "message": "Usage error: unrecognized arguments: unexpected",
+        "algorithm": null,
+        "keyid": null,
+        "package": null,
+        "version": null
+      }
+    },
+    {
+      "case": "sbom verify JSON usage error",
+      "exit": 2,
+      "result": {
+        "valid": false,
+        "status": "INPUT_ERROR",
+        "stage": null,
+        "message": "Usage error: unrecognized arguments: --unknown",
+        "artifact": {
+          "valid": false,
+          "status": "INPUT_ERROR",
+          "message": "Not checked because of a usage error",
+          "algorithm": null,
+          "keyid": null,
+          "package": null,
+          "version": null
+        },
+        "sbom": {
+          "valid": false,
+          "status": "INPUT_ERROR",
+          "message": "Not checked because of a usage error",
+          "algorithm": null,
+          "keyid": null,
+          "package": null,
+          "version": null
+        },
+        "binding": null
+      }
+    },
+    {
+      "case": "large trust store remains usable",
+      "initial_bytes": 1005294,
+      "updated_bytes": 1140388,
+      "exit": 0,
+      "verify": {
+        "valid": true,
+        "status": "OK",
+        "message": "Signature and artifact are valid.",
+        "algorithm": "ed25519",
+        "keyid": "640d544e1610a3a7895e7a20cda0a9be20e513b96dd4d077769a4474856f04d1",
+        "package": "demo",
+        "version": "1.0"
+      }
     }
   ],
-  "version": "zhongli 0.1.1"
+  "version": "zhongli 0.1.2"
 }
