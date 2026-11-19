@@ -57,14 +57,14 @@ started by hand. No credentials are needed to pull it.
 
 | Program version | Source | Image tag | Image digest |
 | --- | --- | --- | --- |
-| 0.1.0 | `main` @ `3a6a7384df2c` | `dev-3a6a7384df2c` | `sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3` |
+| 0.1.0 | [`v0.1.0`](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/tree/v0.1.0) @ `59adcfcece92` | `0.1.0` | `sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620` |
 
-`ci/pipeline.env` pins the digest above.
+`ci/pipeline.env` pins the digest above. The [release image build](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489338377) built this image from repository tag `v0.1.0` and verified an anonymous pull and offline CLI execution.
 
 Always pin the image by digest, not by tag:
 
 ```sh
-IMAGE=docker.io/andiframe/zhongli@sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3
+IMAGE=docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
 docker pull "$IMAGE"
 docker run --rm --network none "$IMAGE" --version
 ```
