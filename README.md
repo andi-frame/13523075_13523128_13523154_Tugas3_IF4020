@@ -21,7 +21,7 @@ manifest is a contract, and `verify` refuses any release that breaks it.
 
 | | |
 | --- | --- |
-| Release | [zhongli 0.1.1](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/releases/tag/v0.1.1) |
+| Release | [zhongli 0.1.2](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/releases/tag/v0.1.2) |
 | Report | [`docs/13523075_13523128_13523154_Tugas3_IF4020.pdf`](docs/13523075_13523128_13523154_Tugas3_IF4020.pdf) |
 | Image | [`andiframe/zhongli`](https://hub.docker.com/r/andiframe/zhongli) on Docker Hub, see [Container image](#container-image) |
 | API documentation | <https://andi-frame.github.io/13523075_13523128_13523154_Tugas3_IF4020/> |
@@ -58,14 +58,14 @@ started by hand. No credentials are needed to pull it.
 
 | Program version | Source | Image tag | Image digest |
 | --- | --- | --- | --- |
-| 0.1.1 | [`v0.1.1`](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/tree/v0.1.1) @ `00b9b1e474de` | `0.1.1` | `sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b` |
+| 0.1.2 | [`v0.1.2`](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/tree/v0.1.2) @ `067f9f542587` | `0.1.2` | `sha256:cdc390179abb33411089224169be0f351eb04d13906edfa3a6bbe7d26432779a` |
 
-`ci/pipeline.env` pins the digest above. The [release image build](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44493218129) built this image from repository tag `v0.1.1` and verified an anonymous pull and offline CLI execution.
+`ci/pipeline.env` pins the digest above. The [release image build](https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44500855372) built this image from repository tag `v0.1.2` and verified an anonymous pull and offline CLI execution.
 
 Always pin the image by digest, not by tag:
 
 ```sh
-IMAGE=docker.io/andiframe/zhongli@sha256:329484468f94d46a99b39f7e2745af5cf3d3fd4c6204f9e3bbc17e1d66697f0b
+IMAGE=docker.io/andiframe/zhongli@sha256:cdc390179abb33411089224169be0f351eb04d13906edfa3a6bbe7d26432779a
 docker pull "$IMAGE"
 docker run --rm --network none "$IMAGE" --version
 ```
