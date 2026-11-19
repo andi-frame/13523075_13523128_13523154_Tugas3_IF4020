@@ -1,210 +1,210 @@
-﻿2026-11-15T13:33:06.3026199Z Current runner version: '2.338.2'
-2026-11-15T13:33:06.3058312Z ##[group]Runner Image Provisioner
-2026-11-15T13:33:06.3059884Z Hosted Compute Agent
-2026-11-15T13:33:06.3060642Z Version: 20261103.629
-2026-11-15T13:33:06.3061518Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
-2026-11-15T13:33:06.3062518Z Build Date: 2026-11-03T17:26:59Z
-2026-11-15T13:33:06.3063364Z Worker ID: {844503e8-3ffb-416b-a08a-c7507ad04721}
-2026-11-15T13:33:06.3064386Z Region: westus3
-2026-11-15T13:33:06.3065082Z Cloud: Azure
-2026-11-15T13:33:06.3065902Z ##[endgroup]
-2026-11-15T13:33:06.3067720Z ##[group]Operating System
-2026-11-15T13:33:06.3068524Z Ubuntu
-2026-11-15T13:33:06.3069525Z 24.04.5
-2026-11-15T13:33:06.3070211Z LTS
-2026-11-15T13:33:06.3070837Z ##[endgroup]
-2026-11-15T13:33:06.3071680Z ##[group]Runner Image
-2026-11-15T13:33:06.3072503Z Image: ubuntu-24.04
-2026-11-15T13:33:06.3073317Z Version: 20261111.370.1
-2026-11-15T13:33:06.3074897Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md
-2026-11-15T13:33:06.3077080Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370
-2026-11-15T13:33:06.3078377Z ##[endgroup]
-2026-11-15T13:33:06.3080190Z ##[group]GITHUB_TOKEN Permissions
-2026-11-15T13:33:06.3082406Z Contents: read
-2026-11-15T13:33:06.3083201Z Metadata: read
-2026-11-15T13:33:06.3083885Z ##[endgroup]
-2026-11-15T13:33:06.3086235Z Secret source: Actions
-2026-11-15T13:33:06.3087535Z Cache mode: write
-2026-11-15T13:33:06.3088425Z Prepare workflow directory
-2026-11-15T13:33:06.3631846Z Prepare all required actions
-2026-11-15T13:33:06.3690140Z Getting action download info
-2026-11-15T13:33:06.6971512Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
-2026-11-15T13:33:06.8468860Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
-2026-11-15T13:33:07.5001705Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
-2026-11-15T13:33:07.8702697Z Complete job name: Deploy (ecdsa-p256-sha256, simulated)
-2026-11-15T13:33:07.9451602Z ##[group]Run actions/checkout@v4
-2026-11-15T13:33:07.9452383Z with:
-2026-11-15T13:33:07.9452921Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:07.9456521Z   token: ***
-2026-11-15T13:33:07.9456938Z   ssh-strict: true
-2026-11-15T13:33:07.9457364Z   ssh-user: git
-2026-11-15T13:33:07.9457783Z   persist-credentials: true
-2026-11-15T13:33:07.9458241Z   clean: true
-2026-11-15T13:33:07.9458802Z   sparse-checkout-cone-mode: true
-2026-11-15T13:33:07.9459285Z   fetch-depth: 1
-2026-11-15T13:33:07.9459688Z   fetch-tags: false
-2026-11-15T13:33:07.9460103Z   show-progress: true
-2026-11-15T13:33:07.9460524Z   lfs: false
-2026-11-15T13:33:07.9460980Z   submodules: false
-2026-11-15T13:33:07.9461420Z   set-safe-directory: true
-2026-11-15T13:33:07.9461902Z   allow-unsafe-pr-checkout: false
-2026-11-15T13:33:07.9462673Z ##[endgroup]
-2026-11-15T13:33:08.1660638Z Syncing repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:08.1663643Z ##[group]Getting Git version info
-2026-11-15T13:33:08.1665328Z Working directory is '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
-2026-11-15T13:33:08.1667420Z [command]/usr/bin/git version
-2026-11-15T13:33:08.1779980Z git version 2.56.1
-2026-11-15T13:33:08.1803076Z ##[endgroup]
-2026-11-15T13:33:08.1813314Z Temporarily overriding HOME='/home/runner/work/_temp/2e7b2403-28c5-43fa-bafd-cc58d54e5e3e' before making global git config changes
-2026-11-15T13:33:08.1815541Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-15T13:33:08.1822156Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:08.1922568Z Deleting the contents of '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
-2026-11-15T13:33:08.1925718Z ##[group]Initializing the repository
-2026-11-15T13:33:08.1927935Z [command]/usr/bin/git init /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:08.2017046Z hint: Using 'master' as the name for the initial branch. This default branch name
-2026-11-15T13:33:08.2022504Z hint: will change to "main" in Git 3.0. To configure the initial branch name
-2026-11-15T13:33:08.2040553Z hint: to use in all of your new repositories, which will suppress this warning,
-2026-11-15T13:33:08.2043256Z hint: call:
-2026-11-15T13:33:08.2044135Z hint:
-2026-11-15T13:33:08.2045173Z hint: 	git config --global init.defaultBranch <name>
-2026-11-15T13:33:08.2046330Z hint:
-2026-11-15T13:33:08.2047377Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2026-11-15T13:33:08.2049121Z hint: 'development'. The just-created branch can be renamed via this command:
-2026-11-15T13:33:08.2050395Z hint:
-2026-11-15T13:33:08.2051311Z hint: 	git branch -m <name>
-2026-11-15T13:33:08.2052217Z hint:
-2026-11-15T13:33:08.2053651Z hint: Disable this message with "git config set advice.defaultBranchName false"
-2026-11-15T13:33:08.2055856Z Initialized empty Git repository in /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/.git/
-2026-11-15T13:33:08.2059941Z [command]/usr/bin/git remote add origin https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:08.2148454Z ##[endgroup]
-2026-11-15T13:33:08.2150418Z ##[group]Disabling automatic garbage collection
-2026-11-15T13:33:08.2151902Z [command]/usr/bin/git config --local gc.auto 0
-2026-11-15T13:33:08.2205702Z ##[endgroup]
-2026-11-15T13:33:08.2214689Z ##[group]Setting up auth
-2026-11-15T13:33:08.2216186Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-15T13:33:08.2295573Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-15T13:33:08.2711838Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-15T13:33:08.2769460Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-15T13:33:08.2983059Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-15T13:33:08.3030697Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-15T13:33:08.3248229Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2026-11-15T13:33:08.3293728Z ##[endgroup]
-2026-11-15T13:33:08.3295151Z ##[group]Fetching the repository
-2026-11-15T13:33:08.3306403Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6f28fecccfb5782c8823b760df5fb02c90f42806:refs/remotes/origin/main
-2026-11-15T13:33:09.0765638Z From https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:09.0767764Z  * [new ref]         6f28fecccfb5782c8823b760df5fb02c90f42806 -> origin/main
-2026-11-15T13:33:09.0771162Z ##[endgroup]
-2026-11-15T13:33:09.0772538Z ##[group]Determining the checkout info
-2026-11-15T13:33:09.0773984Z ##[endgroup]
-2026-11-15T13:33:09.0774862Z [command]/usr/bin/git sparse-checkout disable
-2026-11-15T13:33:09.0777586Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
-2026-11-15T13:33:09.0782168Z ##[group]Checking out the ref
-2026-11-15T13:33:09.0783698Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
-2026-11-15T13:33:09.0785192Z Switched to a new branch 'main'
-2026-11-15T13:33:09.0786307Z branch 'main' set up to track 'origin/main'.
-2026-11-15T13:33:09.0790006Z ##[endgroup]
-2026-11-15T13:33:09.0792465Z [command]/usr/bin/git log -1 --format=%H
-2026-11-15T13:33:09.0793816Z 6f28fecccfb5782c8823b760df5fb02c90f42806
-2026-11-15T13:33:09.1004103Z ##[group]Run actions/download-artifact@v4
-2026-11-15T13:33:09.1005184Z with:
-2026-11-15T13:33:09.1005893Z   name: build
-2026-11-15T13:33:09.1006640Z   path: dist
-2026-11-15T13:33:09.1007406Z   merge-multiple: false
-2026-11-15T13:33:09.1008479Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:09.1010018Z   run-id: 43719510564
-2026-11-15T13:33:09.1010799Z ##[endgroup]
-2026-11-15T13:33:09.2361136Z Downloading single artifact
-2026-11-15T13:33:09.2540790Z (node:2012) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-15T13:33:09.2544626Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-15T13:33:09.4811528Z Preparing to download the following artifacts:
-2026-11-15T13:33:09.4815825Z - build (ID: 14164200558, Size: 41469, Expected Digest: sha256:a780130f8a6ac9296e90f154a5d10734aa69b5f3539493817053ced6b96416ad)
-2026-11-15T13:33:09.6970697Z Redirecting to blob download url: https://productionresultssa2.blob.core.windows.net/actions-results/8eab21eb-7e8d-43a6-b519-9fae6ecf795d/workflow-job-run-e1aaeb76-94fe-5f54-9d7c-471f800236c8/artifacts/44575cf5b28512d75644bf54a517dcef304ff809fd511747621b4d64f19aac66.zip
-2026-11-15T13:33:09.6973171Z Starting download of artifact to: /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/dist
-2026-11-15T13:33:09.9232107Z (node:2012) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
-2026-11-15T13:33:09.9723713Z SHA256 digest of downloaded artifact is a780130f8a6ac9296e90f154a5d10734aa69b5f3539493817053ced6b96416ad
-2026-11-15T13:33:09.9735296Z Artifact download completed successfully.
-2026-11-15T13:33:09.9736056Z Total of 1 artifact(s) downloaded
-2026-11-15T13:33:09.9759485Z Download artifact has finished successfully
-2026-11-15T13:33:09.9951684Z ##[group]Run actions/download-artifact@v4
-2026-11-15T13:33:09.9951927Z with:
-2026-11-15T13:33:09.9952123Z   name: verification-ecdsa-p256-sha256
-2026-11-15T13:33:09.9952351Z   path: verified
-2026-11-15T13:33:09.9952539Z   merge-multiple: false
-2026-11-15T13:33:09.9952785Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:09.9953061Z   run-id: 43719510564
-2026-11-15T13:33:09.9953241Z ##[endgroup]
-2026-11-15T13:33:10.1299607Z Downloading single artifact
-2026-11-15T13:33:10.1454796Z (node:2024) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-15T13:33:10.1455984Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-15T13:33:10.3619768Z Preparing to download the following artifacts:
-2026-11-15T13:33:10.3621015Z - verification-ecdsa-p256-sha256 (ID: 14164270522, Size: 521, Expected Digest: sha256:939c54ea29801a1c9110f91c8f4ea8ea17326b7b598f5ee4ef50e8dbd7c2bfed)
-2026-11-15T13:33:10.5646718Z Redirecting to blob download url: https://productionresultssa2.blob.core.windows.net/actions-results/8eab21eb-7e8d-43a6-b519-9fae6ecf795d/workflow-job-run-3b68779c-7df6-55ea-adb9-f785fa31b3c7/artifacts/246e245822197dfc44513b0bee086210700cf147c7308abd4805abe8a4bb2227.zip
-2026-11-15T13:33:10.5649061Z Starting download of artifact to: /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/verified
-2026-11-15T13:33:10.7956640Z (node:2024) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
-2026-11-15T13:33:10.8012305Z SHA256 digest of downloaded artifact is 939c54ea29801a1c9110f91c8f4ea8ea17326b7b598f5ee4ef50e8dbd7c2bfed
-2026-11-15T13:33:10.8013299Z Artifact download completed successfully.
-2026-11-15T13:33:10.8015750Z Total of 1 artifact(s) downloaded
-2026-11-15T13:33:10.8017445Z Download artifact has finished successfully
-2026-11-15T13:33:10.8151820Z ##[group]Run . ci/pipeline.env
-2026-11-15T13:33:10.8152179Z . ci/pipeline.env
-2026-11-15T13:33:10.8152541Z actual="$(sha256sum "dist/$ARTIFACT" | cut -d' ' -f1)"
-2026-11-15T13:33:10.8152920Z if [ "$actual" != "$(cat verified/verified-artifact.sha256)" ]; then
-2026-11-15T13:33:10.8153289Z   echo "::error::artifact differs from the verified bytes"; exit 1
-2026-11-15T13:33:10.8153580Z fi
-2026-11-15T13:33:10.8153756Z mkdir -p deploy
-2026-11-15T13:33:10.8153947Z {
-2026-11-15T13:33:10.8154134Z   echo "deployed=$ARTIFACT"
-2026-11-15T13:33:10.8154371Z   echo "sha256=$actual"
-2026-11-15T13:33:10.8154610Z   echo "profile=ecdsa-p256-sha256"
-2026-11-15T13:33:10.8154909Z   echo "keyid=$(jq -r .keyid verified/verification.json)"
-2026-11-15T13:33:10.8155211Z   echo "image=$IMAGE"
-2026-11-15T13:33:10.8155560Z   echo "run=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-2026-11-15T13:33:10.8155914Z } > "deploy/DEPLOYED-ecdsa-p256-sha256.txt"
-2026-11-15T13:33:10.8156188Z cat "deploy/DEPLOYED-ecdsa-p256-sha256.txt"
-2026-11-15T13:33:10.8177489Z shell: /usr/bin/bash -e {0}
-2026-11-15T13:33:10.8177714Z ##[endgroup]
-2026-11-15T13:33:10.8313637Z deployed=contoh-app.zip
-2026-11-15T13:33:10.8317474Z sha256=c37d723b4a22a82899ec18245ae7e486b1cc0a1be921d905a18d1891ce6f2997
-2026-11-15T13:33:10.8317896Z profile=ecdsa-p256-sha256
-2026-11-15T13:33:10.8318276Z keyid=1fa39d9f57e354ea96a76e60e3a9020e5abde053ae6325fc88c137e8d9277c4f
-2026-11-15T13:33:10.8319130Z image=docker.io/andiframe/zhongli@sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3
-2026-11-15T13:33:10.8320218Z run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/43719510564
-2026-11-15T13:33:10.8366372Z ##[group]Run actions/upload-artifact@v4
-2026-11-15T13:33:10.8366613Z with:
-2026-11-15T13:33:10.8366809Z   name: deployment-marker-ecdsa-p256-sha256
-2026-11-15T13:33:10.8367057Z   path: deploy/
-2026-11-15T13:33:10.8367249Z   if-no-files-found: warn
-2026-11-15T13:33:10.8367456Z   compression-level: 6
-2026-11-15T13:33:10.8367656Z   overwrite: false
-2026-11-15T13:33:10.8367843Z   include-hidden-files: false
-2026-11-15T13:33:10.8368047Z ##[endgroup]
-2026-11-15T13:33:10.9766088Z (node:2047) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-15T13:33:10.9767226Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-15T13:33:10.9842955Z With the provided path, there will be 1 file uploaded
-2026-11-15T13:33:10.9843943Z Artifact name is valid!
-2026-11-15T13:33:10.9844443Z Root directory input is valid!
-2026-11-15T13:33:11.3239378Z Beginning upload of artifact content to blob storage
-2026-11-15T13:33:11.3473526Z (node:2047) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-2026-11-15T13:33:11.5667515Z Uploaded bytes 455
-2026-11-15T13:33:11.6305342Z Finished uploading artifact content to blob storage!
-2026-11-15T13:33:11.6306642Z SHA256 digest of uploaded artifact zip is a7d92c5f9216f48bbc62f6c30e34d2da6fa4ac3b9be714209d012190d2e23a66
-2026-11-15T13:33:11.6307632Z Finalizing artifact upload
-2026-11-15T13:33:12.0167816Z Artifact deployment-marker-ecdsa-p256-sha256.zip successfully finalized. Artifact ID 14163956329
-2026-11-15T13:33:12.0169387Z Artifact deployment-marker-ecdsa-p256-sha256 has been successfully uploaded! Final size is 455 bytes. Artifact ID is 14163956329
-2026-11-15T13:33:12.0173546Z Artifact download URL: https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/43719510564/artifacts/14163956329
-2026-11-15T13:33:12.0355093Z Post job cleanup.
-2026-11-15T13:33:12.1165848Z [command]/usr/bin/git version
-2026-11-15T13:33:12.1230046Z git version 2.56.1
-2026-11-15T13:33:12.1300172Z Temporarily overriding HOME='/home/runner/work/_temp/dc7165e0-3fb5-4403-9777-3658b50b681a' before making global git config changes
-2026-11-15T13:33:12.1313308Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-15T13:33:12.1321607Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
-2026-11-15T13:33:12.1363660Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-15T13:33:12.1451680Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-15T13:33:12.1756245Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-15T13:33:12.1796405Z http.https://github.com/.extraheader
-2026-11-15T13:33:12.1818919Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-11-15T13:33:12.1884881Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-15T13:33:12.2223891Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-15T13:33:12.2270699Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-15T13:33:12.2759163Z Cleaning up orphan processes
-2026-11-15T13:33:12.3080752Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/download-artifact@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-11-19T08:40:43.6274904Z Current runner version: '2.338.2'
+2026-11-19T08:40:43.6298267Z ##[group]Runner Image Provisioner
+2026-11-19T08:40:43.6299207Z Hosted Compute Agent
+2026-11-19T08:40:43.6299831Z Version: 20261103.629
+2026-11-19T08:40:43.6300449Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-19T08:40:43.6301195Z Build Date: 2026-11-03T17:26:59Z
+2026-11-19T08:40:43.6301830Z Worker ID: {fb25f556-115e-4ba5-a90c-33390cae2c4d}
+2026-11-19T08:40:43.6302518Z Region: us-east-1
+2026-11-19T08:40:43.6303107Z Cloud: AWS
+2026-11-19T08:40:43.6303613Z ##[endgroup]
+2026-11-19T08:40:43.6305409Z ##[group]Operating System
+2026-11-19T08:40:43.6306079Z Ubuntu
+2026-11-19T08:40:43.6306557Z 24.04.5
+2026-11-19T08:40:43.6307072Z LTS
+2026-11-19T08:40:43.6307570Z ##[endgroup]
+2026-11-19T08:40:43.6308082Z ##[group]Runner Image
+2026-11-19T08:40:43.6308742Z Image: ubuntu-24.04
+2026-11-19T08:40:43.6309279Z Version: 20261111.127.1
+2026-11-19T08:40:43.6310580Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-19T08:40:43.6312103Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+2026-11-19T08:40:43.6313095Z ##[endgroup]
+2026-11-19T08:40:43.6314196Z ##[group]GITHUB_TOKEN Permissions
+2026-11-19T08:40:43.6316647Z Contents: read
+2026-11-19T08:40:43.6317232Z Metadata: read
+2026-11-19T08:40:43.6317894Z ##[endgroup]
+2026-11-19T08:40:43.6319965Z Secret source: Actions
+2026-11-19T08:40:43.6320960Z Cache mode: write
+2026-11-19T08:40:43.6321745Z Prepare workflow directory
+2026-11-19T08:40:43.6641550Z Prepare all required actions
+2026-11-19T08:40:43.6691214Z Getting action download info
+2026-11-19T08:40:43.8914137Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-19T08:40:45.9037037Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-19T08:40:46.0460226Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-19T08:40:46.4101947Z Complete job name: Deploy (ecdsa-p256-sha256, simulated)
+2026-11-19T08:40:46.4839335Z ##[group]Run actions/checkout@v4
+2026-11-19T08:40:46.4840502Z with:
+2026-11-19T08:40:46.4841520Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:46.4848415Z   token: ***
+2026-11-19T08:40:46.4849223Z   ssh-strict: true
+2026-11-19T08:40:46.4849993Z   ssh-user: git
+2026-11-19T08:40:46.4850780Z   persist-credentials: true
+2026-11-19T08:40:46.4851661Z   clean: true
+2026-11-19T08:40:46.4852468Z   sparse-checkout-cone-mode: true
+2026-11-19T08:40:46.4853397Z   fetch-depth: 1
+2026-11-19T08:40:46.4854169Z   fetch-tags: false
+2026-11-19T08:40:46.4855138Z   show-progress: true
+2026-11-19T08:40:46.4855970Z   lfs: false
+2026-11-19T08:40:46.4856713Z   submodules: false
+2026-11-19T08:40:46.4857516Z   set-safe-directory: true
+2026-11-19T08:40:46.4858402Z   allow-unsafe-pr-checkout: false
+2026-11-19T08:40:46.4859490Z ##[endgroup]
+2026-11-19T08:40:49.2357599Z Syncing repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:49.2361033Z ##[group]Getting Git version info
+2026-11-19T08:40:49.2362132Z Working directory is '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
+2026-11-19T08:40:49.2363635Z [command]/usr/bin/git version
+2026-11-19T08:40:49.3015767Z git version 2.56.1
+2026-11-19T08:40:49.3056314Z ##[endgroup]
+2026-11-19T08:40:49.3063525Z Temporarily overriding HOME='/home/runner/work/_temp/b5c8afa7-4b48-4f8c-8b85-4a9e91bab3ca' before making global git config changes
+2026-11-19T08:40:49.3065066Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-19T08:40:49.3078248Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:49.3129299Z Deleting the contents of '/home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020'
+2026-11-19T08:40:49.3132421Z ##[group]Initializing the repository
+2026-11-19T08:40:49.3142024Z [command]/usr/bin/git init /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:49.3547849Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-19T08:40:49.3549310Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-19T08:40:49.3550120Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-19T08:40:49.3550730Z hint: call:
+2026-11-19T08:40:49.3551296Z hint:
+2026-11-19T08:40:49.3551881Z hint: 	git config --global init.defaultBranch <name>
+2026-11-19T08:40:49.3552357Z hint:
+2026-11-19T08:40:49.3552735Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-19T08:40:49.3553254Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-19T08:40:49.3553630Z hint:
+2026-11-19T08:40:49.3553918Z hint: 	git branch -m <name>
+2026-11-19T08:40:49.3554217Z hint:
+2026-11-19T08:40:49.3554823Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-19T08:40:49.3558351Z Initialized empty Git repository in /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/.git/
+2026-11-19T08:40:49.3571197Z [command]/usr/bin/git remote add origin https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:49.3621245Z ##[endgroup]
+2026-11-19T08:40:49.3622221Z ##[group]Disabling automatic garbage collection
+2026-11-19T08:40:49.3622934Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-19T08:40:49.3645314Z ##[endgroup]
+2026-11-19T08:40:49.3645804Z ##[group]Setting up auth
+2026-11-19T08:40:49.3646228Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-19T08:40:49.3673305Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-19T08:40:49.5072129Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-19T08:40:49.5095147Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-19T08:40:49.5277451Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-19T08:40:49.5305015Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-19T08:40:49.5548470Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-19T08:40:49.5581992Z ##[endgroup]
+2026-11-19T08:40:49.5582929Z ##[group]Fetching the repository
+2026-11-19T08:40:49.5614335Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +98d423c183ec6cddca1352fc3d2174c52fcd6dad:refs/remotes/origin/main
+2026-11-19T08:40:49.9413853Z From https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:49.9415910Z  * [new ref]         98d423c183ec6cddca1352fc3d2174c52fcd6dad -> origin/main
+2026-11-19T08:40:49.9420059Z ##[endgroup]
+2026-11-19T08:40:49.9420806Z ##[group]Determining the checkout info
+2026-11-19T08:40:49.9421612Z ##[endgroup]
+2026-11-19T08:40:49.9422161Z [command]/usr/bin/git sparse-checkout disable
+2026-11-19T08:40:49.9467299Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-19T08:40:49.9488316Z ##[group]Checking out the ref
+2026-11-19T08:40:49.9491061Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-11-19T08:40:49.9691315Z Switched to a new branch 'main'
+2026-11-19T08:40:49.9698055Z branch 'main' set up to track 'origin/main'.
+2026-11-19T08:40:49.9706374Z ##[endgroup]
+2026-11-19T08:40:49.9734039Z [command]/usr/bin/git log -1 --format=%H
+2026-11-19T08:40:49.9750627Z 98d423c183ec6cddca1352fc3d2174c52fcd6dad
+2026-11-19T08:40:49.9933775Z ##[group]Run actions/download-artifact@v4
+2026-11-19T08:40:49.9934071Z with:
+2026-11-19T08:40:49.9934289Z   name: build
+2026-11-19T08:40:49.9934834Z   path: dist
+2026-11-19T08:40:49.9935106Z   merge-multiple: false
+2026-11-19T08:40:49.9935390Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:49.9935713Z   run-id: 44489522209
+2026-11-19T08:40:49.9935939Z ##[endgroup]
+2026-11-19T08:40:50.1084384Z Downloading single artifact
+2026-11-19T08:40:50.1266235Z (node:2064) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T08:40:50.1267302Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T08:40:50.2240264Z Preparing to download the following artifacts:
+2026-11-19T08:40:50.2241225Z - build (ID: 14512046730, Size: 41750, Expected Digest: sha256:dee1f2ee6876452d7926fd9332f504c807d85176e9283baad845e18bc7a5022e)
+2026-11-19T08:40:50.4287965Z Redirecting to blob download url: https://productionresultssa5.blob.core.windows.net/actions-results/be3f2c0d-b086-451a-ab84-229a98df7ae3/workflow-job-run-5745469b-91ac-57c8-833c-f94377157b27/artifacts/44575cf5b28512d75644bf54a517dcef304ff809fd511747621b4d64f19aac66.zip
+2026-11-19T08:40:50.4303421Z Starting download of artifact to: /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/dist
+2026-11-19T08:40:50.4747174Z (node:2064) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-19T08:40:50.4810315Z SHA256 digest of downloaded artifact is dee1f2ee6876452d7926fd9332f504c807d85176e9283baad845e18bc7a5022e
+2026-11-19T08:40:50.4811238Z Artifact download completed successfully.
+2026-11-19T08:40:50.4811839Z Total of 1 artifact(s) downloaded
+2026-11-19T08:40:50.4814922Z Download artifact has finished successfully
+2026-11-19T08:40:50.5627965Z ##[group]Run actions/download-artifact@v4
+2026-11-19T08:40:50.5628279Z with:
+2026-11-19T08:40:50.5628518Z   name: verification-ecdsa-p256-sha256
+2026-11-19T08:40:50.5628782Z   path: verified
+2026-11-19T08:40:50.5629061Z   merge-multiple: false
+2026-11-19T08:40:50.5629335Z   repository: andi-frame/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:50.5629661Z   run-id: 44489522209
+2026-11-19T08:40:50.5629883Z ##[endgroup]
+2026-11-19T08:40:50.6730386Z Downloading single artifact
+2026-11-19T08:40:50.6848885Z (node:2076) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T08:40:50.6851168Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T08:40:50.7776096Z Preparing to download the following artifacts:
+2026-11-19T08:40:50.7788913Z - verification-ecdsa-p256-sha256 (ID: 14512550981, Size: 521, Expected Digest: sha256:ba52cd2260bb3af478bcce34547fa0365e92d68d37e342465b899328f4095176)
+2026-11-19T08:40:50.8965572Z Redirecting to blob download url: https://productionresultssa5.blob.core.windows.net/actions-results/be3f2c0d-b086-451a-ab84-229a98df7ae3/workflow-job-run-ffe8eb01-c9cb-5f22-a298-de6fa55c01c5/artifacts/246e245822197dfc44513b0bee086210700cf147c7308abd4805abe8a4bb2227.zip
+2026-11-19T08:40:50.8975323Z Starting download of artifact to: /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020/verified
+2026-11-19T08:40:50.9380513Z (node:2076) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-19T08:40:50.9485523Z SHA256 digest of downloaded artifact is ba52cd2260bb3af478bcce34547fa0365e92d68d37e342465b899328f4095176
+2026-11-19T08:40:50.9500228Z Artifact download completed successfully.
+2026-11-19T08:40:50.9501005Z Total of 1 artifact(s) downloaded
+2026-11-19T08:40:50.9501464Z Download artifact has finished successfully
+2026-11-19T08:40:50.9584908Z ##[group]Run . ci/pipeline.env
+2026-11-19T08:40:50.9585352Z . ci/pipeline.env
+2026-11-19T08:40:50.9585753Z actual="$(sha256sum "dist/$ARTIFACT" | cut -d' ' -f1)"
+2026-11-19T08:40:50.9586171Z if [ "$actual" != "$(cat verified/verified-artifact.sha256)" ]; then
+2026-11-19T08:40:50.9586564Z   echo "::error::artifact differs from the verified bytes"; exit 1
+2026-11-19T08:40:50.9586935Z fi
+2026-11-19T08:40:50.9587162Z mkdir -p deploy
+2026-11-19T08:40:50.9587435Z {
+2026-11-19T08:40:50.9587676Z   echo "deployed=$ARTIFACT"
+2026-11-19T08:40:50.9587939Z   echo "sha256=$actual"
+2026-11-19T08:40:50.9588253Z   echo "profile=ecdsa-p256-sha256"
+2026-11-19T08:40:50.9588582Z   echo "keyid=$(jq -r .keyid verified/verification.json)"
+2026-11-19T08:40:50.9588970Z   echo "image=$IMAGE"
+2026-11-19T08:40:50.9589406Z   echo "run=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+2026-11-19T08:40:50.9589803Z } > "deploy/DEPLOYED-ecdsa-p256-sha256.txt"
+2026-11-19T08:40:50.9590138Z cat "deploy/DEPLOYED-ecdsa-p256-sha256.txt"
+2026-11-19T08:40:51.1086544Z shell: /usr/bin/bash -e {0}
+2026-11-19T08:40:51.1086937Z ##[endgroup]
+2026-11-19T08:40:51.1480741Z deployed=contoh-app.zip
+2026-11-19T08:40:51.1481352Z sha256=df12ad48e1c50100e8d29e1129e4132a7aae7b9c37e2e5a8de0848404df73c85
+2026-11-19T08:40:51.1481765Z profile=ecdsa-p256-sha256
+2026-11-19T08:40:51.1482182Z keyid=1fa39d9f57e354ea96a76e60e3a9020e5abde053ae6325fc88c137e8d9277c4f
+2026-11-19T08:40:51.1482809Z image=docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
+2026-11-19T08:40:51.1483699Z run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209
+2026-11-19T08:40:51.1531755Z ##[group]Run actions/upload-artifact@v4
+2026-11-19T08:40:51.1532095Z with:
+2026-11-19T08:40:51.1532335Z   name: deployment-marker-ecdsa-p256-sha256
+2026-11-19T08:40:51.1532678Z   path: deploy/
+2026-11-19T08:40:51.1532908Z   if-no-files-found: warn
+2026-11-19T08:40:51.1533299Z   compression-level: 6
+2026-11-19T08:40:51.1533604Z   overwrite: false
+2026-11-19T08:40:51.1533854Z   include-hidden-files: false
+2026-11-19T08:40:51.1534145Z ##[endgroup]
+2026-11-19T08:40:51.2755001Z (node:2096) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-19T08:40:51.2756397Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-19T08:40:51.2867224Z With the provided path, there will be 1 file uploaded
+2026-11-19T08:40:51.2915058Z Artifact name is valid!
+2026-11-19T08:40:51.2915773Z Root directory input is valid!
+2026-11-19T08:40:51.5055286Z Beginning upload of artifact content to blob storage
+2026-11-19T08:40:51.5890939Z (node:2096) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-19T08:40:51.6315448Z Uploaded bytes 454
+2026-11-19T08:40:51.6482080Z Finished uploading artifact content to blob storage!
+2026-11-19T08:40:51.6482979Z SHA256 digest of uploaded artifact zip is 27f5de3343ec47280f764bba4ee7272a603f00a9378bd9fbb0da6d04f14bcc04
+2026-11-19T08:40:51.6483776Z Finalizing artifact upload
+2026-11-19T08:40:51.9986920Z Artifact deployment-marker-ecdsa-p256-sha256.zip successfully finalized. Artifact ID 14512491462
+2026-11-19T08:40:51.9988071Z Artifact deployment-marker-ecdsa-p256-sha256 has been successfully uploaded! Final size is 454 bytes. Artifact ID is 14512491462
+2026-11-19T08:40:51.9991619Z Artifact download URL: https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209/artifacts/14512491462
+2026-11-19T08:40:52.0135392Z Post job cleanup.
+2026-11-19T08:40:52.0814604Z [command]/usr/bin/git version
+2026-11-19T08:40:52.0855371Z git version 2.56.1
+2026-11-19T08:40:52.0917324Z Temporarily overriding HOME='/home/runner/work/_temp/1b5ae499-6819-440f-ae24-eb364941987a' before making global git config changes
+2026-11-19T08:40:52.0919619Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-19T08:40:52.0925125Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/13523075_13523128_13523154_Tugas3_IF4020/13523075_13523128_13523154_Tugas3_IF4020
+2026-11-19T08:40:52.0967075Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-19T08:40:52.1013503Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-19T08:40:52.1299685Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-19T08:40:52.1325527Z http.https://github.com/.extraheader
+2026-11-19T08:40:52.1337292Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-19T08:40:52.1412191Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-19T08:40:52.1697648Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-19T08:40:52.1704119Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-19T08:40:52.1942169Z Cleaning up orphan processes
+2026-11-19T08:40:52.2180039Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/download-artifact@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

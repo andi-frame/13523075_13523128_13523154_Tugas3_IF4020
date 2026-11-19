@@ -4,13 +4,13 @@ zhongli 0.1.0
 Generated ed25519 key pair
   private key: /output/runtime.key.pem
   public key:  /output/runtime.pub.pem
-  keyid:       2c69cff49387bf1da409d319d138e528ec4c11699a034c5f42181b3edc33dfa4
+  keyid:       f0a11982686465a1c8850ae0566e777adc4bcb7ce078e04c53da2b56f3f953e5
 Trusted key (added)
-  keyid:     2c69cff49387bf1da409d319d138e528ec4c11699a034c5f42181b3edc33dfa4
+  keyid:     f0a11982686465a1c8850ae0566e777adc4bcb7ce078e04c53da2b56f3f953e5
   algorithm: ed25519
   package:   runtime-demo
   packages:  runtime-demo
-2c69cff49387bf1da409d319d138e528ec4c11699a034c5f42181b3edc33dfa4  ed25519  runtime-demo
+f0a11982686465a1c8850ae0566e777adc4bcb7ce078e04c53da2b56f3f953e5  ed25519  runtime-demo
 keygen without --out: exit 2
 runtime.key.pem owner 1001:1001
 runtime.pub.pem owner 1001:1001

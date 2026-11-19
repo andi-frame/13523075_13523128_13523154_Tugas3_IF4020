@@ -1,8 +1,8 @@
 scenario=C04-artifact-missing
 profile=ecdsa-p256-sha256
 trust_store=ci/trust.json
-image=docker.io/andiframe/zhongli@sha256:596ae4079fe1fad5e64f0428c3d2080ea792d818054035a06f11d15b894e4ff3
+image=docker.io/andiframe/zhongli@sha256:a264d46624080b3774d264032a6b5e3e62ebab599e21afdccd952488a0e73620
 expected=INPUT_ERROR exit 2
 actual=INPUT_ERROR exit 2 valid=false
 deployment_marker=absent
-run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/43719510564
+run=https://github.com/andi-frame/13523075_13523128_13523154_Tugas3_IF4020/actions/runs/44489522209
