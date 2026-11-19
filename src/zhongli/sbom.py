@@ -23,7 +23,7 @@ The SBOM records the artifact in ``metadata.component``:
   "serialNumber": "urn:uuid:...",
   "version": 1,
   "metadata": {
-    "tools": {"components": [{"type": "application", "name": "zhongli", "version": "0.1.1"}]},
+    "tools": {"components": [{"type": "application", "name": "zhongli", "version": "0.1.2"}]},
     "component": {
       "type": "application",
       "bom-ref": "release-artifact",

@@ -8,6 +8,8 @@ from cryptography.exceptions import InvalidSignature, UnsupportedAlgorithm
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
+from ._pkcs8 import validate_pkcs8
+
 PROFILE = "rsa-pss-sha256"
 SIGNATURE_SIZE = 384
 
@@ -63,9 +65,10 @@ def load_private_key(pem_bytes: bytes) -> rsa.RSAPrivateKey:
     except (ValueError, TypeError, UnsupportedAlgorithm) as exc:
         raise KeyValidationError("Invalid unencrypted PKCS8 private key") from exc
     _private(key)
-    # Re-export ensures the key uses the unconstrained rsaEncryption profile.
-    if der != export_private_pkcs8_der(key):
-        raise KeyValidationError("Expected canonical PKCS8 rsaEncryption encoding")
+    try:
+        validate_pkcs8(der, export_private_pkcs8_der(key))
+    except ValueError as exc:
+        raise KeyValidationError(f"Invalid PKCS8 envelope: {exc}") from exc
     return key
 
 

@@ -55,11 +55,14 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _usage_failure(error: UsageError, argv: list[str]) -> int:
+def _usage_failure(error: UsageError, argv: list[str], context: argparse.Namespace) -> int:
     error.parser.print_usage(sys.stderr)
-    if error.parser.prog == f"{PROG} verify" and "--json" in argv:
+    if (error.parser.prog == f"{PROG} verify" or getattr(context, "command", None) == "verify") \
+            and "--json" in argv:
         return emit(VerificationResult(Status.INPUT_ERROR, f"Usage error: {error}"), as_json=True)
-    if error.parser.prog == f"{PROG} sbom verify" and "--json" in argv:
+    if (error.parser.prog == f"{PROG} sbom verify" or
+            (getattr(context, "command", None) == "sbom" and
+             getattr(context, "sbom_command", None) == "verify")) and "--json" in argv:
         unchecked = VerificationResult(Status.INPUT_ERROR, "Not checked because of a usage error")
         return emit_sbom(SbomVerificationResult(Status.INPUT_ERROR, None, f"Usage error: {error}",
                                                 unchecked, unchecked), as_json=True)
@@ -69,10 +72,13 @@ def _usage_failure(error: UsageError, argv: list[str]) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
+    # Keep the namespace even if parse_args reports leftover arguments at the
+    # root parser, so the selected command still determines the JSON contract.
+    context = argparse.Namespace()
     try:
-        args = build_parser().parse_args(argv)
+        args = build_parser().parse_args(argv, namespace=context)
     except UsageError as error:
-        return _usage_failure(error, argv)
+        return _usage_failure(error, argv, context)
     try:
         return args.handler(args)
     except Exception as exc:

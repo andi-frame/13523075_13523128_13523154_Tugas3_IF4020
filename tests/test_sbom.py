@@ -249,3 +249,12 @@ def test_cli_create_and_sign(tmp_path, keypairs):
     proc = _cli("sbom", "sign", "--sbom", "sbom.json", "--package", "other-app", "--version", VERSION,
                 "--key", "k.key.pem", "--out", "x.json", cwd=tmp_path)
     assert proc.returncode == 2 and b"INPUT_ERROR" in proc.stderr
+
+
+def test_cli_unknown_sbom_verify_option_is_json_input_error(tmp_path):
+    proc = _cli("sbom", "verify", "--file", "x", "--bundle", "b", "--sbom", "s",
+                "--sbom-bundle", "sb", "--trust-store", "t", "--package", "demo",
+                "--version", "1.0", "--json", "--unknown", cwd=tmp_path)
+    assert proc.returncode == 2 and proc.stdout.endswith(b"\n")
+    data = json.loads(proc.stdout)
+    assert data["status"] == "INPUT_ERROR" and data["valid"] is False and data["stage"] is None

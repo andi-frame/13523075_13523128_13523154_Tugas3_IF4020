@@ -354,3 +354,22 @@ def test_python_module_entry_point():
     result = subprocess.run([sys.executable, "-m", "zhongli", "--version"],
                             capture_output=True, text=True)
     assert result.returncode == 0 and result.stdout.startswith("zhongli ")
+
+
+@pytest.mark.parametrize("extra", [["--unknown"], ["unexpected"], ["--pack", "demo"]])
+def test_cli_json_unknown_arguments_are_input_errors(make_release, extra):
+    release = make_release("ed25519")
+    result = run(*_verify_args(release), "--json", *extra)
+    assert result.returncode == 2 and result.stdout.endswith("\n")
+    data = json.loads(result.stdout)
+    assert data["valid"] is False and data["status"] == "INPUT_ERROR"
+    assert data["algorithm"] is None and data["keyid"] is None
+    assert "usage:" in result.stderr
+
+
+def test_cli_does_not_treat_a_package_value_as_verify_command(make_release):
+    release = make_release("ed25519")
+    result = run("sign", "--file", release.artifact, "--package", "verify", "--version", "1.0",
+                 "--key", release.root / "publisher.key.pem", "--out", release.root / "unused.json", "--json")
+    assert result.returncode == 2 and result.stdout == ""
+    assert not (release.root / "unused.json").exists()

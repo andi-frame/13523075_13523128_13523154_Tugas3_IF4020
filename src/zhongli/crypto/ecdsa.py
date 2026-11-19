@@ -16,6 +16,8 @@ from cryptography.hazmat.primitives.asymmetric.utils import (
     decode_dss_signature, encode_dss_signature,
 )
 
+from ._pkcs8 import validate_pkcs8
+
 PROFILE = "ecdsa-p256-sha256"
 SIGNATURE_SIZE = 64
 SCALAR_SIZE = 32
@@ -78,8 +80,10 @@ def load_private_key(pem_bytes: bytes) -> ec.EllipticCurvePrivateKey:
     except (ValueError, TypeError, UnsupportedAlgorithm) as exc:
         raise KeyValidationError("Invalid unencrypted PKCS8 private key") from exc
     key = _private(key)
-    if der != export_private_pkcs8_der(key):
-        raise KeyValidationError("Expected canonical PKCS8 P-256 encoding")
+    try:
+        validate_pkcs8(der, export_private_pkcs8_der(key))
+    except ValueError as exc:
+        raise KeyValidationError(f"Invalid PKCS8 envelope: {exc}") from exc
     return key
 
 

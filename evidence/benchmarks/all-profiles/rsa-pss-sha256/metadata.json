@@ -1,6 +1,6 @@
 {
   "algorithm": "rsa-pss-sha256",
-  "program_version": "0.1.1",
+  "program_version": "0.1.2",
   "python": "3.13.15",
   "os": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
   "machine": "x86_64",

@@ -8,6 +8,8 @@ from cryptography.exceptions import InvalidSignature, UnsupportedAlgorithm
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
+from ._pkcs8 import validate_pkcs8
+
 PROFILE = "ed25519"
 SIGNATURE_SIZE = 64
 # SPKI prefix: id-Ed25519 (1.3.101.112) without parameters, then a 32-byte key.
@@ -63,8 +65,10 @@ def load_private_key(pem_bytes: bytes) -> ed25519.Ed25519PrivateKey:
     except (ValueError, TypeError, UnsupportedAlgorithm) as exc:
         raise KeyValidationError("Invalid unencrypted PKCS8 private key") from exc
     key = _private(key)
-    if der != export_private_pkcs8_der(key):
-        raise KeyValidationError("Expected canonical PKCS8 Ed25519 encoding")
+    try:
+        validate_pkcs8(der, export_private_pkcs8_der(key))
+    except ValueError as exc:
+        raise KeyValidationError(f"Invalid PKCS8 envelope: {exc}") from exc
     return key
 
 

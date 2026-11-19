@@ -168,7 +168,8 @@ or trust store is tried, and the trust store is never updated from a bundle.
 
 With `--json`, stdout holds exactly one JSON object followed by a newline;
 diagnostics go to stderr. This also applies to usage errors such as a missing
-option, which are reported as `INPUT_ERROR`.
+option, an unknown option or an unexpected positional argument: all are reported
+as `INPUT_ERROR`, including errors raised by the root argument parser.
 
 ```json
 {"valid": true, "status": "OK", "message": "Signature and artifact are valid.", "algorithm": "ecdsa-p256-sha256", "keyid": "2339bbb4fed9733fdf3494cca5b32335b9770e67391dbbca99fd55b0d7e50668", "package": "demo", "version": "1.0"}
@@ -300,8 +301,10 @@ ECDSA the library hashes `M` with SHA-256 exactly once; no digest is passed in
 
 Key loading and export use the
 [serialization API](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization/).
-Private keys must match canonical unencrypted PKCS#8 DER after loading and
-re-export, rejecting SEC1/PKCS#1 data disguised as `PRIVATE KEY`. Public keys must be in canonical DER: a key that differs from its own re-export
+Private key import checks the PKCS#8 envelope and profile AlgorithmIdentifier
+(OID and parameters), while the backend validates the key material. Standard
+optional attributes such as `friendlyName` are accepted; SEC1/PKCS#1 data
+disguised as `PRIVATE KEY` and trailing DER data are rejected. Public keys must be in canonical DER: a key that differs from its own re-export
 (for example a compressed EC point, explicit curve parameters or an RSA-PSS
 restricted OID) is rejected.
 
