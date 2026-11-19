@@ -14,6 +14,8 @@ import math
 import platform
 from pathlib import Path
 import statistics
+import subprocess
+import sys
 import tempfile
 from time import perf_counter_ns
 import ssl
@@ -23,9 +25,7 @@ from cryptography.hazmat.backends.openssl import backend as openssl_backend
 from zhongli import keys
 from zhongli.artifact import read_artifact
 from zhongli.formats import build_manifest, encode_bundle, serialize_manifest
-from zhongli.signing import sign
 from zhongli.trust import add_trust
-from zhongli.verification import Status, verify
 
 
 def summarize(samples):
@@ -39,8 +39,8 @@ def run_benchmark(adapter, output: Path, *, iterations=30, warmups=5, keygens=5,
     """Shared harness: adapter must implement the documented crypto contract.
 
     ``crypto_*`` rows time the adapter on manifest bytes only. ``*_end_to_end``
-    rows time the in-process application functions, including file I/O, key
-    loading, artifact hashing, parsing and (for sign) the atomic bundle write.
+    rows time complete CLI subprocesses, including interpreter start-up, option
+    parsing, file I/O, key loading, artifact hashing and output writes.
     """
     if iterations < 30 or warmups < 5 or keygens < 5 or len(set(sizes)) < 3 or min(sizes) < 0:
         raise ValueError("Require >=30 samples, >=5 warmups, >=5 keygens and >=3 distinct sizes")
@@ -95,15 +95,25 @@ def run_benchmark(adapter, output: Path, *, iterations=30, warmups=5, keygens=5,
 
             measure("crypto_verify", size, crypto_verify)
             bundle_path = root / "bundle.json"
-            measure("sign_end_to_end", size, lambda: sign(artifact, "benchmark", "1.0",
-                    private_path, bundle_path, adapter=adapter))
+            def command(arguments, output_path):
+                with output_path.open("wb") as stdout:
+                    subprocess.run([sys.executable, "-m", "zhongli", *arguments],
+                                   stdout=stdout, stderr=subprocess.PIPE, check=True)
 
-            def verify_end_to_end():
-                result = verify(artifact, bundle_path, store_path, "benchmark", "1.0")
-                if result.status is not Status.OK:
-                    raise ValueError(f"Application verification failed during benchmark: {result.status}")
-
-            measure("verify_end_to_end", size, verify_end_to_end)
+            measure("sign_end_to_end", size, lambda: command([
+                "sign", "--file", str(artifact), "--package", "benchmark", "--version", "1.0",
+                "--key", str(private_path), "--out", str(bundle_path),
+            ], root / "sign.stdout"))
+            verification_path = root / "verification.json"
+            measure("verify_end_to_end", size, lambda: command([
+                "verify", "--file", str(artifact), "--bundle", str(bundle_path),
+                "--trust-store", str(store_path), "--package", "benchmark",
+                "--version", "1.0", "--json",
+            ], verification_path))
+            # Validate command output outside the measured interval.
+            result = json.loads(verification_path.read_bytes())
+            if result["status"] != "OK" or result["valid"] is not True:
+                raise ValueError("CLI verification failed during benchmark")
     with (output / "raw.csv").open("w", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=("operation", "artifact_bytes", "iteration", "elapsed_ns"), lineterminator="\n")
         writer.writeheader()
@@ -119,17 +129,19 @@ def run_benchmark(adapter, output: Path, *, iterations=30, warmups=5, keygens=5,
         cpu = next((line.split(":", 1)[1].strip() for line in cpuinfo.read_text().splitlines()
                     if line.startswith("model name")), cpu)
     metadata = {
-        "algorithm": profile, "python": platform.python_version(), "os": platform.platform(),
+        "algorithm": profile, "program_version": version("zhongli"),
+        "python": platform.python_version(), "os": platform.platform(),
         "machine": platform.machine(), "cpu": cpu, "cryptography": version("cryptography"),
         "cryptography_openssl": openssl_backend.openssl_version_text(),
         "python_ssl": ssl.OPENSSL_VERSION,
         "iterations": iterations, "warmups": warmups, "keygens": keygens,
         "clock": "perf_counter_ns", "p95_method": "nearest rank ceil(0.95*n)",
         "dataset": dataset, "key_sizes": key_sizes,
-        "scope": ("In-process; crypto includes profile hashing; end-to-end sign includes key load, "
-                  "artifact read/hash, serialization and atomic fsync/write; end-to-end verify includes "
-                  "bundle and trust store reads, strict parsing, key validation, signature, metadata "
-                  "and artifact checks. Interpreter start-up is excluded."),
+        "scope": ("Crypto includes profile hashing. End-to-end uses a fresh CLI subprocess per "
+                  "sample via sys.executable -m zhongli, including interpreter start-up, option "
+                  "parsing, key loading, artifact read/hash, format and trust checks, atomic bundle "
+                  "write for sign, and stdout written to a file (JSON for verify). "
+                  "Container start-up is excluded."),
     }
     (output / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     (output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")

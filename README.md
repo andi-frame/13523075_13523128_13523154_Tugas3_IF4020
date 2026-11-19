@@ -205,7 +205,8 @@ whitespace, checked by decoding and re-encoding.
 entry has exactly `keyid`, `algorithm`, `public_key_pem` and `packages`. Every
 entry is validated on load: the key matches the profile and its parameters, the
 keyid matches the key, packages are non-empty, unique and contain no wildcards,
-and keyids are unique. Invalid stores are never overwritten. Updates are written
+and keyids are unique. Trust stores have no additional file-size cap; a valid
+store remains readable after its package permissions grow. Invalid stores are never overwritten. Updates are written
 to a temporary file in the same directory and then atomically replaced.
 
 **Keys** are unencrypted PKCS#8 PEM (`PRIVATE KEY`) and SubjectPublicKeyInfo PEM
@@ -298,7 +299,8 @@ ECDSA the library hashes `M` with SHA-256 exactly once; no digest is passed in
 
 Key loading and export use the
 [serialization API](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization/).
-Public keys must be in canonical DER: a key that differs from its own re-export
+Private keys must match canonical unencrypted PKCS#8 DER after loading and
+re-export, rejecting SEC1/PKCS#1 data disguised as `PRIVATE KEY`. Public keys must be in canonical DER: a key that differs from its own re-export
 (for example a compressed EC point, explicit curve parameters or an RSA-PSS
 restricted OID) is rejected.
 
@@ -349,10 +351,13 @@ uv run python benchmarks/run.py --out <new-directory>       # performance measur
 - `benchmarks/run.py` measures key generation, artifact hashing, crypto sign and
   verify on the manifest, and end-to-end `sign`/`verify` for 1 KiB, 1 MiB and
   10 MiB artifacts (5 warm-up runs, 30 samples, monotonic `perf_counter_ns`,
-  nearest-rank P95 at `ceil(0.95 n)`). `evidence/benchmarks/all-profiles/` has
+  nearest-rank P95 at `ceil(0.95 n)`). Each end-to-end sample starts a fresh
+  `python -m zhongli` process and includes CLI argument parsing, interpreter
+  start-up and stdout written to a file (`verify --json`); container start-up
+  is excluded. `evidence/benchmarks/all-profiles/` has
   raw CSV, environment metadata and `summary.md` for all three profiles on one
-  machine. End-to-end RSA signing is dominated by the validation that OpenSSL
-  runs when loading a 3072-bit private key, not by the signature itself.
+  machine. End-to-end RSA signing includes interpreter start-up and the validation
+  OpenSSL runs when loading a 3072-bit private key, in addition to the signature itself.
 
 Key pairs in `tests/fixtures/` and `evidence/` are named `TEST_ONLY` and exist
 only for tests. Never use them for real releases.

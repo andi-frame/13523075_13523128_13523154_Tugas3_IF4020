@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-15T13:14:39+00:00",
+  "generated_at": "2026-11-19T09:04:05+00:00",
   "environment": {
-    "python": "3.13.18",
-    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
-    "zhongli": "0.1.0",
+    "python": "3.13.15",
+    "platform": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
+    "zhongli": "0.1.1",
     "cryptography": "50.0.2",
-    "openssl_cli": "OpenSSL 3.0.22 25 Aug 2026 (Library: OpenSSL 3.0.22 25 Aug 2026)"
+    "openssl_cli": "OpenSSL 3.6.5 29 Sep 2026 (Library: OpenSSL 3.6.5 29 Sep 2026)"
   },
   "cases": [
     {
@@ -380,7 +380,7 @@
         "valid": false,
         "status": "KEY_NOT_TRUSTED",
         "stage": "sbom",
-        "message": "Key 06c792d6461dcc3be758f82488f6223c24d283c7eae50e8455862c3b816c49d8 is not in the trust store",
+        "message": "Key f87546aac18e12de6ffd91ccad2779fae967877d999a05d646e0f6410f69d064 is not in the trust store",
         "artifact": {
           "valid": true,
           "status": "OK",
@@ -393,9 +393,9 @@
         "sbom": {
           "valid": false,
           "status": "KEY_NOT_TRUSTED",
-          "message": "Key 06c792d6461dcc3be758f82488f6223c24d283c7eae50e8455862c3b816c49d8 is not in the trust store",
+          "message": "Key f87546aac18e12de6ffd91ccad2779fae967877d999a05d646e0f6410f69d064 is not in the trust store",
           "algorithm": "rsa-pss-sha256",
-          "keyid": "06c792d6461dcc3be758f82488f6223c24d283c7eae50e8455862c3b816c49d8",
+          "keyid": "f87546aac18e12de6ffd91ccad2779fae967877d999a05d646e0f6410f69d064",
           "package": "contoh-app",
           "version": "1.0.0"
         },
@@ -890,7 +890,7 @@
         "valid": false,
         "status": "KEY_NOT_TRUSTED",
         "stage": "sbom",
-        "message": "Key ff81078828e668b3c7911eddca972d569b1caff893e54a4f87e12d950b74b671 is not in the trust store",
+        "message": "Key 4701987c689e40d536de9bcc5b18295fef063c82a933a55de3777b7c0e805ca5 is not in the trust store",
         "artifact": {
           "valid": true,
           "status": "OK",
@@ -903,9 +903,9 @@
         "sbom": {
           "valid": false,
           "status": "KEY_NOT_TRUSTED",
-          "message": "Key ff81078828e668b3c7911eddca972d569b1caff893e54a4f87e12d950b74b671 is not in the trust store",
+          "message": "Key 4701987c689e40d536de9bcc5b18295fef063c82a933a55de3777b7c0e805ca5 is not in the trust store",
           "algorithm": "ecdsa-p256-sha256",
-          "keyid": "ff81078828e668b3c7911eddca972d569b1caff893e54a4f87e12d950b74b671",
+          "keyid": "4701987c689e40d536de9bcc5b18295fef063c82a933a55de3777b7c0e805ca5",
           "package": "contoh-app",
           "version": "1.0.0"
         },
@@ -1400,7 +1400,7 @@
         "valid": false,
         "status": "KEY_NOT_TRUSTED",
         "stage": "sbom",
-        "message": "Key e7ba8657dff89527967a2e76d81aaed3ab323ca196d3bdae8332700b1c3725b3 is not in the trust store",
+        "message": "Key 8395662ae2dbe0d71a80dbe165caa4c301be30be655b66d830c6de4fb8bd8231 is not in the trust store",
         "artifact": {
           "valid": true,
           "status": "OK",
@@ -1413,9 +1413,9 @@
         "sbom": {
           "valid": false,
           "status": "KEY_NOT_TRUSTED",
-          "message": "Key e7ba8657dff89527967a2e76d81aaed3ab323ca196d3bdae8332700b1c3725b3 is not in the trust store",
+          "message": "Key 8395662ae2dbe0d71a80dbe165caa4c301be30be655b66d830c6de4fb8bd8231 is not in the trust store",
           "algorithm": "ed25519",
-          "keyid": "e7ba8657dff89527967a2e76d81aaed3ab323ca196d3bdae8332700b1c3725b3",
+          "keyid": "8395662ae2dbe0d71a80dbe165caa4c301be30be655b66d830c6de4fb8bd8231",
           "package": "contoh-app",
           "version": "1.0.0"
         },

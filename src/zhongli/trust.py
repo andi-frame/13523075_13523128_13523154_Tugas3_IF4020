@@ -16,8 +16,6 @@ from . import keys
 from .formats import FormatError, HEX_PATTERN, PACKAGE_PATTERN, parse_json_strict
 
 SCHEMA = "minisign-trust/v1"
-# Internal limit, not part of the spec.
-TRUST_STORE_LIMIT = 1024 * 1024
 _ENTRY_FIELDS = ("keyid", "algorithm", "public_key_pem", "packages")
 
 
@@ -98,10 +96,8 @@ def parse_trust_store_strict(raw_bytes: bytes) -> TrustStore:
     are a non-empty list of unique names without wildcards; keyids are unique.
 
     Raises:
-        FormatError: any check fails, the file exceeds 1 MiB or starts with a BOM.
+        FormatError: any check fails or the document starts with a BOM.
     """
-    if len(raw_bytes) > TRUST_STORE_LIMIT:
-        raise FormatError("Trust store exceeds 1 MiB")
     if raw_bytes.startswith(b"\xef\xbb\xbf"):
         raise FormatError("Trust store must be UTF-8 without BOM")
     data = parse_json_strict(raw_bytes)

@@ -230,3 +230,17 @@ def test_reject_explicit_curve_parameters(tmp_path):
         pytest.skip("OpenSSL build cannot export explicit-parameter keys")
     with pytest.raises(ecdsa.KeyValidationError):
         ecdsa.load_public_key((tmp_path / "explicit.pub.pem").read_bytes())
+
+
+def test_reject_sec1_disguised_as_pkcs8(pair):
+    der = pair.private_key.private_bytes(serialization.Encoding.DER,
+                                         serialization.PrivateFormat.TraditionalOpenSSL,
+                                         serialization.NoEncryption())
+    with pytest.raises(ecdsa.KeyValidationError, match="PKCS8"):
+        ecdsa.load_private_key(_pem(der, "PRIVATE KEY"))
+
+
+def test_reject_trailing_private_der_data(pair):
+    der = ecdsa.export_private_pkcs8_der(pair.private_key) + b"\x00"
+    with pytest.raises(ecdsa.KeyValidationError):
+        ecdsa.load_private_key(_pem(der, "PRIVATE KEY"))

@@ -62,7 +62,10 @@ def load_private_key(pem_bytes: bytes) -> ed25519.Ed25519PrivateKey:
         key = serialization.load_der_private_key(der, password=None)
     except (ValueError, TypeError, UnsupportedAlgorithm) as exc:
         raise KeyValidationError("Invalid unencrypted PKCS8 private key") from exc
-    return _private(key)
+    key = _private(key)
+    if der != export_private_pkcs8_der(key):
+        raise KeyValidationError("Expected canonical PKCS8 Ed25519 encoding")
+    return key
 
 
 def load_public_key(pem_bytes: bytes) -> ed25519.Ed25519PublicKey:

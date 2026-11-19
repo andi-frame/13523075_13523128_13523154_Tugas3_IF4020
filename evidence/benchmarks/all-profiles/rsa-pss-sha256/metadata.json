@@ -1,12 +1,13 @@
 {
   "algorithm": "rsa-pss-sha256",
-  "python": "3.13.18",
-  "os": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "program_version": "0.1.1",
+  "python": "3.13.15",
+  "os": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
   "machine": "x86_64",
-  "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+  "cpu": "AMD Ryzen 7 5800H with Radeon Graphics",
   "cryptography": "50.0.2",
   "cryptography_openssl": "OpenSSL 4.0.3 29 Sep 2026",
-  "python_ssl": "OpenSSL 3.0.22 25 Aug 2026",
+  "python_ssl": "OpenSSL 3.5.8 25 Aug 2026",
   "iterations": 30,
   "warmups": 5,
   "keygens": 5,
@@ -41,5 +42,5 @@
       "public_spki_der": 422
     }
   ],
-  "scope": "In-process; crypto includes profile hashing; end-to-end sign includes key load, artifact read/hash, serialization and atomic fsync/write; end-to-end verify includes bundle and trust store reads, strict parsing, key validation, signature, metadata and artifact checks. Interpreter start-up is excluded."
+  "scope": "Crypto includes profile hashing. End-to-end uses a fresh CLI subprocess per sample via sys.executable -m zhongli, including interpreter start-up, option parsing, key loading, artifact read/hash, format and trust checks, atomic bundle write for sign, and stdout written to a file (JSON for verify). Container start-up is excluded."
 }

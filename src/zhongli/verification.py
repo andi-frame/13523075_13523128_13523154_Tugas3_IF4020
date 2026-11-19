@@ -27,7 +27,7 @@ from .formats import (
     BUNDLE_LIMIT, PACKAGE_PATTERN, VERSION_PATTERN, FormatError,
     parse_bundle_strict, parse_manifest_strict,
 )
-from .trust import TRUST_STORE_LIMIT, KeyNotTrustedError, find_authorized_key, parse_trust_store_strict
+from .trust import KeyNotTrustedError, find_authorized_key, parse_trust_store_strict
 
 
 class Status(enum.StrEnum):
@@ -149,7 +149,7 @@ def verify_with_manifest(
     artifact_path, bundle_path, trust_store_path = map(Path, (artifact_path, bundle_path, trust_store_path))
     try:
         bundle_bytes = _read_limited(bundle_path, BUNDLE_LIMIT)
-        trust_bytes = _read_limited(trust_store_path, TRUST_STORE_LIMIT)
+        trust_bytes = trust_store_path.read_bytes()
         # The artifact stays open so that step 7 hashes the same file that was
         # checked for readability here.
         with artifact_path.open("rb") as artifact:

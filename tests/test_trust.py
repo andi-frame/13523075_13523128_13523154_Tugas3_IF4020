@@ -196,3 +196,31 @@ def test_profile_differs_from_manifest_not_trusted(ed_pair):
     store = trust.parse_trust_store_strict(_store(_entry(ed_pair)))
     with pytest.raises(trust.KeyNotTrustedError):
         trust.find_authorized_key(store, ed25519.fingerprint(ed_pair.public_key), "rsa-pss-sha256", "demo")
+
+
+def test_large_store_stays_usable_after_add(tmp_path, ed_pair):
+    from zhongli.signing import sign
+    from zhongli.verification import Status, verify
+
+    path = tmp_path / "trust.json"
+    packages = ["demo"] + [f"p{i:063d}" for i in range(15000)]
+    data = {"schema": "minisign-trust/v1", "keys": [_entry(ed_pair, packages=packages)]}
+    compact = json.dumps(data, separators=(",", ":")).encode()
+    assert len(compact) < 1024 * 1024
+    path.write_bytes(compact)
+    trust.add_trust(path, _pem(ed_pair), "new-package")
+    assert path.stat().st_size > 1024 * 1024
+    assert trust.list_trust(path)[0].packages == (*packages, "new-package")
+    before = path.read_bytes()
+    assert not trust.add_trust(path, _pem(ed_pair), "new-package").changed
+    assert path.read_bytes() == before
+
+    artifact = tmp_path / "demo.bin"
+    artifact.write_bytes(b"large trust store regression")
+    private = tmp_path / "publisher.key.pem"
+    private.write_bytes(ed25519.export_private_pkcs8_pem(ed_pair.private_key))
+    bundle = tmp_path / "release.json"
+    sign(artifact, "demo", "1.0", private, bundle)
+    assert verify(artifact, bundle, path, "demo", "1.0").status is Status.OK
+    trust.remove_trust(path, ed25519.fingerprint(ed_pair.public_key))
+    assert trust.list_trust(path) == ()

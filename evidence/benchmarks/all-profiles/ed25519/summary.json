@@ -3,112 +3,112 @@
     "operation": "keygen",
     "artifact_bytes": 0,
     "n": 5,
-    "median_ns": 46416,
-    "p95_ns": 123738
+    "median_ns": 33853,
+    "p95_ns": 91252
   },
   {
     "operation": "artifact_sha256",
     "artifact_bytes": 1024,
     "n": 30,
-    "median_ns": 15710.5,
-    "p95_ns": 16641
+    "median_ns": 16045.0,
+    "p95_ns": 17172
   },
   {
     "operation": "crypto_sign",
     "artifact_bytes": 1024,
     "n": 30,
-    "median_ns": 34612.0,
-    "p95_ns": 50436
+    "median_ns": 30287.0,
+    "p95_ns": 30838
   },
   {
     "operation": "crypto_verify",
     "artifact_bytes": 1024,
     "n": 30,
-    "median_ns": 105091.0,
-    "p95_ns": 140057
+    "median_ns": 97082.0,
+    "p95_ns": 104236
   },
   {
     "operation": "sign_end_to_end",
     "artifact_bytes": 1024,
     "n": 30,
-    "median_ns": 2178390.0,
-    "p95_ns": 3994727
+    "median_ns": 97977414.0,
+    "p95_ns": 150716734
   },
   {
     "operation": "verify_end_to_end",
     "artifact_bytes": 1024,
     "n": 30,
-    "median_ns": 271307.5,
-    "p95_ns": 929221
+    "median_ns": 104341315.5,
+    "p95_ns": 123050681
   },
   {
     "operation": "artifact_sha256",
     "artifact_bytes": 1048576,
     "n": 30,
-    "median_ns": 781110.5,
-    "p95_ns": 1287613
+    "median_ns": 631657.5,
+    "p95_ns": 682954
   },
   {
     "operation": "crypto_sign",
     "artifact_bytes": 1048576,
     "n": 30,
-    "median_ns": 55361.5,
-    "p95_ns": 80423
+    "median_ns": 29690.5,
+    "p95_ns": 33062
   },
   {
     "operation": "crypto_verify",
     "artifact_bytes": 1048576,
     "n": 30,
-    "median_ns": 108965.5,
-    "p95_ns": 122895
+    "median_ns": 94397.5,
+    "p95_ns": 99948
   },
   {
     "operation": "sign_end_to_end",
     "artifact_bytes": 1048576,
     "n": 30,
-    "median_ns": 3203075.5,
-    "p95_ns": 8911860
+    "median_ns": 91358307.5,
+    "p95_ns": 112933607
   },
   {
     "operation": "verify_end_to_end",
     "artifact_bytes": 1048576,
     "n": 30,
-    "median_ns": 1493253.5,
-    "p95_ns": 5941520
+    "median_ns": 87584912.0,
+    "p95_ns": 116042543
   },
   {
     "operation": "artifact_sha256",
     "artifact_bytes": 10485760,
     "n": 30,
-    "median_ns": 9352927.0,
-    "p95_ns": 15498864
+    "median_ns": 7926755.5,
+    "p95_ns": 8576377
   },
   {
     "operation": "crypto_sign",
     "artifact_bytes": 10485760,
     "n": 30,
-    "median_ns": 33705.0,
-    "p95_ns": 36777
+    "median_ns": 29681.0,
+    "p95_ns": 31860
   },
   {
     "operation": "crypto_verify",
     "artifact_bytes": 10485760,
     "n": 30,
-    "median_ns": 105195.0,
-    "p95_ns": 138813
+    "median_ns": 95966.0,
+    "p95_ns": 100989
   },
   {
     "operation": "sign_end_to_end",
     "artifact_bytes": 10485760,
     "n": 30,
-    "median_ns": 12087018.0,
-    "p95_ns": 15830012
+    "median_ns": 99656811.0,
+    "p95_ns": 125821520
   },
   {
     "operation": "verify_end_to_end",
     "artifact_bytes": 10485760,
     "n": 30,
-    "median_ns": 9330409.5,
-    "p95_ns": 10206558
+    "median_ns": 103939444.0,
+    "p95_ns": 119125930
   }
 ]
